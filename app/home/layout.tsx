@@ -1,4 +1,4 @@
-import Header from '@/components/layout/header';
+import Header from '@/components/header/header';
 import Sidebar from '@/components/layout/sidebar';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import type { Metadata } from 'next';
@@ -18,11 +18,11 @@ export default function DashboardLayout({
 }) {
   return (
     <div className="flex">
-      <Sidebar />
       <main className="w-full flex-1 overflow-hidden">
         <Header />
-        {children}
-
+        <div className="p-4">
+          {children} {/* Hiển thị nội dung của các trang con */}
+        </div>
       </main>
     </div>
   );
