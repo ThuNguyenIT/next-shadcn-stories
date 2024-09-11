@@ -4,7 +4,7 @@ import * as React from 'react';
 export default function Footer() {
   return (
     <footer
-      className="w-full py-6"
+      className="w-full py-6 bg-no-repeat"
       style={
         {
           // backgroundImage: `url("/images/bg-footer.png")`

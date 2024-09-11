@@ -37,6 +37,9 @@ export const StoryColumn: React.FC<IStoryColumn> = ({ stories }) => {
               <p className="line-clamp-2 text-sm text-muted-foreground">
                 {stories[0].description}
               </p>
+              <p className="line-clamp-2 text-sm text-muted-foreground">
+                Chương {stories[0].chapter}
+              </p>
             </div>
           </div>
         </CardContent>
@@ -50,7 +53,7 @@ export const StoryColumn: React.FC<IStoryColumn> = ({ stories }) => {
                 Chương {story.chapter}
               </span>
             </div>
-            <Separator className="my-2" />
+            <Separator className="my-2 border-dashed border-1" />
           </li>
         ))}
       </ul>

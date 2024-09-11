@@ -4,7 +4,9 @@ import { UpdatedStoriesList } from '@/components/home/updated-stories-list';
 import { FavoriteStories } from '@/components/home/favorite-stories';
 import { PopularStories } from '@/components/home/popular-stories';
 import { StoryColumn } from '@/components/home/story-column';
+import { Separator } from '@/components/ui/separator';
 import { Story } from '@/types';
+import { DynamicTitleSection } from '@/components/home/dynamic-title-section';
 
 const stories: Story[] = [
   {
@@ -135,16 +137,19 @@ const completedStories: Story[] = [
 
 export default function page() {
   return (
-    <PageContainer scrollable={true}>
+    <PageContainer >
       <UpdatedStoriesList stories={stories} />
+      <Separator className="border-dashed border-1 border-indigo-600 bg-[#81D4FA]" />
       <div className="container mx-auto flex flex-col space-y-8 px-4 sm:flex-row sm:space-x-4 sm:space-y-0">
         <FavoriteStories stories={stories} />
         <PopularStories stories={stories} />
       </div>
+      <Separator className="border-dashed border-1 border-indigo-600 bg-[#81D4FA]" />
       <div className="container mx-auto px-4">
-        <h2 className="mb-6 text-2xl font-bold text-blue-500">
+        {/* <h2 className="mb-6 text-2xl font-bold text-blue-500">
           Truyện đã hoàn thành
-        </h2>
+        </h2> */}
+        <DynamicTitleSection title={'Truyện đã hoàn thành'} href={'/more'} />
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
           <StoryColumn stories={completedStories} />
           <StoryColumn stories={completedStories} />
