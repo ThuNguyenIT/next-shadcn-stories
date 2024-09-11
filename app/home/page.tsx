@@ -1,167 +1,156 @@
-import { AreaGraph } from '@/components/charts/area-graph';
-import { BarGraph } from '@/components/charts/bar-graph';
-import { PieGraph } from '@/components/charts/pie-graph';
-import { CalendarDateRangePicker } from '@/components/date-range-picker';
+import * as React from 'react';
 import PageContainer from '@/components/layout/page-container';
-import { RecentSales } from '@/components/recent-sales';
-import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle
-} from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { UpdatedStoriesList } from '@/components/home/updated-stories-list';
+import { FavoriteStories } from '@/components/home/favorite-stories';
+import { PopularStories } from '@/components/home/popular-stories';
+import { StoryColumn } from '@/components/home/story-column';
+import { Story } from '@/types';
+
+const stories: Story[] = [
+  {
+    id: '1',
+    title: 'Ngã Hữu Chư Thiên Vạn',
+    author: 'Kỳ Huyễn',
+    chapter: 4095,
+    updatedAt: '14/02/2020',
+    coverImage: '/images/placeholder1.png'
+  },
+  {
+    id: '2',
+    title: 'Tây Dư Tôi Cường Tô Sư',
+    author: 'Huyền Huyễn',
+    chapter: 4095,
+    updatedAt: '14/02/2020',
+    coverImage: '/images/placeholder2.png'
+  },
+  {
+    id: '3',
+    title: 'Linh Khí Phục Tô: Úc Vạn',
+    author: 'Huyền Huyễn',
+    chapter: 4095,
+    updatedAt: '14/02/2020',
+    coverImage: '/images/placeholder3.png'
+  },
+  {
+    id: '4',
+    title: 'Linh Khí Phục Tô: Úc Vạn',
+    author: 'Huyền Huyễn',
+    chapter: 4095,
+    updatedAt: '14/02/2020',
+    coverImage: '/images/placeholder4.png'
+  },
+  {
+    id: '5',
+    title: 'Ngã Hữu Chư Thiên Vạn',
+    author: 'Kỳ Huyễn',
+    chapter: 4095,
+    updatedAt: '14/02/2020',
+    coverImage: '/images/placeholder4.png'
+  },
+  {
+    id: '6',
+    title: 'Tây Dư Tôi Cường Tô Sư',
+    author: 'Huyền Huyễn',
+    chapter: 4095,
+    updatedAt: '14/02/2020',
+    coverImage: '/images/placeholder2.png'
+  },
+  {
+    id: '7',
+    title: 'Linh Khí Phục Tô: Úc Vạn',
+    author: 'Huyền Huyễn',
+    chapter: 4095,
+    updatedAt: '14/02/2020',
+    coverImage: '/images/placeholder1.png'
+  },
+  {
+    id: '8',
+    title: 'Linh Khí Phục Tô: Úc Vạn',
+    author: 'Huyền Huyễn',
+    chapter: 4095,
+    updatedAt: '14/02/2020',
+    coverImage: '/images/placeholder3.png'
+  }
+];
+
+const completedStories: Story[] = [
+  {
+    id: '1',
+    title: 'Tu Chân Gia Tộc Bình',
+    author: 'Unknown', // Provide a default value
+    chapter: 4095,
+    updatedAt: '2024-09-11', // Provide a default value
+    coverImage: '/images/placeholder3.png',
+    description: 'Sơn không tại cao, có gia thì sao. Suối không tại uyên...'
+  },
+  {
+    id: '2',
+    title: 'Phàm Nhân Tu Tiên Chi',
+    author: 'Unknown',
+    chapter: 1536,
+    updatedAt: '2024-09-11',
+    coverImage: '/images/placeholder3.png'
+  },
+  {
+    id: '3',
+    title: 'Tạo Hóa Chi Vương',
+    author: 'Unknown',
+    chapter: 1536,
+    updatedAt: '2024-09-11',
+    coverImage: '/images/placeholder3.png'
+  },
+  {
+    id: '4',
+    title: 'Lâm Uyên Hành',
+    author: 'Unknown',
+    chapter: 1536,
+    updatedAt: '2024-09-11',
+    coverImage: '/images/placeholder3.png'
+  },
+  {
+    id: '5',
+    title: 'Nhất Niệm Vĩnh Hằng',
+    author: 'Unknown',
+    chapter: 1536,
+    updatedAt: '2024-09-11',
+    coverImage: '/images/placeholder3.png'
+  },
+  {
+    id: '6',
+    title: 'Đế Bá',
+    author: 'Unknown',
+    chapter: 1536,
+    updatedAt: '2024-09-11',
+    coverImage: '/images/placeholder3.png'
+  },
+  {
+    id: '7',
+    title: 'Thần Đạo Đan Tôn',
+    author: 'Unknown',
+    chapter: 1536,
+    updatedAt: '2024-09-11',
+    coverImage: '/images/placeholder3.png'
+  }
+];
 
 export default function page() {
   return (
     <PageContainer scrollable={true}>
-      <div className="space-y-2">
-        <div className="flex items-center justify-between space-y-2">
-          <h2 className="text-2xl font-bold tracking-tight">
-            Hi, Welcome back 👋 13212312
-          </h2>
-          <div className="hidden items-center space-x-2 md:flex">
-            <CalendarDateRangePicker />
-            <Button>Download</Button>
-          </div>
+      <UpdatedStoriesList stories={stories} />
+      <div className="container mx-auto flex flex-col space-y-8 px-4 sm:flex-row sm:space-x-4 sm:space-y-0">
+        <FavoriteStories stories={stories} />
+        <PopularStories stories={stories} />
+      </div>
+      <div className="container mx-auto px-4">
+        <h2 className="mb-6 text-2xl font-bold text-blue-500">
+          Truyện đã hoàn thành
+        </h2>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <StoryColumn stories={completedStories} />
+          <StoryColumn stories={completedStories} />
+          <StoryColumn stories={completedStories} />
+          <StoryColumn stories={completedStories} />
         </div>
-        <Tabs defaultValue="overview" className="space-y-4">
-          <TabsList>
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="analytics" disabled>
-              Analytics
-            </TabsTrigger>
-          </TabsList>
-          <TabsContent value="overview" className="space-y-4">
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">
-                    Total Revenue
-                  </CardTitle>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    className="h-4 w-4 text-muted-foreground"
-                  >
-                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                  </svg>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">$45,231.89</div>
-                  <p className="text-xs text-muted-foreground">
-                    +20.1% from last month
-                  </p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">
-                    Subscriptions
-                  </CardTitle>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    className="h-4 w-4 text-muted-foreground"
-                  >
-                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                    <circle cx="9" cy="7" r="4" />
-                    <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
-                  </svg>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">+2350</div>
-                  <p className="text-xs text-muted-foreground">
-                    +180.1% from last month
-                  </p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Sales</CardTitle>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    className="h-4 w-4 text-muted-foreground"
-                  >
-                    <rect width="20" height="14" x="2" y="5" rx="2" />
-                    <path d="M2 10h20" />
-                  </svg>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">+12,234</div>
-                  <p className="text-xs text-muted-foreground">
-                    +19% from last month
-                  </p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">
-                    Active Now
-                  </CardTitle>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    className="h-4 w-4 text-muted-foreground"
-                  >
-                    <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-                  </svg>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">+573</div>
-                  <p className="text-xs text-muted-foreground">
-                    +201 since last hour
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-7">
-              <div className="col-span-4">
-                <BarGraph />
-              </div>
-              <Card className="col-span-4 md:col-span-3">
-                <CardHeader>
-                  <CardTitle>Recent Sales</CardTitle>
-                  <CardDescription>
-                    You made 265 sales this month.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <RecentSales />
-                </CardContent>
-              </Card>
-              <div className="col-span-4">
-                <AreaGraph />
-              </div>
-              <div className="col-span-4 md:col-span-3">
-                <PieGraph />
-              </div>
-            </div>
-          </TabsContent>
-        </Tabs>
       </div>
     </PageContainer>
   );
