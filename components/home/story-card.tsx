@@ -20,7 +20,7 @@ export const StoryCard: React.FC<IStoryCard> = ({ story }) => {
             <h3 className="line-clamp-2 font-normal text-black">
               {story.title}
             </h3>
-            <p className="leading-18px text-sm font-normal text-gray-600 text-muted-foreground">
+            <p className="leading-18px text-sm font-normal text-gray-600 ">
               {story.author}
             </p>
             <p className="text-sm font-normal text-gray-600">

@@ -26,7 +26,7 @@ export const DynamicTitleSection: React.FC<IDynamicTitleSection> = ({
             width={14}
             height={14}
           />
-          {linkText}
+          <p className="hidden md:block">{linkText}</p>
         </Link>
       )}
     </div>

@@ -1,11 +1,19 @@
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { SearchIcon } from 'lucide-react';
+import { MobileSidebar } from '../layout/mobile-sidebar';
 
 export default function Header() {
   return (
     <header className="relative h-[300px] w-full overflow-hidden">
+      <nav className="flex items-center justify-between px-4 py-2 absolute">
+        <div className={`${cn('block lg:!hidden')} z-50`}>
+          <MobileSidebar />
+        </div>
+
+      </nav>
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{

@@ -1,0 +1,6 @@
+
+.bottom-dashed {
+    border-bottom: 1px dashed #999;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}

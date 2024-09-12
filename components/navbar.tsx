@@ -16,19 +16,19 @@ import { Button } from '@/components/ui/button';
 
 export default function Navbar() {
   return (
-    <div className="flex w-full justify-around bg-sky-200 p-2">
+    <div className="flex w-full justify-around bg-sky-200 p-2 hidden lg:block">
       <div className="max-w-1366 mx-auto flex w-full justify-between">
         <NavigationMenu className="">
           <NavigationMenuList>
             <NavigationMenuItem>
               <Link href="/" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <NavigationMenuLink className={`${navigationMenuTriggerStyle()} text-textPrimary`}>
                   Trang chủ
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuTrigger>Thể loại</NavigationMenuTrigger>
+              <NavigationMenuTrigger className="text-textPrimary">Thể loại</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                   <li className="row-span-3">
@@ -59,7 +59,7 @@ export default function Navbar() {
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuTrigger>Sắp xếp</NavigationMenuTrigger>
+              <NavigationMenuTrigger className="text-textPrimary">Sắp xếp</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                   {sortItems.map((item) => (
@@ -76,46 +76,46 @@ export default function Navbar() {
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="/truyen-con-trai" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <NavigationMenuLink className={`${navigationMenuTriggerStyle()} text-textPrimary`}>
                   Truyện con trai
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="/truyen-con-gai" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <NavigationMenuLink className={`${navigationMenuTriggerStyle()} text-textPrimary`}>
                   Truyện con gái
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="/lich-su" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <NavigationMenuLink className={`${navigationMenuTriggerStyle()} text-textPrimary`}>
                   Lịch sử
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="/thao-luan" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <NavigationMenuLink className={`${navigationMenuTriggerStyle()} text-textPrimary`}>
                   Thảo luận
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="/fanpage" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <NavigationMenuLink className={`${navigationMenuTriggerStyle()} text-textPrimary`}>
                   Fanpage
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-        <div className="right-4 top-2 flex space-x-2">
-          <Button variant="ghost" size="sm">
+        <div className="right-4 top-2 flex space-x-2 items-center">
+          <Button variant="ghost" size="sm" className="text-red-400">
             Đăng ký
           </Button>
-          <Button variant="ghost" size="sm">
+          <Button variant="ghost" size="sm" className="text-red-400">
             Đăng nhập
           </Button>
         </div>

@@ -10,12 +10,12 @@ export default function Footer() {
       }}
     >
       <div className="container mx-auto grid grid-cols-12 gap-4 px-4">
-        <div className="col-span-12 mb-4 md:col-span-3 md:mb-0">
+        <div className="col-span-12 mb-4 md:col-span-3 md:mb-0 hidden md:block">
           <Image
             className="h-24 w-24 items-center justify-center"
             src="/images/logo.png" // Relative path from the public folder
             alt="Mystical landscape with pagodas on misty mountains"
-            width={112} 
+            width={112}
             height={101}
           />
         </div>

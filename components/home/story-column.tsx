@@ -36,7 +36,7 @@ export const StoryColumn: React.FC<IStoryColumn> = ({ stories }) => {
               <h4 className="line-clamp-2 font-normal text-black">
                 {stories[0].title}
               </h4>
-              <p className="leading-18px line-clamp-2 text-sm text-gray-500 text-muted-foreground">
+              <p className="leading-18px line-clamp-2 text-sm text-gray-500">
                 {stories[0].description}
               </p>
               <p className="text-13px font-normal text-gray-600">
@@ -50,19 +50,16 @@ export const StoryColumn: React.FC<IStoryColumn> = ({ stories }) => {
         {stories.slice(1).map((story) => (
           <li
             key={story.id}
-            //       border-bottom: 1px dashed #999;
-            // margin-bottom: 10px;
-            // padding-bottom: 10px;"
+            className="bottom-dashed"
           >
             <div className="flex items-center justify-between">
               <span className="line-clamp-2 truncate text-sm font-normal text-black">
                 {story.title}
               </span>
-              <span className="text-sm font-normal text-gray-600 text-muted-foreground">
+              <span className="text-sm font-normal text-gray-600">
                 Chương {story.chapter}
               </span>
             </div>
-            <Separator className="border-1 border-dashed mt-3" />
           </li>
         ))}
       </ul>
