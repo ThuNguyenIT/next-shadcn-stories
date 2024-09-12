@@ -17,9 +17,15 @@ module.exports = {
       }
     },
     extend: {
+      maxWidth: {
+        1366: '1366px' // Thêm lớp max-w-1366 cho chiều rộng tối đa 1366px
+      },
+      backgroundSize: {
+        full: '100% 100%'
+      },
       colors: {
         border: 'hsl(var(--border))',
-        input: '#81D4FA',
+        input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
@@ -40,8 +46,8 @@ module.exports = {
           foreground: 'hsl(var(--muted-foreground))'
         },
         accent: {
-        //   DEFAULT: 'hsl(var(--accent))',
-        //   foreground: 'hsl(var(--accent-foreground))'
+          //   DEFAULT: 'hsl(var(--accent))',
+          //   foreground: 'hsl(var(--accent-foreground))'
         },
         popover: {
           DEFAULT: 'hsl(var(--popover))',
@@ -57,7 +63,9 @@ module.exports = {
           3: 'hsl(var(--chart-3))',
           4: 'hsl(var(--chart-4))',
           5: 'hsl(var(--chart-5))'
-        }
+        },
+        textPrimary: '#0277BD',
+        textSecondary: '#81D4FA'
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -85,6 +93,13 @@ module.exports = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out'
+      },
+      fontSize: {
+        'size-20': '20px',
+        '13px': '13px'
+      },
+      lineHeight: {
+        '18px': '18px' // Thêm lớp tùy chỉnh cho line-height 18px
       }
     }
   },

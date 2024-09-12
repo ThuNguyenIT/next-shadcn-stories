@@ -23,37 +23,46 @@ export const StoryColumn: React.FC<IStoryColumn> = ({ stories }) => {
         </Link>
       </div>
       <div className="mb-4">
-        <CardContent className="p-4">
+        <div className="p-4">
           <div className="flex space-x-4">
             <Image
               src={stories[0].coverImage || ''}
               alt={stories[0].title}
               width={80}
               height={120}
-              className="rounded-md object-cover"
+              className="object-cover"
             />
             <div>
-              <h4 className="font-semibold">{stories[0].title}</h4>
-              <p className="line-clamp-2 text-sm text-muted-foreground">
+              <h4 className="line-clamp-2 font-normal text-black">
+                {stories[0].title}
+              </h4>
+              <p className="leading-18px line-clamp-2 text-sm text-gray-500 text-muted-foreground">
                 {stories[0].description}
               </p>
-              <p className="line-clamp-2 text-sm text-muted-foreground">
+              <p className="text-13px font-normal text-gray-600">
                 Chương {stories[0].chapter}
               </p>
             </div>
           </div>
-        </CardContent>
+        </div>
       </div>
       <ul className="space-y-2">
         {stories.slice(1).map((story) => (
-          <li key={story.id}>
+          <li
+            key={story.id}
+            //       border-bottom: 1px dashed #999;
+            // margin-bottom: 10px;
+            // padding-bottom: 10px;"
+          >
             <div className="flex items-center justify-between">
-              <span className="truncate text-sm">{story.title}</span>
-              <span className="text-sm text-muted-foreground">
+              <span className="line-clamp-2 truncate text-sm font-normal text-black">
+                {story.title}
+              </span>
+              <span className="text-sm font-normal text-gray-600 text-muted-foreground">
                 Chương {story.chapter}
               </span>
             </div>
-            <Separator className="my-2 border-dashed border-1" />
+            <Separator className="border-1 border-dashed mt-3" />
           </li>
         ))}
       </ul>

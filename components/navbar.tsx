@@ -17,106 +17,108 @@ import { Button } from '@/components/ui/button';
 export default function Navbar() {
   return (
     <div className="flex w-full justify-around bg-sky-200 p-2">
-      <NavigationMenu className="w-[1366px]">
-        <NavigationMenuList>
-          <NavigationMenuItem>
-            <Link href="/" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Trang chủ
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>Thể loại</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-                <li className="row-span-3">
-                  <NavigationMenuLink asChild>
-                    <a
-                      className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                      href="/"
-                    >
-                      <div className="mb-2 mt-4 text-lg font-medium">
-                        Khám phá thể loại
-                      </div>
-                      <p className="text-sm leading-tight text-muted-foreground">
-                        Tìm hiểu các thể loại truyện khác nhau
-                      </p>
-                    </a>
-                  </NavigationMenuLink>
-                </li>
-                <ListItem href="/docs" title="Hành động">
-                  Truyện hành động và phiêu lưu
-                </ListItem>
-                <ListItem href="/docs/installation" title="Tình cảm">
-                  Truyện tình cảm lãng mạn
-                </ListItem>
-                <ListItem href="/docs/primitives/typography" title="Hài hước">
-                  Truyện hài hước vui nhộn
-                </ListItem>
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>Sắp xếp</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                {sortItems.map((item) => (
-                  <ListItem
-                    key={item.title}
-                    title={item.title}
-                    href={item.href}
-                  >
-                    {item.description}
+      <div className="max-w-1366 mx-auto flex w-full justify-between">
+        <NavigationMenu className="">
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <Link href="/" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Trang chủ
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>Thể loại</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                  <li className="row-span-3">
+                    <NavigationMenuLink asChild>
+                      <a
+                        className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                        href="/"
+                      >
+                        <div className="mb-2 mt-4 text-lg font-medium">
+                          Khám phá thể loại
+                        </div>
+                        <p className="text-sm leading-tight text-muted-foreground">
+                          Tìm hiểu các thể loại truyện khác nhau
+                        </p>
+                      </a>
+                    </NavigationMenuLink>
+                  </li>
+                  <ListItem href="/docs" title="Hành động">
+                    Truyện hành động và phiêu lưu
                   </ListItem>
-                ))}
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Link href="/truyen-con-trai" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Truyện con trai
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Link href="/truyen-con-gai" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Truyện con gái
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Link href="/lich-su" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Lịch sử
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Link href="/thao-luan" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Thảo luận
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Link href="/fanpage" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Fanpage
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
-      <div className="right-4 top-2 flex space-x-2">
-        <Button variant="ghost" size="sm">
-          Đăng ký
-        </Button>
-        <Button variant="ghost" size="sm">
-          Đăng nhập
-        </Button>
+                  <ListItem href="/docs/installation" title="Tình cảm">
+                    Truyện tình cảm lãng mạn
+                  </ListItem>
+                  <ListItem href="/docs/primitives/typography" title="Hài hước">
+                    Truyện hài hước vui nhộn
+                  </ListItem>
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>Sắp xếp</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                  {sortItems.map((item) => (
+                    <ListItem
+                      key={item.title}
+                      title={item.title}
+                      href={item.href}
+                    >
+                      {item.description}
+                    </ListItem>
+                  ))}
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/truyen-con-trai" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Truyện con trai
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/truyen-con-gai" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Truyện con gái
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/lich-su" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Lịch sử
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/thao-luan" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Thảo luận
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/fanpage" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Fanpage
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+        <div className="right-4 top-2 flex space-x-2">
+          <Button variant="ghost" size="sm">
+            Đăng ký
+          </Button>
+          <Button variant="ghost" size="sm">
+            Đăng nhập
+          </Button>
+        </div>
       </div>
     </div>
   );
@@ -132,7 +134,7 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
+            'hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors',
             className
           )}
           {...props}
