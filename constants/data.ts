@@ -11,84 +11,12 @@ export type User = {
 export const users: User[] = [
   {
     id: 1,
-    name: 'Candice Schiner',
-    company: 'Dell',
-    role: 'Frontend Developer',
-    verified: false,
-    status: 'Active'
-  },
-  {
-    id: 2,
-    name: 'John Doe',
-    company: 'TechCorp',
-    role: 'Backend Developer',
+    name: 'Admin',
+    company: 'T&T',
+    role: 'Administrator',
     verified: true,
     status: 'Active'
   },
-  {
-    id: 3,
-    name: 'Alice Johnson',
-    company: 'WebTech',
-    role: 'UI Designer',
-    verified: true,
-    status: 'Active'
-  },
-  {
-    id: 4,
-    name: 'David Smith',
-    company: 'Innovate Inc.',
-    role: 'Fullstack Developer',
-    verified: false,
-    status: 'Inactive'
-  },
-  {
-    id: 5,
-    name: 'Emma Wilson',
-    company: 'TechGuru',
-    role: 'Product Manager',
-    verified: true,
-    status: 'Active'
-  },
-  {
-    id: 6,
-    name: 'James Brown',
-    company: 'CodeGenius',
-    role: 'QA Engineer',
-    verified: false,
-    status: 'Active'
-  },
-  {
-    id: 7,
-    name: 'Laura White',
-    company: 'SoftWorks',
-    role: 'UX Designer',
-    verified: true,
-    status: 'Active'
-  },
-  {
-    id: 8,
-    name: 'Michael Lee',
-    company: 'DevCraft',
-    role: 'DevOps Engineer',
-    verified: false,
-    status: 'Active'
-  },
-  {
-    id: 9,
-    name: 'Olivia Green',
-    company: 'WebSolutions',
-    role: 'Frontend Developer',
-    verified: true,
-    status: 'Active'
-  },
-  {
-    id: 10,
-    name: 'Robert Taylor',
-    company: 'DataTech',
-    role: 'Data Analyst',
-    verified: false,
-    status: 'Active'
-  }
 ];
 
 export type Employee = {
@@ -113,31 +41,31 @@ export type Employee = {
 export const navItems: NavItem[] = [
   {
     title: 'Dashboard',
-    href: '/dashboard',
+    href: '/admin',
     icon: 'dashboard',
     label: 'Dashboard'
   },
   {
     title: 'User',
-    href: '/dashboard/user',
+    href: '/admin/user',
     icon: 'user',
     label: 'user'
   },
   {
     title: 'Employee',
-    href: '/dashboard/employee',
+    href: '/admin/employee',
     icon: 'employee',
     label: 'employee'
   },
   {
     title: 'Profile',
-    href: '/dashboard/profile',
+    href: '/admin/profile',
     icon: 'profile',
     label: 'profile'
   },
   {
     title: 'Kanban',
-    href: '/dashboard/kanban',
+    href: '/admin/kanban',
     icon: 'kanban',
     label: 'kanban'
   },
@@ -146,5 +74,11 @@ export const navItems: NavItem[] = [
     href: '/',
     icon: 'login',
     label: 'login'
+  },
+  {
+    title: 'Category',
+    href: '/admin/category',
+    icon: 'folderTree',
+    label: 'category'
   }
 ];

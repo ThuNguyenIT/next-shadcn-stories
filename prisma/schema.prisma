@@ -1,0 +1,170 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int       @id @default(autoincrement())
+  username      String    @unique
+  email         String    @unique
+  password      String
+  roles         UserRole[]
+  point         Float?    // Số điểm thưởng hoặc tích lũy của người dùng
+  fullName      String?
+  mobile        String?
+  address       String?
+  birthday      DateTime?
+  comments      Comment[]
+  ratings       Rating[]
+  favorites     Favorite[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Role {
+  id          Int        @id @default(autoincrement())
+  role        Int        
+  description String
+  users       UserRole[]
+  createdAt   DateTime   @default(now())
+}
+
+model UserRole {
+  userId Int
+  roleId Int
+  user   User  @relation(fields: [userId], references: [id])
+  role   Role  @relation(fields: [roleId], references: [id])
+
+  @@id([userId, roleId])
+}
+
+model Author {
+  id          Int       @id @default(autoincrement())
+  name        String
+  pseudonym   String?    // Bút danh
+  alias       String?    // Bút danh (khác)
+  bio         String?    // Tiểu sử
+  avatar      String?    // Ảnh đại diện
+  email       String?    // Email liên hệ
+  nationality String?    // Quốc tịch
+  birthdate   DateTime?
+  novels      Novel[]
+  socialMedia String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Category {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  novels      Novel[]   
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Novel {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String?
+  author      Author    @relation(fields: [authorId], references: [id])
+  authorId    Int
+  category    Category  @relation(fields: [categoryId], references: [id])
+  categoryId  Int
+  chapters    Chapter[] 
+  comments    Comment[] 
+  ratings     Rating[]  
+  favorites   Favorite[]
+  views       View[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Novel {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String?
+  author      Author    @relation(fields: [authorId], references: [id])
+  authorId    Int
+  category    Category  @relation(fields: [categoryId], references: [id])
+  categoryId  Int
+  chapters    Chapter[] // Danh sách chương truyện
+  comments    Comment[] // Danh sách bình luận của truyện
+  ratings     Rating[]  // Danh sách đánh giá của người dùng
+  favorites   Favorite[]// Danh sách người dùng yêu thích truyện này
+  views       View[]    // Số lượng lượt xem của truyện
+  status      String    // Trạng thái truyện (Full, Còn tiếp, etc.)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model NovelCategory {
+  novel      Novel    @relation(fields: [novel_id], references: [id])
+  novel_id   Int
+  category   Category @relation(fields: [category_id], references: [id])
+  category_id Int
+
+  @@id([novel_id, category_id]) // Thiết lập khóa chính cho cả hai trường
+}
+
+model Chapter {
+  id              Int      @id @default(autoincrement())
+  novel           Novel    @relation(fields: [novelId], references: [id])
+  novelId         Int
+  title           String
+  content         String
+  chapter_number  Int
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  comments        Comment[]
+}
+
+model Comment {
+  id         Int      @id @default(autoincrement())
+  novel      Novel?   @relation(fields: [novelId], references: [id])
+  novelId   Int?
+  chapter    Chapter? @relation(fields: [chapterId], references: [id])
+  chapterId Int?
+  user       User     @relation(fields: [userId], references: [id])
+  userId    Int
+  content    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Rating {
+  id         Int      @id @default(autoincrement())
+  novel      Novel    @relation(fields: [novelId], references: [id])
+  novelId   Int
+  user       User     @relation(fields: [userId], references: [id])
+  userId    Int
+  rating     Int      @default(1)
+  createdAt DateTime @default(now())
+}
+
+model Favorite {
+  id         Int      @id @default(autoincrement())
+  novel      Novel    @relation(fields: [novelId], references: [id])
+  novelId   Int
+  user       User     @relation(fields: [userId], references: [id])
+  userId    Int
+  createdAt DateTime @default(now())
+}
+
+model View {
+  id          Int      @id @default(autoincrement())
+  novel       Novel    @relation(fields: [novelId], references: [id])
+  novelId     Int
+  view_count  Int      @default(0)
+  createdAt   DateTime @default(now())
+}

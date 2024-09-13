@@ -5,8 +5,8 @@ import PageContainer from '@/components/layout/page-container';
 import { Heading } from '@/components/ui/heading';
 
 const breadcrumbItems = [
-  { title: 'Dashboard', link: '/dashboard' },
-  { title: 'Kanban', link: '/dashboard/kanban' }
+  { title: 'Dashboard', link: '/admin' },
+  { title: 'Kanban', link: '/admin/kanban' }
 ];
 
 export default function page() {

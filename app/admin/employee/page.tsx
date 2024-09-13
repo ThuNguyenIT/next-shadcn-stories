@@ -11,8 +11,8 @@ import { Plus } from 'lucide-react';
 import Link from 'next/link';
 
 const breadcrumbItems = [
-  { title: 'Dashboard', link: '/dashboard' },
-  { title: 'Employee', link: '/dashboard/employee' }
+  { title: 'Dashboard', link: '/admin' },
+  { title: 'Employee', link: '/admin/employee' }
 ];
 
 type paramsProps = {
@@ -47,7 +47,7 @@ export default async function page({ searchParams }: paramsProps) {
           />
 
           <Link
-            href={'/dashboard/employee/new'}
+            href={'/admin/employee/new'}
             className={cn(buttonVariants({ variant: 'default' }))}
           >
             <Plus className="mr-2 h-4 w-4" /> Add New

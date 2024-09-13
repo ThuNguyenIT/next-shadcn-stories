@@ -5,9 +5,9 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import React from 'react';
 
 const breadcrumbItems = [
-  { title: 'Dashboard', link: '/dashboard' },
-  { title: 'User', link: '/dashboard/user' },
-  { title: 'Create', link: '/dashboard/user/create' }
+  { title: 'Dashboard', link: '/admin' },
+  { title: 'User', link: '/admin/user' },
+  { title: 'Create', link: '/admin/user/create' }
 ];
 export default function Page() {
   return (
