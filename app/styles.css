@@ -4,3 +4,10 @@
     margin-bottom: 10px;
     padding-bottom: 10px;
 }
+.modal-story-preference>button{
+    display:none
+}
+.nav-link:hover{
+    background-color:transparent
+}
+

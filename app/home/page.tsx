@@ -7,6 +7,8 @@ import { StoryColumn } from '@/components/home/story-column';
 import { Separator } from '@/components/ui/separator';
 import { Story } from '@/types';
 import { DynamicTitleSection } from '@/components/home/dynamic-title-section';
+import StoryPreferenceModal from '@/components/home/story-preference-modal';
+import AuthModal from '@/components/home/auth-modal';
 
 const stories: Story[] = [
   {
@@ -136,8 +138,16 @@ const completedStories: Story[] = [
 ];
 
 export default function page() {
+  // const [open, setOpen] = useState(false)
+  // const handleOpenAuthModal = useCallback(() => {
+  //   setOpen(true)
+  // }, [])
+  // const handleCloseAuthModal = useCallback(() => {
+  //   setOpen(false)
+  // }, [])
   return (
     <PageContainer>
+      <StoryPreferenceModal />
       <UpdatedStoriesList stories={stories} />
       <Separator className="border-1 bg-textSecondary mb-10 mt-6 border-dashed border-indigo-600" />
       <div className="container mx-auto flex flex-col gap-x-10 space-y-8 px-4 sm:flex-row sm:space-x-4 sm:space-y-0">
@@ -154,6 +164,7 @@ export default function page() {
           <StoryColumn stories={completedStories} />
         </div>
       </div>
+      <AuthModal />
     </PageContainer>
   );
 }

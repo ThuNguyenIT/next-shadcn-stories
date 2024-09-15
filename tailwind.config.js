@@ -64,8 +64,9 @@ module.exports = {
           4: 'hsl(var(--chart-4))',
           5: 'hsl(var(--chart-5))'
         },
-        textPrimary: '#0277BD',
-        textSecondary: '#81D4FA'
+        textSecondary: '#81D4FA',
+        'female-purple': '#9C27B0',
+        'male-blue': '#0277BD'
       },
       borderRadius: {
         lg: 'var(--radius)',

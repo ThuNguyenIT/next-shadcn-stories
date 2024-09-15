@@ -1,11 +1,35 @@
+'use client';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { SearchIcon } from 'lucide-react';
 import { MobileSidebar } from '../layout/mobile-sidebar';
+import { Genders, useHomeStore } from '@/lib';
+import { useEffect, useState } from 'react';
 
 export default function Header() {
+  const { targetGender, setTargetGender } = useHomeStore();
+  const [imageMaleSrc, setImageMaleSrc] = useState('/svg/icon-shield-active.svg');
+  const [imageFemaleSrc, setImageFemaleSrc] = useState('/svg/icon-users.svg');
+  const [color, setColor] = useState('male-blue');
+
+  useEffect(() => {
+    // Cập nhật imageSrc sau khi component đã mount trên client
+    if (targetGender === Genders.MALE) {
+      setImageMaleSrc('/svg/icon-shield-active.svg');
+      setImageFemaleSrc('/svg/icon-users.svg');
+    } else {
+      setImageMaleSrc('/svg/icon-shield.svg');
+      setImageFemaleSrc('/svg/icon-users-active.svg');
+    }
+    setColor(
+      `${targetGender === Genders.MALE ? 'male-blue' : 'female-purple'
+      }`
+    );
+  }, [targetGender]);
+
+
   return (
     <header className="relative h-[300px] w-full overflow-hidden">
       <nav className="flex items-center justify-between px-4 py-2 absolute">
@@ -37,29 +61,30 @@ export default function Header() {
             <Input
               type="text"
               placeholder="Nhập tên truyện hoặc tác giả"
-              className="pr-10"
+              className={`pr-10 border-${color}`}
             />
             <Button
               size="icon"
               variant="ghost"
-              className="absolute right-0 top-0 h-full bg-[#0277BD]"
+              className={`absolute right-0 top-0 h-full hover:bg-${color} bg-${color}`}
             >
-              <SearchIcon className="h-4 w-4" />
+              <SearchIcon className="h-4 w-4 text-white " />
             </Button>
           </div>
         </div>
         <div className="flex space-x-2">
-          <Button variant="secondary" size="icon" className="w-13 h-13">
+          <Button variant="secondary" size="icon" className="w-13 h-13" onClick={() => setTargetGender(Genders.MALE)}>
             <Image
-              src="/svg/icon-shield-active.svg" // Path to your SVG in the public folder
+              src={imageMaleSrc}
               alt="Users Icon"
               width={52}
               height={52}
             />
           </Button>
-          <Button variant="secondary" size="icon" className="w-13 h-13">
+          <Button variant="secondary" size="icon" className="w-13 h-13"
+            onClick={() => setTargetGender(Genders.FEMALE)}>
             <Image
-              src="/svg/icon-users.svg" // Path to your SVG in the public folder
+              src={imageFemaleSrc}
               alt="Users Icon"
               width={52}
               height={52}

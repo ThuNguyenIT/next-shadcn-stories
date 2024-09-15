@@ -7,7 +7,7 @@ interface IStoryCard {
 export const StoryCard: React.FC<IStoryCard> = ({ story }) => {
   return (
     <div key={story.id} className="overflow-hidden">
-      <div className="">
+      <div >
         <div className="flex space-x-4">
           <Image
             src={story.coverImage}

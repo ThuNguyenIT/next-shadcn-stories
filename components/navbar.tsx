@@ -1,3 +1,4 @@
+'use client';
 import * as React from 'react';
 import Link from 'next/link';
 import { ChevronDown } from 'lucide-react';
@@ -13,22 +14,38 @@ import {
   navigationMenuTriggerStyle
 } from '@/components/ui/navigation-menu';
 import { Button } from '@/components/ui/button';
+import { Genders, useHomeStore } from '@/lib';
+import { useEffect, useState } from 'react';
 
 export default function Navbar() {
+  const { targetGender, setTargetGender } = useHomeStore();
+  const [color, setColor] = useState('male-blue');
+  const [bgColor, setBgColor] = useState('bg-sky-300');
+
+  useEffect(() => {
+    // Cập nhật className sau khi component đã mount trên client
+    setColor(
+      `${targetGender === Genders.MALE ? 'text-male-blue' : 'text-female-purple'
+      }`)
+    setBgColor(
+      `${targetGender === Genders.MALE ? 'bg-sky-300' : 'bg-pink-100'
+      }`
+    );
+  }, [targetGender]);
   return (
-    <div className="flex w-full justify-around bg-sky-200 p-2 hidden lg:block">
+    <div className={`flex w-full justify-around p-2 hidden lg:block ${bgColor}`}>
       <div className="max-w-1366 mx-auto flex w-full justify-between">
-        <NavigationMenu className="">
+        <NavigationMenu >
           <NavigationMenuList>
             <NavigationMenuItem>
               <Link href="/" legacyBehavior passHref>
-                <NavigationMenuLink className={`${navigationMenuTriggerStyle()} text-textPrimary`}>
+                <NavigationMenuLink className={`nav-link ${navigationMenuTriggerStyle()} text-${color}`}>
                   Trang chủ
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuTrigger className="text-textPrimary">Thể loại</NavigationMenuTrigger>
+              <NavigationMenuTrigger className={`nav-link text-${color}`}>Thể loại</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                   <li className="row-span-3">
@@ -59,7 +76,7 @@ export default function Navbar() {
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuTrigger className="text-textPrimary">Sắp xếp</NavigationMenuTrigger>
+              <NavigationMenuTrigger className={`nav-link text-${color}`}>Sắp xếp</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                   {sortItems.map((item) => (
@@ -76,35 +93,35 @@ export default function Navbar() {
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="/truyen-con-trai" legacyBehavior passHref>
-                <NavigationMenuLink className={`${navigationMenuTriggerStyle()} text-textPrimary`}>
+                <NavigationMenuLink className={`nav-link ${navigationMenuTriggerStyle()} text-${color}`}>
                   Truyện con trai
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="/truyen-con-gai" legacyBehavior passHref>
-                <NavigationMenuLink className={`${navigationMenuTriggerStyle()} text-textPrimary`}>
+                <NavigationMenuLink className={`nav-link ${navigationMenuTriggerStyle()} text-${color}`}>
                   Truyện con gái
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="/lich-su" legacyBehavior passHref>
-                <NavigationMenuLink className={`${navigationMenuTriggerStyle()} text-textPrimary`}>
+                <NavigationMenuLink className={`nav-link ${navigationMenuTriggerStyle()} text-${color}`}>
                   Lịch sử
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="/thao-luan" legacyBehavior passHref>
-                <NavigationMenuLink className={`${navigationMenuTriggerStyle()} text-textPrimary`}>
+                <NavigationMenuLink className={`nav-link ${navigationMenuTriggerStyle()} text-${color}`}>
                   Thảo luận
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="/fanpage" legacyBehavior passHref>
-                <NavigationMenuLink className={`${navigationMenuTriggerStyle()} text-textPrimary`}>
+                <NavigationMenuLink className={`nav-link ${navigationMenuTriggerStyle()} text-${color}`}>
                   Fanpage
                 </NavigationMenuLink>
               </Link>
@@ -112,10 +129,10 @@ export default function Navbar() {
           </NavigationMenuList>
         </NavigationMenu>
         <div className="right-4 top-2 flex space-x-2 items-center">
-          <Button variant="ghost" size="sm" className="text-red-400">
+          <Button variant="ghost" size="sm" className="nav-link text-red-400">
             Đăng ký
           </Button>
-          <Button variant="ghost" size="sm" className="text-red-400">
+          <Button variant="ghost" size="sm" className="nav-link text-red-400">
             Đăng nhập
           </Button>
         </div>
