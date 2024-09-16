@@ -15,12 +15,15 @@ import {
 } from '@/components/ui/navigation-menu';
 import { Button } from '@/components/ui/button';
 import { Genders, useHomeStore } from '@/lib';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import AuthModal from './home/auth-modal';
 
 export default function Navbar() {
   const { targetGender, setTargetGender } = useHomeStore();
-  const [color, setColor] = useState('male-blue');
-  const [bgColor, setBgColor] = useState('bg-sky-300');
+  const [open, setOpen] = useState<boolean>(false)
+  const [color, setColor] = useState<string>('male-blue');
+  const [bgColor, setBgColor] = useState<string>('bg-sky-300');
+  const [activeTab, setActiveTab] = useState<string>('login');
 
   useEffect(() => {
     // Cập nhật className sau khi component đã mount trên client
@@ -32,6 +35,22 @@ export default function Navbar() {
       }`
     );
   }, [targetGender]);
+
+  const handleOpenAuthModal = useCallback(() => {
+    setOpen(true)
+  }, [])
+  const handleCloseAuthModal = useCallback(() => {
+    setOpen(false)
+  }, [])
+
+  const openRegisterTab = () => {
+    setActiveTab('register');
+    handleOpenAuthModal()
+  };
+  const openSignUpTab = () => {
+    setActiveTab('login');
+    handleOpenAuthModal()
+  };
   return (
     <div className={`flex w-full justify-around p-2 hidden lg:block ${bgColor}`}>
       <div className="max-w-1366 mx-auto flex w-full justify-between">
@@ -129,14 +148,15 @@ export default function Navbar() {
           </NavigationMenuList>
         </NavigationMenu>
         <div className="right-4 top-2 flex space-x-2 items-center">
-          <Button variant="ghost" size="sm" className="nav-link text-red-400">
+          <Button variant="ghost" size="sm" className="nav-link text-red-400" onClick={openRegisterTab}>
             Đăng ký
           </Button>
-          <Button variant="ghost" size="sm" className="nav-link text-red-400">
+          <Button variant="ghost" size="sm" className="nav-link text-red-400" onClick={openSignUpTab}>
             Đăng nhập
           </Button>
         </div>
       </div>
+      <AuthModal open={open} handleCloseAuthModal={handleCloseAuthModal} activeTab={activeTab} setActiveTab={setActiveTab} />
     </div>
   );
 }

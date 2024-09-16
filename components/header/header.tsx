@@ -61,7 +61,7 @@ export default function Header() {
             <Input
               type="text"
               placeholder="Nhập tên truyện hoặc tác giả"
-              className={`pr-10 border-${color}`}
+              className={`pr-10 border-${color} `}
             />
             <Button
               size="icon"

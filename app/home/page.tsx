@@ -138,13 +138,7 @@ const completedStories: Story[] = [
 ];
 
 export default function page() {
-  // const [open, setOpen] = useState(false)
-  // const handleOpenAuthModal = useCallback(() => {
-  //   setOpen(true)
-  // }, [])
-  // const handleCloseAuthModal = useCallback(() => {
-  //   setOpen(false)
-  // }, [])
+
   return (
     <PageContainer>
       <StoryPreferenceModal />
@@ -164,7 +158,7 @@ export default function page() {
           <StoryColumn stories={completedStories} />
         </div>
       </div>
-      <AuthModal />
+
     </PageContainer>
   );
 }
