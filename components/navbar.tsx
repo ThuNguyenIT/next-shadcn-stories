@@ -18,6 +18,24 @@ import { Genders, useHomeStore } from '@/lib';
 import { useCallback, useEffect, useState } from 'react';
 import AuthModal from './home/auth-modal';
 
+const genres = [
+  { name: "Tiên hiệp", href: "/home/category" },
+  { name: "Huyền huyễn", href: "/home/category" },
+  { name: "Đô thị", href: "/home/category" },
+  { name: "Khoa huyễn", href: "/home/category" },
+  { name: "Kỳ huyễn", href: "/home/category" },
+  { name: "Võ hiệp", href: "/home/category" },
+  { name: "Lịch sử", href: "/home/category" },
+  { name: "Đồng nhân", href: "/home/category" },
+  { name: "Quân sự", href: "/home/category" },
+  { name: "Du hí", href: "/home/category" },
+  { name: "Canh kỳ", href: "/home/category" },
+  { name: "Linh dị", href: "/home/category" },
+  { name: "Ngôn tình", href: "/home/category" },
+  { name: "Nữ cường", href: "/home/category" },
+  { name: "Đam mỹ", href: "/home/category" },
+]
+
 export default function Navbar() {
   const { targetGender, setTargetGender } = useHomeStore();
   const [open, setOpen] = useState<boolean>(false)
@@ -57,7 +75,7 @@ export default function Navbar() {
         <NavigationMenu >
           <NavigationMenuList>
             <NavigationMenuItem>
-              <Link href="/" legacyBehavior passHref>
+              <Link href="/home" legacyBehavior passHref>
                 <NavigationMenuLink className={`nav-link ${navigationMenuTriggerStyle()} text-${color}`}>
                   Trang chủ
                 </NavigationMenuLink>
@@ -65,34 +83,20 @@ export default function Navbar() {
             </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuTrigger className={`nav-link text-${color}`}>Thể loại</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-                  <li className="row-span-3">
-                    <NavigationMenuLink asChild>
-                      <a
-                        className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                        href="/"
-                      >
-                        <div className="mb-2 mt-4 text-lg font-medium">
-                          Khám phá thể loại
-                        </div>
-                        <p className="text-sm leading-tight text-muted-foreground">
-                          Tìm hiểu các thể loại truyện khác nhau
-                        </p>
-                      </a>
+              <NavigationMenuContent className={`!data-[state=open]:bg-transparent !data-[active]:bg-transparent !data-[state=open]:bg-transparent !data-[active]:bg-transparent`}>
+                <div className={`grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-3 bg-[#F3FCFF]`}>
+                  {genres.map((genre) => (
+                    <NavigationMenuLink
+                      key={genre.name}
+                      href={genre.href}
+                      className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                    >
+                      {genre.name}
                     </NavigationMenuLink>
-                  </li>
-                  <ListItem href="/docs" title="Hành động">
-                    Truyện hành động và phiêu lưu
-                  </ListItem>
-                  <ListItem href="/docs/installation" title="Tình cảm">
-                    Truyện tình cảm lãng mạn
-                  </ListItem>
-                  <ListItem href="/docs/primitives/typography" title="Hài hước">
-                    Truyện hài hước vui nhộn
-                  </ListItem>
-                </ul>
+                  ))}
+                </div>
               </NavigationMenuContent>
+
             </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuTrigger className={`nav-link text-${color}`}>Sắp xếp</NavigationMenuTrigger>
@@ -157,7 +161,7 @@ export default function Navbar() {
         </div>
       </div>
       <AuthModal open={open} handleCloseAuthModal={handleCloseAuthModal} activeTab={activeTab} setActiveTab={setActiveTab} />
-    </div>
+    </div >
   );
 }
 

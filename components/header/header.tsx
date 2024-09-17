@@ -6,28 +6,44 @@ import Image from 'next/image';
 import { SearchIcon } from 'lucide-react';
 import { MobileSidebar } from '../layout/mobile-sidebar';
 import { Genders, useHomeStore } from '@/lib';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
+
+interface IState {
+  imageMaleSrc: string
+  imageFemaleSrc: string
+  isMounted: boolean
+}
 export default function Header() {
   const { targetGender, setTargetGender } = useHomeStore();
-  const [imageMaleSrc, setImageMaleSrc] = useState('/svg/icon-shield-active.svg');
-  const [imageFemaleSrc, setImageFemaleSrc] = useState('/svg/icon-users.svg');
-  const [color, setColor] = useState('male-blue');
 
+  const [state, setState] = useState<IState>({
+    imageMaleSrc: '/svg/icon-shield-active.svg',
+    imageFemaleSrc: '/svg/icon-users.svg',
+    isMounted: false
+  })
+
+  const handleSetStateField = useCallback(
+    (field: keyof IState, value: boolean | string) => {
+      setState((prevState) => ({ ...prevState, [field]: value }))
+    },
+    []
+  )
+
+  useEffect(() => {
+    handleSetStateField('isMounted', true)
+  }, []);
   useEffect(() => {
     // Cập nhật imageSrc sau khi component đã mount trên client
     if (targetGender === Genders.MALE) {
-      setImageMaleSrc('/svg/icon-shield-active.svg');
-      setImageFemaleSrc('/svg/icon-users.svg');
+      handleSetStateField('imageMaleSrc', '/svg/icon-shield-active.svg');
+      handleSetStateField('imageFemaleSrc', '/svg/icon-users.svg');
     } else {
-      setImageMaleSrc('/svg/icon-shield.svg');
-      setImageFemaleSrc('/svg/icon-users-active.svg');
+      handleSetStateField('imageMaleSrc', '/svg/icon-shield.svg');
+      handleSetStateField('imageFemaleSrc', '/svg/icon-users-active.svg');
     }
-    setColor(
-      `${targetGender === Genders.MALE ? 'male-blue' : 'female-purple'
-      }`
-    );
   }, [targetGender]);
+
 
 
   return (
@@ -61,12 +77,12 @@ export default function Header() {
             <Input
               type="text"
               placeholder="Nhập tên truyện hoặc tác giả"
-              className={`pr-10 border-${color} `}
+              className={`pr-10 ${state.isMounted ? (targetGender === Genders.MALE ? 'border-male-blue' : 'border-female-purple') : ''}`}
             />
             <Button
               size="icon"
               variant="ghost"
-              className={`absolute right-0 top-0 h-full hover:bg-${color} bg-${color}`}
+              className={`absolute right-0 top-0 h-full ${state.isMounted ? (targetGender === Genders.MALE ? 'hover:bg-male-blue bg-male-blue' : 'hover:bg-female-purple bg-female-purple') : ''}`}
             >
               <SearchIcon className="h-4 w-4 text-white " />
             </Button>
@@ -75,7 +91,7 @@ export default function Header() {
         <div className="flex space-x-2">
           <Button variant="secondary" size="icon" className="w-13 h-13" onClick={() => setTargetGender(Genders.MALE)}>
             <Image
-              src={imageMaleSrc}
+              src={state.imageMaleSrc}
               alt="Users Icon"
               width={52}
               height={52}
@@ -84,7 +100,7 @@ export default function Header() {
           <Button variant="secondary" size="icon" className="w-13 h-13"
             onClick={() => setTargetGender(Genders.FEMALE)}>
             <Image
-              src={imageFemaleSrc}
+              src={state.imageFemaleSrc}
               alt="Users Icon"
               width={52}
               height={52}
