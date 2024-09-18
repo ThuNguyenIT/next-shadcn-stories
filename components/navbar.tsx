@@ -70,36 +70,47 @@ export default function Navbar() {
     handleOpenAuthModal()
   };
   return (
-    <div className={`flex w-full justify-around p-2 hidden lg:block ${bgColor}`}>
-      <div className="max-w-1366 mx-auto flex w-full justify-between">
-        <NavigationMenu >
+    <div
+      className={`flex hidden w-full justify-around p-2 lg:block ${bgColor}`}
+    >
+      <div className="mx-auto flex w-full max-w-1366 justify-between">
+        <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
               <Link href="/home" legacyBehavior passHref>
-                <NavigationMenuLink className={`nav-link ${navigationMenuTriggerStyle()} text-${color}`}>
+                <NavigationMenuLink
+                  className={`nav-link ${navigationMenuTriggerStyle()} text-${color}`}
+                >
                   Trang chủ
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuTrigger className={`nav-link text-${color}`}>Thể loại</NavigationMenuTrigger>
-              <NavigationMenuContent className={`!data-[state=open]:bg-transparent !data-[active]:bg-transparent !data-[state=open]:bg-transparent !data-[active]:bg-transparent`}>
-                <div className={`grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-3 bg-[#F3FCFF]`}>
+              <NavigationMenuTrigger className={`nav-link text-${color}`}>
+                Thể loại
+              </NavigationMenuTrigger>
+              <NavigationMenuContent
+                className={`!data-[state=open]:bg-transparent !data-[active]:bg-transparent !data-[state=open]:bg-transparent !data-[active]:bg-transparent`}
+              >
+                <div
+                  className={`grid w-[400px] gap-3 bg-[#F3FCFF] p-4 md:w-[500px] md:grid-cols-3 `}
+                >
                   {genres.map((genre) => (
                     <NavigationMenuLink
                       key={genre.name}
                       href={genre.href}
-                      className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                      className="block select-none space-y-1 border-b border-dashed border-gray-200 p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                     >
                       {genre.name}
                     </NavigationMenuLink>
                   ))}
                 </div>
               </NavigationMenuContent>
-
             </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavigationMenuTrigger className={`nav-link text-${color}`}>Sắp xếp</NavigationMenuTrigger>
+            {/* <NavigationMenuItem>
+              <NavigationMenuTrigger className={`nav-link text-${color}`}>
+                Sắp xếp
+              </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                   {sortItems.map((item) => (
@@ -113,55 +124,89 @@ export default function Navbar() {
                   ))}
                 </ul>
               </NavigationMenuContent>
+            </NavigationMenuItem> */}
+            <NavigationMenuItem>
+              <Link href="/home/sort" legacyBehavior passHref>
+                <NavigationMenuLink
+                  className={`nav-link ${navigationMenuTriggerStyle()} text-${color}`}
+                >
+                  Sắp xếp
+                </NavigationMenuLink>
+              </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="/truyen-con-trai" legacyBehavior passHref>
-                <NavigationMenuLink className={`nav-link ${navigationMenuTriggerStyle()} text-${color}`}>
+                <NavigationMenuLink
+                  className={`nav-link ${navigationMenuTriggerStyle()} text-${color}`}
+                >
                   Truyện con trai
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="/truyen-con-gai" legacyBehavior passHref>
-                <NavigationMenuLink className={`nav-link ${navigationMenuTriggerStyle()} text-${color}`}>
+                <NavigationMenuLink
+                  className={`nav-link ${navigationMenuTriggerStyle()} text-${color}`}
+                >
                   Truyện con gái
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="/lich-su" legacyBehavior passHref>
-                <NavigationMenuLink className={`nav-link ${navigationMenuTriggerStyle()} text-${color}`}>
+                <NavigationMenuLink
+                  className={`nav-link ${navigationMenuTriggerStyle()} text-${color}`}
+                >
                   Lịch sử
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="/thao-luan" legacyBehavior passHref>
-                <NavigationMenuLink className={`nav-link ${navigationMenuTriggerStyle()} text-${color}`}>
+                <NavigationMenuLink
+                  className={`nav-link ${navigationMenuTriggerStyle()} text-${color}`}
+                >
                   Thảo luận
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="/fanpage" legacyBehavior passHref>
-                <NavigationMenuLink className={`nav-link ${navigationMenuTriggerStyle()} text-${color}`}>
+                <NavigationMenuLink
+                  className={`nav-link ${navigationMenuTriggerStyle()} text-${color}`}
+                >
                   Fanpage
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-        <div className="right-4 top-2 flex space-x-2 items-center">
-          <Button variant="ghost" size="sm" className="nav-link text-red-400" onClick={openRegisterTab}>
+        <div className="right-4 top-2 flex items-center space-x-2">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="nav-link text-red-400"
+            onClick={openRegisterTab}
+          >
             Đăng ký
           </Button>
-          <Button variant="ghost" size="sm" className="nav-link text-red-400" onClick={openSignUpTab}>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="nav-link text-red-400"
+            onClick={openSignUpTab}
+          >
             Đăng nhập
           </Button>
         </div>
       </div>
-      <AuthModal open={open} handleCloseAuthModal={handleCloseAuthModal} activeTab={activeTab} setActiveTab={setActiveTab} />
-    </div >
+      <AuthModal
+        open={open}
+        handleCloseAuthModal={handleCloseAuthModal}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+      />
+    </div>
   );
 }
 
