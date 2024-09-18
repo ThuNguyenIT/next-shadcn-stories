@@ -66,7 +66,8 @@ module.exports = {
         },
         textSecondary: '#81D4FA',
         'female-purple': '#9C27B0',
-        'male-blue': '#0277BD'
+        'male-blue': '#0277BD',
+        'custom-red': '#EF5350'
       },
       borderRadius: {
         lg: 'var(--radius)',

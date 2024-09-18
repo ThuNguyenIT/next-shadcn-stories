@@ -1,5 +1,6 @@
 import { Story } from '@/types';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface IStoryCard {
   story: Story;
@@ -17,9 +18,9 @@ export const StoryCard: React.FC<IStoryCard> = ({ story }) => {
             className="object-cover"
           />
           <div className="space-y-1">
-            <h3 className="line-clamp-2 font-normal text-black">
+            <Link href={`/home/story/${story.title}`} className="line-clamp-2 font-normal text-black">
               {story.title}
-            </h3>
+            </Link>
             <p className="leading-18px text-sm font-normal text-gray-600 ">
               {story.author}
             </p>

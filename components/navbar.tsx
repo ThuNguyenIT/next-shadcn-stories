@@ -19,21 +19,21 @@ import { useCallback, useEffect, useState } from 'react';
 import AuthModal from './home/auth-modal';
 
 const genres = [
-  { name: "Tiên hiệp", href: "/home/category" },
-  { name: "Huyền huyễn", href: "/home/category" },
-  { name: "Đô thị", href: "/home/category" },
-  { name: "Khoa huyễn", href: "/home/category" },
-  { name: "Kỳ huyễn", href: "/home/category" },
-  { name: "Võ hiệp", href: "/home/category" },
-  { name: "Lịch sử", href: "/home/category" },
-  { name: "Đồng nhân", href: "/home/category" },
-  { name: "Quân sự", href: "/home/category" },
-  { name: "Du hí", href: "/home/category" },
-  { name: "Canh kỳ", href: "/home/category" },
-  { name: "Linh dị", href: "/home/category" },
-  { name: "Ngôn tình", href: "/home/category" },
-  { name: "Nữ cường", href: "/home/category" },
-  { name: "Đam mỹ", href: "/home/category" },
+  { name: "Tiên hiệp", href: "/home/category/tien-hiep" },
+  { name: "Huyền huyễn", href: "/home/category/huyen-huyen" },
+  { name: "Đô thị", href: "/home/category/do-thi" },
+  { name: "Khoa huyễn", href: "/home/category/khoa-huyen" },
+  { name: "Kỳ huyễn", href: "/home/category/ky-huyen" },
+  { name: "Võ hiệp", href: "/home/category/vo-hiep" },
+  { name: "Lịch sử", href: "/home/category/lich-su" },
+  { name: "Đồng nhân", href: "/home/category/dong-nhan" },
+  { name: "Quân sự", href: "/home/category/quan-su" },
+  { name: "Du hí", href: "/home/category/du-hi" },
+  { name: "Canh kỳ", href: "/home/category/canh-ky" },
+  { name: "Linh dị", href: "/home/category/linh-di" },
+  { name: "Ngôn tình", href: "/home/category/ngon-tinh" },
+  { name: "Nữ cường", href: "/home/category/nu-cuong" },
+  { name: "Đam mỹ", href: "/home/category/dam-my" },
 ]
 
 export default function Navbar() {

@@ -1,7 +1,10 @@
+"use client"
 import BookFilter from '@/components/home/book-filter';
+import Pagination from '@/components/home/pagination';
 import { UpdatedStoriesList } from '@/components/home/updated-stories-list';
 import PageContainer from '@/components/layout/page-container';
 import { Story } from '@/types';
+import React from 'react';
 
 const stories: Story[] = [
   {
@@ -70,11 +73,20 @@ const stories: Story[] = [
   }
 ];
 export default function page() {
+  const [currentPage, setCurrentPage] = React.useState(1)
+  const totalPages = 5
   return (
     <PageContainer>
       <div className="space-y-2">
         <BookFilter />
         <UpdatedStoriesList stories={stories} />
+        <div className="p-4">
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+          />
+        </div>
       </div>
     </PageContainer>
   );
