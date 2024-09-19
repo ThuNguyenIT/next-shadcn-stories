@@ -6,4 +6,11 @@ export interface Story {
   updatedAt: string;
   coverImage: string;
   description?: string;
+  slug?: string;
+}
+
+
+export interface Chapter {
+  title: string;
+  date: string;
 }

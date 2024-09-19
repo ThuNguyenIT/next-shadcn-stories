@@ -62,9 +62,6 @@ export default function BookFilter() {
     },
     []
   )
-  const [sortActiveButton, setSortActiveButton] = useState<string>('moi-cap-nhat');
-  const [chapterActiveButton, setChapterActiveButton] = useState<string>('all');
-  const [statusActiveButton, setStatusActiveButton] = useState<string>('progress');
   return (
     <div className="bg-transparent p-4 text-white">
       <div className="grid grid-cols-[auto,1fr] items-start gap-4">
@@ -138,8 +135,8 @@ export default function BookFilter() {
                 className={classNames(
                   'bg-transparent border-gray-300 rounded-none', // Các lớp chung
                   {
-                    'text-custom-red border border-custom-red hover:bg-custom-red hover:text-white': statusActiveButton === option.value, // Trạng thái active
-                    'text-gray-500 hover:bg-custom-red hover:text-white': statusActiveButton !== option.value, // Trạng thái không active
+                    'text-custom-red border border-custom-red hover:bg-custom-red hover:text-white': state.statusActiveButton === option.value, // Trạng thái active
+                    'text-gray-500 hover:bg-custom-red hover:text-white': state.statusActiveButton !== option.value, // Trạng thái không active
                   }
                 )}
               >

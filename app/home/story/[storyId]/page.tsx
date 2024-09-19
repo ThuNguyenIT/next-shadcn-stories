@@ -1,76 +1,177 @@
-"use client"
+'use client';
 import { Breadcrumbs } from '@/components/breadcrumbs';
 import PageContainer from '@/components/layout/page-container';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import classNames from 'classnames';
 import { Eye, Heart, ThumbsUp } from 'lucide-react';
 import { useParams } from 'next/navigation';
+import Image from 'next/image';
+import { useCallback, useState } from 'react';
+import { Chapter } from '@/types';
+import { ChapterRow } from '@/components/home/chapter-row';
+
+interface IState {
+  activeButton: string;
+}
+
+interface ButtonOption {
+  label: string;
+  value: string;
+}
+
+const buttonOptions: ButtonOption[] = [
+  { label: 'Đọc truyện', value: 'doc-truyen' },
+  { label: 'Yêu thích', value: 'yeu-thich' },
+  { label: 'Theo dõi', value: 'theo-doi' }
+];
 
 
-const breadcrumbItems = [
-    { title: 'Trang chủ', link: '/home' },
-    { title: 'User', link: '/dashboard/user' },
-    { title: 'Create', link: '/dashboard/user/create' }
+const latestChapters: Chapter[] = [
+  { title: 'Chapter 1', date: '14/02/2020' },
+  { title: 'Chapter 2', date: '14/02/2020' }
+];
+
+const chapterList: Chapter[] = [
+  { title: 'Chapter 1', date: '01/02/2020' },
+  { title: 'Chapter 2', date: '01/02/2020' },
+  { title: 'Chapter 3', date: '01/02/2020' },
+  { title: 'Chapter 4', date: '01/02/2020' },
+  { title: 'Chapter 5', date: '01/02/2020' },
+  { title: 'Chapter 6', date: '01/02/2020' },
+  { title: 'Chapter 7', date: '01/02/2020' },
+  { title: 'Chapter 8', date: '01/02/2020' }
 ];
 export default function StoryDetailPage() {
-    const params = useParams();
-    const { storyId } = params
-    const breadcrumbItems = [
-        { title: 'Trang chủ', link: '/home' },
-        { title: `${storyId}`, link: '#' },
-    ];
-    return (
-        <PageContainer >
-            <div className="space-y-4">
+  const params = useParams();
+  const { storyId } = params;
 
-                <Breadcrumbs items={breadcrumbItems} />
-                <div className=" mx-auto text-white">
-                    <div className="p-6">
-                        <div className="flex gap-6 mb-4">
-                            <div className="w-1/4">
-                                <img
-                                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Group%2094-b0R4jx8Y8UyDxi9mpp0cgDVtCjYVgq.png"
-                                    alt="Story cover"
-                                    className="w-full h-auto object-cover rounded-lg"
-                                />
-                            </div>
-                            <div className="w-3/4 space-y-2">
-                                <h1 className="text-2xl font-bold">Kỳ Huyễn, Đô thị, Ảo tưởng</h1>
-                                <p className="text-blue-400">Tác giả: Bạch Phật Lăng</p>
-                                <p className="text-gray-400">Tình trạng: Đang tiến hành</p>
-                                <div className="flex space-x-4 text-sm">
-                                    <span className="flex items-center">
-                                        <ThumbsUp className="w-4 h-4 mr-1" />
-                                        248.000 lượt thích
-                                    </span>
-                                    <span className="flex items-center">
-                                        <Heart className="w-4 h-4 mr-1" />
-                                        248.000 Theo dõi
-                                    </span>
-                                    <span className="flex items-center">
-                                        <Eye className="w-4 h-4 mr-1" />
-                                        248.000 lượt xem
-                                    </span>
-                                </div>
-                                <div className="flex space-x-2 pt-2">
-                                    <Button className="bg-red-500 hover:bg-red-600">Đọc truyện</Button>
-                                    <Button variant="outline" className="border-gray-600 text-white hover:bg-gray-800">
-                                        Yêu thích
-                                    </Button>
-                                    <Button variant="outline" className="border-gray-600 text-white hover:bg-gray-800">
-                                        Theo dõi
-                                    </Button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="w-full pt-4">
-                            <p className="text-sm text-gray-300">
-                                Một vị thần trong mắt bạn là như thế nào ? Có một ngôi đền lớn, đền chúng thờ phụng, sùng bái. Vị thần cao to, mặc áo tơ lụa, vương miện lấp lánh?! Không! Hãy cùng Samurai khám phá, Yato, một vị thần vừa nghèo vừa nhỏ. Đến mỗi cái đền thờ...
-                            </p>
-                        </div>
-                    </div>
+  const [state, setState] = useState<IState>({
+    activeButton: 'doc-truyen'
+  });
+  const handleSetStateField = useCallback(
+    (field: keyof IState, value: string) => {
+      setState((prevState) => ({ ...prevState, [field]: value }));
+    },
+    []
+  );
+  const breadcrumbItems = [
+    { title: 'Trang chủ', link: '/home' },
+    { title: `${storyId}`, link: '#' }
+  ];
+  return (
+    <PageContainer>
+      <div className="space-y-4">
+        <Breadcrumbs items={breadcrumbItems} />
+        <div className=" mx-auto text-white">
+          <div className="p-6">
+            <div className="mb-6 flex gap-8">
+              <div className="flex-shrink-0">
+                <Image
+                  src="/images/placeholder3.png"
+                  alt={'story.title'}
+                  width={170}
+                  height={220}
+                  className="object-cover"
+                />
+              </div>
+              <div className="flex-grow space-y-3">
+                <h1 className="text-2xl font-bold text-black">
+                  Ngã Hữu Chư Thiên Vạn
+                </h1>
+                <h1 className="text-15px text-male-blue">
+                  Kỳ Huyễn, Đô thị, Ảo tưởng
+                </h1>
+                <p className="text-15px">
+                  <span className="text-gray-400">Tác giả:</span>{' '}
+                  <span className="text-male-blue"> Bạch Phật Lăng</span>
+                </p>
+                <p className="text-15px text-gray-400">
+                  Tình trạng: Đang tiến hành
+                </p>
+                <div className="flex space-x-6 text-sm">
+                  <span className="text-15px flex items-center text-gray-400">
+                    <ThumbsUp className="mr-2 h-4 w-4 text-gray-600" />
+                    248.000 lượt thích
+                  </span>
+                  <span className="text-15px flex items-center text-gray-400">
+                    <Heart className="mr-2 h-4 w-4 text-gray-600" />
+                    248.000 Theo dõi
+                  </span>
+                  <span className="text-15px flex items-center text-gray-400">
+                    <Eye className="mr-2 h-4 w-4 text-gray-600" />
+                    248.000 lượt xem
+                  </span>
                 </div>
+                <div className="flex space-x-3 pt-2">
+                  {buttonOptions.map((option) => (
+                    <div
+                      key={option.value}
+                      className="flex items-center space-x-2"
+                    >
+                      <Button
+                        onClick={() =>
+                          handleSetStateField('activeButton', option.value)
+                        }
+                        variant="default"
+                        className={classNames(
+                          'rounded-none border-gray-300 bg-transparent',
+                          {
+                            'border border-custom-red bg-custom-red text-white hover:bg-custom-red hover:text-white':
+                              state.activeButton === option.value, // Trạng thái active
+                            'text-gray-500 hover:bg-custom-red hover:text-white':
+                              state.activeButton !== option.value // Trạng thái không active
+                          }
+                        )}
+                      >
+                        {option.label}
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-        </PageContainer>
-    );
+            <div className="w-full">
+              <p className="text-custom-gray text-sm leading-relaxed">
+                Một vị thần trong mắt bạn là như thế nào ? Có một ngôi đền lớn,
+                đền chúng thờ phụng, sùng bái. Vị thần cao to, mặc áo tơ lụa,
+                vương miện lấp lánh?! Không! Hãy cùng Samurai khám phá, Yato,
+                một vị thần vừa nghèo vừa nhỏ. Đến mỗi cái đền thờ...
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="space-y-6 p-4 text-white">
+          <div>
+            <h2 className="mb-2 text-lg font-semibold text-male-blue">
+              Chương mới nhất
+            </h2>
+            <div className="border-t border-gray-800">
+              {latestChapters.map((chapter, index) => (
+                <ChapterRow
+                  key={index}
+                  chapter={chapter}
+                  isEven={index % 2 === 0}
+                />
+              ))}
+            </div>
+          </div>
+          <div>
+            <h2 className="mb-2 text-lg font-semibold text-[#3498db]">
+              Danh sách chương
+            </h2>
+            <div className="border-t border-gray-800">
+              {chapterList.map((chapter, index) => (
+                <ChapterRow
+                  key={index}
+                  chapter={chapter}
+                  isEven={index % 2 === 0}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </PageContainer>
+  );
 }

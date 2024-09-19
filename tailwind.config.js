@@ -67,7 +67,8 @@ module.exports = {
         textSecondary: '#81D4FA',
         'female-purple': '#9C27B0',
         'male-blue': '#0277BD',
-        'custom-red': '#EF5350'
+        'custom-red': '#EF5350',
+        'custom-gray': '#424242'
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -98,7 +99,8 @@ module.exports = {
       },
       fontSize: {
         'size-20': '20px',
-        '13px': '13px'
+        '13px': '13px',
+        '15px': '15px'
       },
       lineHeight: {
         '18px': '18px' // Thêm lớp tùy chỉnh cho line-height 18px

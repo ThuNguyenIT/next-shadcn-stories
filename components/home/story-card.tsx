@@ -8,7 +8,7 @@ interface IStoryCard {
 export const StoryCard: React.FC<IStoryCard> = ({ story }) => {
   return (
     <div key={story.id} className="overflow-hidden">
-      <div >
+      <div>
         <div className="flex space-x-4">
           <Image
             src={story.coverImage}
@@ -18,10 +18,13 @@ export const StoryCard: React.FC<IStoryCard> = ({ story }) => {
             className="object-cover"
           />
           <div className="space-y-1">
-            <Link href={`/home/story/${story.title}`} className="line-clamp-2 font-normal text-black">
+            <Link
+              href={`/home/story/${story.slug}`}
+              className="line-clamp-2 font-normal text-black"
+            >
               {story.title}
             </Link>
-            <p className="leading-18px text-sm font-normal text-gray-600 ">
+            <p className="text-sm font-normal leading-18px text-gray-600 ">
               {story.author}
             </p>
             <p className="text-sm font-normal text-gray-600">

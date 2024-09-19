@@ -8,12 +8,12 @@ import { Separator } from '@/components/ui/separator';
 import { Story } from '@/types';
 import { DynamicTitleSection } from '@/components/home/dynamic-title-section';
 import StoryPreferenceModal from '@/components/home/story-preference-modal';
-import AuthModal from '@/components/home/auth-modal';
 
 const stories: Story[] = [
   {
     id: '1',
     title: 'Ngã Hữu Chư Thiên Vạn',
+    slug: 'nga-huu-chu-thien-van',
     author: 'Kỳ Huyễn',
     chapter: 4095,
     updatedAt: '14/02/2020',
@@ -22,6 +22,7 @@ const stories: Story[] = [
   {
     id: '2',
     title: 'Tây Dư Tôi Cường Tô Sư',
+    slug: 'tay-du-toi-cuong-to-su',
     author: 'Huyền Huyễn',
     chapter: 4095,
     updatedAt: '14/02/2020',
@@ -30,6 +31,7 @@ const stories: Story[] = [
   {
     id: '3',
     title: 'Linh Khí Phục Tô: Úc Vạn',
+    slug: 'linh-khi-phuc-to-uc-van',
     author: 'Huyền Huyễn',
     chapter: 4095,
     updatedAt: '14/02/2020',
@@ -38,6 +40,7 @@ const stories: Story[] = [
   {
     id: '4',
     title: 'Linh Khí Phục Tô: Úc Vạn',
+    slug: 'linh-khi-phuc-to-uc-van',
     author: 'Huyền Huyễn',
     chapter: 4095,
     updatedAt: '14/02/2020',
@@ -46,6 +49,7 @@ const stories: Story[] = [
   {
     id: '5',
     title: 'Ngã Hữu Chư Thiên Vạn',
+    slug: 'nga-huu-chu-thien-van',
     author: 'Kỳ Huyễn',
     chapter: 4095,
     updatedAt: '14/02/2020',
@@ -54,6 +58,7 @@ const stories: Story[] = [
   {
     id: '6',
     title: 'Tây Dư Tôi Cường Tô Sư',
+    slug: 'tay-du-toi-cuong-to-su',
     author: 'Huyền Huyễn',
     chapter: 4095,
     updatedAt: '14/02/2020',
@@ -62,6 +67,7 @@ const stories: Story[] = [
   {
     id: '7',
     title: 'Linh Khí Phục Tô: Úc Vạn',
+    slug: 'linh-khi-phuc-to-uc-van',
     author: 'Huyền Huyễn',
     chapter: 4095,
     updatedAt: '14/02/2020',
@@ -70,6 +76,7 @@ const stories: Story[] = [
   {
     id: '8',
     title: 'Linh Khí Phục Tô: Úc Vạn',
+    slug: 'linh-khi-phuc-to-uc-van',
     author: 'Huyền Huyễn',
     chapter: 4095,
     updatedAt: '14/02/2020',
