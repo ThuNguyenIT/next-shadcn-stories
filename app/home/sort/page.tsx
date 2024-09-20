@@ -4,7 +4,7 @@ import Pagination from '@/components/home/pagination';
 import { UpdatedStoriesList } from '@/components/home/updated-stories-list';
 import PageContainer from '@/components/layout/page-container';
 import { Story } from '@/types';
-import React from 'react';
+import React, { useState } from 'react';
 
 const stories: Story[] = [
   {
@@ -73,7 +73,8 @@ const stories: Story[] = [
   }
 ];
 export default function page() {
-  const [currentPage, setCurrentPage] = React.useState(1)
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [currentPage, setCurrentPage] = useState<number>(1)
   const totalPages = 5
   return (
     <PageContainer>

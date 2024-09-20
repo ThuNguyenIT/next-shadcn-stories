@@ -7,8 +7,11 @@ import { Eye, Heart, ThumbsUp } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import { useCallback, useState } from 'react';
-import { Chapter } from '@/types';
+import { Chapter, IComment } from '@/types';
 import { ChapterRow } from '@/components/home/chapter-row';
+import { CommentStory } from '@/components/home/comment-story';
+import Pagination from '@/components/home/pagination';
+import CommentForm from '@/components/home/comment-form';
 
 interface IState {
   activeButton: string;
@@ -25,7 +28,6 @@ const buttonOptions: ButtonOption[] = [
   { label: 'Theo dõi', value: 'theo-doi' }
 ];
 
-
 const latestChapters: Chapter[] = [
   { title: 'Chapter 1', date: '14/02/2020' },
   { title: 'Chapter 2', date: '14/02/2020' }
@@ -41,9 +43,54 @@ const chapterList: Chapter[] = [
   { title: 'Chapter 7', date: '01/02/2020' },
   { title: 'Chapter 8', date: '01/02/2020' }
 ];
+
+const comments: IComment[] = [
+  {
+    author: 'Nguyễn Văn A',
+    content: 'Truyện đang ngay lúc gây cấn, dù sao cũng thank nhóm dịch',
+    timestamp: '26 phút trước',
+    likes: 24,
+    avatarSrc: '/placeholder.svg?height=40&width=40',
+    replies: [
+      {
+        author: 'Diệp Chân Khang',
+        content: 'Truyện đang ngay lúc gây cấn, dù sao cũng thank nhóm dịch',
+        timestamp: '26 phút trước',
+        likes: 24,
+        avatarSrc: '/placeholder.svg?height=40&width=40',
+        replies: [
+          {
+            author: 'Tuấn Akira',
+            content:
+              'Truyện đang ngay lúc gây cấn, dù sao cũng thank nhóm dịch',
+            timestamp: '26 phút trước',
+            likes: 24,
+            avatarSrc: '/placeholder.svg?height=40&width=40'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    author: 'Nguyễn Văn A',
+    content: 'Truyện đang ngay lúc gây cấn, dù sao cũng thank nhóm dịch',
+    timestamp: '26 phút trước',
+    likes: 24,
+    avatarSrc: '/placeholder.svg?height=40&width=40'
+  },
+  {
+    author: 'Nguyễn Văn A',
+    content: 'Truyện đang ngay lúc gây cấn, dù sao cũng thank nhóm dịch',
+    timestamp: '26 phút trước',
+    likes: 24,
+    avatarSrc: '/placeholder.svg?height=40&width=40'
+  }
+];
 export default function StoryDetailPage() {
   const params = useParams();
   const { storyId } = params;
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const totalPages = 5;
 
   const [state, setState] = useState<IState>({
     activeButton: 'doc-truyen'
@@ -89,15 +136,15 @@ export default function StoryDetailPage() {
                   Tình trạng: Đang tiến hành
                 </p>
                 <div className="flex space-x-6 text-sm">
-                  <span className="text-15px flex items-center text-gray-400">
+                  <span className="flex items-center text-15px text-gray-400">
                     <ThumbsUp className="mr-2 h-4 w-4 text-gray-600" />
                     248.000 lượt thích
                   </span>
-                  <span className="text-15px flex items-center text-gray-400">
+                  <span className="flex items-center text-15px text-gray-400">
                     <Heart className="mr-2 h-4 w-4 text-gray-600" />
                     248.000 Theo dõi
                   </span>
-                  <span className="text-15px flex items-center text-gray-400">
+                  <span className="flex items-center text-15px text-gray-400">
                     <Eye className="mr-2 h-4 w-4 text-gray-600" />
                     248.000 lượt xem
                   </span>
@@ -131,7 +178,7 @@ export default function StoryDetailPage() {
               </div>
             </div>
             <div className="w-full">
-              <p className="text-custom-gray text-sm leading-relaxed">
+              <p className="text-sm leading-relaxed text-custom-gray">
                 Một vị thần trong mắt bạn là như thế nào ? Có một ngôi đền lớn,
                 đền chúng thờ phụng, sùng bái. Vị thần cao to, mặc áo tơ lụa,
                 vương miện lấp lánh?! Không! Hãy cùng Samurai khám phá, Yato,
@@ -170,6 +217,23 @@ export default function StoryDetailPage() {
               ))}
             </div>
           </div>
+        </div>
+        <div className="p-4">
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+          />
+        </div>
+        <CommentForm />
+
+        <div className="space-y-4 p-4">
+          {comments.map((comment, index) => (
+            <CommentStory key={index} {...comment} />
+          ))}
+          <Button className="w-full bg-blue-600 text-white hover:bg-blue-700">
+            Xem thêm nhiều bình luận
+          </Button>
         </div>
       </div>
     </PageContainer>

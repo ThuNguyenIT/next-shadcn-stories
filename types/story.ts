@@ -14,3 +14,13 @@ export interface Chapter {
   title: string;
   date: string;
 }
+
+export interface IComment {
+  author: string;
+  content: string;
+  timestamp: string;
+  likes: number;
+  avatarSrc: string;
+  replies?: IComment[];
+  parentAuthor?: string;
+}
