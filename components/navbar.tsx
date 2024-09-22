@@ -19,21 +19,21 @@ import { useCallback, useEffect, useState } from 'react';
 import AuthModal from './home/auth-modal';
 
 const genres = [
-  { name: "Tiên hiệp", href: "/home/category/tien-hiep" },
-  { name: "Huyền huyễn", href: "/home/category/huyen-huyen" },
-  { name: "Đô thị", href: "/home/category/do-thi" },
-  { name: "Khoa huyễn", href: "/home/category/khoa-huyen" },
-  { name: "Kỳ huyễn", href: "/home/category/ky-huyen" },
-  { name: "Võ hiệp", href: "/home/category/vo-hiep" },
-  { name: "Lịch sử", href: "/home/category/lich-su" },
-  { name: "Đồng nhân", href: "/home/category/dong-nhan" },
-  { name: "Quân sự", href: "/home/category/quan-su" },
-  { name: "Du hí", href: "/home/category/du-hi" },
-  { name: "Canh kỳ", href: "/home/category/canh-ky" },
-  { name: "Linh dị", href: "/home/category/linh-di" },
-  { name: "Ngôn tình", href: "/home/category/ngon-tinh" },
-  { name: "Nữ cường", href: "/home/category/nu-cuong" },
-  { name: "Đam mỹ", href: "/home/category/dam-my" },
+  { name: "Tiên hiệp", href: "/category/tien-hiep" },
+  { name: "Huyền huyễn", href: "/category/huyen-huyen" },
+  { name: "Đô thị", href: "/category/do-thi" },
+  { name: "Khoa huyễn", href: "/category/khoa-huyen" },
+  { name: "Kỳ huyễn", href: "/category/ky-huyen" },
+  { name: "Võ hiệp", href: "/category/vo-hiep" },
+  { name: "Lịch sử", href: "/category/lich-su" },
+  { name: "Đồng nhân", href: "/category/dong-nhan" },
+  { name: "Quân sự", href: "/category/quan-su" },
+  { name: "Du hí", href: "/category/du-hi" },
+  { name: "Canh kỳ", href: "/category/canh-ky" },
+  { name: "Linh dị", href: "/category/linh-di" },
+  { name: "Ngôn tình", href: "/category/ngon-tinh" },
+  { name: "Nữ cường", href: "/category/nu-cuong" },
+  { name: "Đam mỹ", href: "/category/dam-my" },
 ]
 
 export default function Navbar() {
@@ -126,7 +126,7 @@ export default function Navbar() {
               </NavigationMenuContent>
             </NavigationMenuItem> */}
             <NavigationMenuItem>
-              <Link href="/home/sort" legacyBehavior passHref>
+              <Link href="/sort" legacyBehavior passHref>
                 <NavigationMenuLink
                   className={`nav-link ${navigationMenuTriggerStyle()} text-${color}`}
                 >
@@ -185,7 +185,7 @@ export default function Navbar() {
           <Button
             variant="ghost"
             size="sm"
-            className="nav-link text-red-400"
+            className="nav-link text-custom-red"
             onClick={openRegisterTab}
           >
             Đăng ký
@@ -193,7 +193,7 @@ export default function Navbar() {
           <Button
             variant="ghost"
             size="sm"
-            className="nav-link text-red-400"
+            className="nav-link text-custom-red"
             onClick={openSignUpTab}
           >
             Đăng nhập

@@ -64,7 +64,7 @@ export default function BookFilter() {
   )
   return (
     <div className="bg-transparent p-4 text-white">
-      <div className="grid grid-cols-[auto,1fr] items-start gap-4">
+      <div className="grid grid-cols-[150px,1fr] items-start gap-4">
         <h3 className="text-sky-300">Thể loại</h3>
         <div className="flex flex-wrap gap-2">
           {checkboxItems.map((item) => (
@@ -78,7 +78,7 @@ export default function BookFilter() {
         </div>
       </div>
 
-      <div className="mt-4 grid grid-cols-[auto,1fr] items-center gap-4">
+      <div className="mt-4 grid grid-cols-[150px,1fr] items-center gap-4">
         <h3 className="text-sky-300">Sắp xếp</h3>
         <div defaultValue="moi-cap-nhat" className="flex gap-2">
           {sortButtonOptions.map((option) => (
@@ -101,7 +101,7 @@ export default function BookFilter() {
         </div>
       </div>
 
-      <div className="mt-4 grid grid-cols-[auto,1fr] items-center gap-4">
+      <div className="mt-4 grid grid-cols-[150px,1fr] items-center gap-4">
         <h3 className="text-sky-300">Lọc theo chương</h3>
         <div className="flex gap-2">
           {chapterButtonOptions.map((option) => (
@@ -124,7 +124,7 @@ export default function BookFilter() {
         </div>
       </div>
 
-      <div className="mt-4 grid grid-cols-[auto,1fr] items-center gap-4">
+      <div className="mt-4 grid grid-cols-[150px,1fr] items-center gap-4">
         <h3 className="text-sky-300">Tình trạng</h3>
         <div className="flex gap-2">
           {statusButtonOptions.map((option) => (

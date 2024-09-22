@@ -19,7 +19,7 @@ export const StoryCard: React.FC<IStoryCard> = ({ story }) => {
           />
           <div className="space-y-1">
             <Link
-              href={`/home/story/${story.slug}`}
+              href={`/story/${story.slug}`}
               className="line-clamp-2 font-normal text-black"
             >
               {story.title}

@@ -7,6 +7,8 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import './styles.css';
 import { auth } from '@/auth';
+import Head from 'next/head';
+import StoryPreferenceModal from '@/components/home/story-preference-modal';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -29,6 +31,7 @@ export default async function RootLayout({
       >
         <NextTopLoader showSpinner={false} />
         <Providers session={session}>
+          <StoryPreferenceModal />
           <Toaster />
           {children}
         </Providers>

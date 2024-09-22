@@ -12,7 +12,9 @@ import { ChapterRow } from '@/components/home/chapter-row';
 import { CommentStory } from '@/components/home/comment-story';
 import Pagination from '@/components/home/pagination';
 import CommentForm from '@/components/home/comment-form';
-
+import { SameGenreStories } from '@/components/home/same-genre-stories';
+import { sameGenreStories } from '@/constants/data';
+import { useRouter } from 'next/navigation';
 interface IState {
   activeButton: string;
 }
@@ -20,10 +22,11 @@ interface IState {
 interface ButtonOption {
   label: string;
   value: string;
+  link?: string;
 }
 
 const buttonOptions: ButtonOption[] = [
-  { label: 'Đọc truyện', value: 'doc-truyen' },
+  { label: 'Đọc truyện', value: 'doc-truyen', link: '/detail/abc' },
   { label: 'Yêu thích', value: 'yeu-thich' },
   { label: 'Theo dõi', value: 'theo-doi' }
 ];
@@ -88,6 +91,7 @@ const comments: IComment[] = [
 ];
 export default function StoryDetailPage() {
   const params = useParams();
+  const router = useRouter();
   const { storyId } = params;
   const [currentPage, setCurrentPage] = useState<number>(1);
   const totalPages = 5;
@@ -156,8 +160,13 @@ export default function StoryDetailPage() {
                       className="flex items-center space-x-2"
                     >
                       <Button
-                        onClick={() =>
+                        onClick={() => {
+
                           handleSetStateField('activeButton', option.value)
+                          if (option?.link) {
+                            router.push(option.link);
+                          }
+                        }
                         }
                         variant="default"
                         className={classNames(
@@ -190,10 +199,10 @@ export default function StoryDetailPage() {
 
         <div className="space-y-6 p-4 text-white">
           <div>
-            <h2 className="mb-2 text-lg font-semibold text-male-blue">
+            <h2 className="mb-2 text-xl font-semibold text-male-blue">
               Chương mới nhất
             </h2>
-            <div className="border-t border-gray-800">
+            <div >
               {latestChapters.map((chapter, index) => (
                 <ChapterRow
                   key={index}
@@ -204,10 +213,10 @@ export default function StoryDetailPage() {
             </div>
           </div>
           <div>
-            <h2 className="mb-2 text-lg font-semibold text-[#3498db]">
+            <h2 className="mb-2 text-xl font-semibold text-[#3498db]">
               Danh sách chương
             </h2>
-            <div className="border-t border-gray-800">
+            <div >
               {chapterList.map((chapter, index) => (
                 <ChapterRow
                   key={index}
@@ -225,6 +234,10 @@ export default function StoryDetailPage() {
             onPageChange={setCurrentPage}
           />
         </div>
+        <div className="p-4">
+          <SameGenreStories stories={sameGenreStories} />
+        </div>
+
         <CommentForm />
 
         <div className="space-y-4 p-4">

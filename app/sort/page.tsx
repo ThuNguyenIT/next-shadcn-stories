@@ -73,7 +73,6 @@ const stories: Story[] = [
   }
 ];
 export default function page() {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [currentPage, setCurrentPage] = useState<number>(1)
   const totalPages = 5
   return (

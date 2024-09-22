@@ -148,14 +148,14 @@ export default function page() {
 
   return (
     <PageContainer>
-      <StoryPreferenceModal />
+
       <UpdatedStoriesList stories={stories} />
-      <Separator className="border-1 bg-textSecondary mb-10 mt-6 border-dashed border-indigo-600" />
+      <Separator className="border-1 bg-secondary mb-10 mt-6 border-dashed border-indigo-600" />
       <div className="container mx-auto flex flex-col gap-x-10 space-y-8 px-4 sm:flex-row sm:space-x-4 sm:space-y-0">
         <FavoriteStories stories={stories} />
         <PopularStories stories={stories} />
       </div>
-      <Separator className="border-1 bg-textSecondary mb-10 mt-6 border-dashed border-indigo-600" />
+      <Separator className="border-1 bg-secondary mb-10 mt-6 border-dashed border-indigo-600" />
       <div className="container mx-auto px-4">
         <DynamicTitleSection title={'Truyện đã hoàn thành'} href={'/more'} />
         <div className="mt-5 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">

@@ -64,10 +64,10 @@ module.exports = {
           4: 'hsl(var(--chart-4))',
           5: 'hsl(var(--chart-5))'
         },
-        textSecondary: '#81D4FA',
         'female-purple': '#9C27B0',
         'male-blue': '#0277BD',
         'custom-red': '#EF5350',
+        'light-blue': '#F3FCFF',
         'custom-gray': '#424242'
       },
       borderRadius: {
@@ -103,7 +103,7 @@ module.exports = {
         '15px': '15px'
       },
       lineHeight: {
-        '18px': '18px' // Thêm lớp tùy chỉnh cho line-height 18px
+        '18px': '18px'
       }
     }
   },
