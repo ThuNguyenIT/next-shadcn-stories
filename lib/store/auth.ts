@@ -3,17 +3,25 @@ import { persist } from 'zustand/middleware';
 import { User } from '@/types';
 
 
-export type State = {
+export type AuthState = {
     user: User | null;
 
 };
-export type Actions = {
+export type AuthActions = {
+    setUser: (user: User) => void;
+    logout: () => void;
 };
-export const useAuthStore = create<State & Actions>()(
+export const useAuthStore = create<AuthState & AuthActions>()(
     persist(
         (set) => ({
             user: null,
+            setUser: (user: User) => {
+                set({ user });
+            },
+            logout: () => {
+                set({ user: null });
+            }
         }),
-        { name: 'auth-store', skipHydration: true, }
+        { name: 'auth-store' }
     )
 );

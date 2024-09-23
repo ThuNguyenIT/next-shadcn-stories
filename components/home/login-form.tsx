@@ -4,6 +4,7 @@ import { z } from "zod";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "../ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useAuthStore } from "@/lib/store/auth";
 
 // Schema validation for login
 const LoginSchema = z.object({
@@ -11,18 +12,12 @@ const LoginSchema = z.object({
     password: z.string().min(8, { message: "Mật khẩu phải có ít nhất 8 ký tự." }),
 });
 
-// const FormSchema = z.object({
-//     email: z.string().email({
-//         message: "Email không hợp lệ.",
-//     }),
-//     password: z.string()
-//         .min(6, { message: "Mật khẩu phải có ít nhất 6 ký tự." })
-//         .regex(/[a-z]/, { message: "Mật khẩu phải có ít nhất một ký tự thường." })
-//         .regex(/[A-Z]/, { message: "Mật khẩu phải có ít nhất một ký tự hoa." })
-//         .regex(/\d/, { message: "Mật khẩu phải có ít nhất một chữ số." })
-//         .regex(/[@$!%*?&#]/, { message: "Mật khẩu phải có ít nhất một ký tự đặc biệt." }),
-// });
-export const LoginForm = () => {
+interface ILoginForml {
+    handleCloseAuthModal: () => void
+}
+export const LoginForm: React.FC<ILoginForml> = ({ handleCloseAuthModal }) => {
+
+    const { setUser } = useAuthStore();
     const form = useForm<z.infer<typeof LoginSchema>>({
         resolver: zodResolver(LoginSchema),
         defaultValues: {
@@ -33,6 +28,12 @@ export const LoginForm = () => {
 
     function onSubmit(data: z.infer<typeof LoginSchema>) {
         console.log('onSubmit', data)
+        setUser({
+            id: 10, username: 'vuha',
+            email: data.email,
+            full_name: "Vu ha"
+        })
+        handleCloseAuthModal()
     }
 
     return (

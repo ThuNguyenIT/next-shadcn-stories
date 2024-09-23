@@ -14,9 +14,12 @@ import {
   navigationMenuTriggerStyle
 } from '@/components/ui/navigation-menu';
 import { Button } from '@/components/ui/button';
-import { Genders, useHomeStore } from '@/lib';
 import { useCallback, useEffect, useState } from 'react';
 import AuthModal from './home/auth-modal';
+
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
+import LogoutConfirmationDialog from './home/confirm-logout-dialog';
+import { Genders, useAuthStore, useHomeStore } from '@/lib';
 
 const genres = [
   { name: "Tiên hiệp", href: "/category/tien-hiep" },
@@ -37,7 +40,9 @@ const genres = [
 ]
 
 export default function Navbar() {
-  const { targetGender, setTargetGender } = useHomeStore();
+  const { user, logout } = useAuthStore();
+  const { targetGender } = useHomeStore();
+  const [isAlertOpen, setIsAlertOpen] = React.useState(false)
   const [open, setOpen] = useState<boolean>(false)
   const [color, setColor] = useState<string>('male-blue');
   const [bgColor, setBgColor] = useState<string>('bg-sky-300');
@@ -60,6 +65,11 @@ export default function Navbar() {
   const handleCloseAuthModal = useCallback(() => {
     setOpen(false)
   }, [])
+  const handleLogout = () => {
+    // Implement your logout logic here
+    console.log("User logged out", typeof user, user)
+    logout()
+  }
 
   const openRegisterTab = () => {
     setActiveTab('register');
@@ -181,24 +191,40 @@ export default function Navbar() {
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-        <div className="right-4 top-2 flex items-center space-x-2">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="nav-link text-custom-red"
-            onClick={openRegisterTab}
-          >
-            Đăng ký
-          </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="nav-link text-custom-red"
-            onClick={openSignUpTab}
-          >
-            Đăng nhập
-          </Button>
-        </div>
+        {user ? (<div className="right-4 top-2 flex items-center space-x-2">
+          <DropdownMenu>
+            <DropdownMenuTrigger className="flex items-center text-custom-red">
+              {user.full_name}
+
+              <ChevronDown className="ml-1 h-4 w-4" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem>
+                <Link href="/account">Tài khoản</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem onSelect={() => setIsAlertOpen(true)}>Đăng xuất</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>) : (
+          <div className="right-4 top-2 flex items-center space-x-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="nav-link text-custom-red"
+              onClick={openRegisterTab}
+            >
+              Đăng ký
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="nav-link text-custom-red"
+              onClick={openSignUpTab}
+            >
+              Đăng nhập
+            </Button>
+          </div>)}
+
       </div>
       <AuthModal
         open={open}
@@ -206,6 +232,7 @@ export default function Navbar() {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
       />
+      <LogoutConfirmationDialog isAlertOpen={isAlertOpen} setIsAlertOpen={setIsAlertOpen} handleLogout={handleLogout} />
     </div>
   );
 }

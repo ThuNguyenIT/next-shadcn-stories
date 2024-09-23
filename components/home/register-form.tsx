@@ -20,18 +20,22 @@ const RegisterSchema = z.object({
     message: "Mật khẩu xác nhận không khớp.",
     path: ["confirmPassword"],
 });
-
-export const RegisterForm = () => {
+interface IRegisterForm {
+    handleCloseAuthModal: () => void
+}
+export const RegisterForm: React.FC<IRegisterForm> = ({ handleCloseAuthModal }) => {
     const form = useForm<z.infer<typeof RegisterSchema>>({
         resolver: zodResolver(RegisterSchema),
         defaultValues: {
             email: "",
             password: "",
+            confirmPassword: "",
         },
     })
 
     function onSubmit(data: z.infer<typeof RegisterSchema>) {
         console.log('onSubmit', data)
+        handleCloseAuthModal()
     }
 
     return (
@@ -74,10 +78,6 @@ export const RegisterForm = () => {
                         </FormItem>
                     )}
                 />
-
-
-
-
                 <Button type="submit" className="w-full bg-red-500 hover:bg-red-600 text-white">
                     Đăng ký
                 </Button>

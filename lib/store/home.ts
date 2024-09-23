@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware';
 
 
 
-export type State = {
+export type HomeState = {
     targetGender: Genders | null; // Khởi tạo với null cho đến khi người dùng chọn
 
 };
@@ -25,11 +25,11 @@ const saveTargetGender = (gender: Genders | null) => {
     localStorage.setItem('targetGender', gender || '');
 };
 
-export type Actions = {
+export type HomeActions = {
     setTargetGender: (gender: Genders) => void;
 };
 
-export const useHomeStore = create<State & Actions>()(
+export const useHomeStore = create<HomeState & HomeActions>()(
     persist(
         (set) => ({
             targetGender: getInitialTargetGender(),

@@ -42,10 +42,10 @@ const AuthModal: React.FC<IAuthModal> = ({ open, handleCloseAuthModal, activeTab
                         <div className="absolute left-1/2 top-1/2 -translate-y-1/2 w-px h-5 bg-gray-300"></div>
                     </TabsList>
                     <TabsContent value="login">
-                        <LoginForm />
+                        <LoginForm handleCloseAuthModal={handleCloseAuthModal} />
                     </TabsContent>
                     <TabsContent value="register">
-                        <RegisterForm />
+                        <RegisterForm handleCloseAuthModal={handleCloseAuthModal} />
                     </TabsContent>
                 </Tabs>
             </DialogContent>
