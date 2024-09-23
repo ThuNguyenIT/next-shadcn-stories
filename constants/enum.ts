@@ -1,16 +1,27 @@
 export enum RoleName {
-    superAdmin = 0,             // Quản trị viên cấp cao nhất
-    admin = 1,                  // Quản trị viên chính của trang web
-    moderator = 2,              // Người kiểm duyệt nội dung
-    author = 3,                 // Tác giả truyện
-    reader = 4,                 // Người đọc thông thường
-    editor = 5,                 // Biên tập viên chỉnh sửa nội dung
-    translator = 6,             // Dịch giả dịch truyện
-    vipUser = 7,                // Người dùng VIP với quyền truy cập đặc biệt
-    supporter = 8,              // Hỗ trợ viên kỹ thuật
-    contributor = 9,            // Cộng tác viên đóng góp nội dung
-    sponsor = 10,               // Nhà tài trợ truyện hoặc chương
-    betaReader = 11,            // Người đọc thử truyện trước khi xuất bản
-    accountant = 12,            // Quản lý tài chính và thanh toán
-    marketingSpecialist = 13,   // Chuyên viên tiếp thị và quảng cáo
+    SUPER_ADMIN = 'Quản trị viên cao cấp',
+    ADMIN = 'Quản trị viên',
+    ACCOUNTANT = 'Quản lý các vấn đề tài chính và thanh toán',
+    MODERATOR = 'Kiểm duyệt nội dung tài khoản',
+    SUPPORTER = 'Hỗ trợ kỹ thuật cho tài khoản',
+    MARKETING = 'Chuyên viên tiếp thị và quảng bá',
+    EDITOR = 'Chỉnh sửa và biên tập nội dung',
+    AUTHOR = 'Tác giả viết truyện',
+    TRANSLATOR = 'Dịch giả dịch nội dung truyện',
+    VIP_USER = 'Tài khoản VIP với quyền lợi đặc biệt',
+    CONTRIBUTOR = 'Cộng tác viên đóng góp nội dung',
+    SPONSOR = 'Nhà tài trợ nội dung hoặc chương',
+    BETA_READER = 'Độc giả thử nghiệm nội dung',
+    READER = 'Độc giả thông thường',
+}
+
+
+export enum NovelStatus {
+    OnGoing = 'Chưa hoàn thành',
+    Completed = 'Hoàn thành',
+    Paused = 'Tạm dừng',
+    Dropped = 'Kết thúc',
+    Licensed = 'Đã cấp phép',
+    Cancelled = 'Đã hủy',
+    Planned = 'Đang lên kế hoạch',
 }
