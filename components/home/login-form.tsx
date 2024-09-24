@@ -12,10 +12,10 @@ const LoginSchema = z.object({
     password: z.string().min(8, { message: "Mật khẩu phải có ít nhất 8 ký tự." }),
 });
 
-interface ILoginForml {
+interface ILoginForm {
     handleCloseAuthModal: () => void
 }
-export const LoginForm: React.FC<ILoginForml> = ({ handleCloseAuthModal }) => {
+export const LoginForm: React.FC<ILoginForm> = ({ handleCloseAuthModal }) => {
 
     const { setUser } = useAuthStore();
     const form = useForm<z.infer<typeof LoginSchema>>({

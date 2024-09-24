@@ -8,7 +8,6 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import { Home, Settings, ChevronLeftCircleIcon, ChevronRightCircleIcon, AlertTriangle, Heart } from "lucide-react"
 
 export default function NavigationBarFooter() {
     return (
