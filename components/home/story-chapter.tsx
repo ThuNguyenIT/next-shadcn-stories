@@ -1,7 +1,9 @@
 import React from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { useLayoutStore } from "@/lib"
 
 export default function StoryChapter() {
+    const { textColor, setTextColor } = useLayoutStore()
     return (
         <div className="mx-auto bg-transparent text-gray-300">
             <CardHeader className="space-y-1">
@@ -14,7 +16,7 @@ export default function StoryChapter() {
                 <h2 className="text-xl font-bold text-custom-gray text-center mb-6">
                     Chương 5: Vạn nhất nếm đi mạng nhỏ làm thế nào
                 </h2>
-                <div className="text-gray-800 grid gap-y-4">
+                <div className={`text-${textColor} grid gap-y-4`}>
 
                     <p>
                         Cái kia mộc kiếm vừa rơi xuống nhập trong nồi, không có có cái gì đặc biệt biến hóa, Bạch Tiểu Thuần khẽ di một

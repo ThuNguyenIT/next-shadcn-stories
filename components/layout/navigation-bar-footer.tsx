@@ -8,8 +8,10 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import ReadingCustomization from "../home/reading-customization";
 
 export default function NavigationBarFooter() {
+
     return (
         <nav className="flex items-center justify-between px-4 py-2.5 bg-light-blue">
             <div className="mx-auto flex w-full max-w-1366 justify-between">
@@ -26,17 +28,7 @@ export default function NavigationBarFooter() {
                         </span>
                         <span className="text-sm">Trang chủ</span>
                     </Button>
-                    <Button variant="ghost" size="sm" className="flex items-center space-x-2 text-gray-600 hover:text-gray-800 hover:bg-transparent">
-                        <span className="mr-1 border border-dashed border-gray-400">
-                            <Image
-                                src="/svg/icon-settings.svg" // Path to your SVG in the public folder
-                                alt={''}
-                                width={32}
-                                height={32}
-                            />
-                        </span>
-                        <span className="text-sm">Mẫu sắc & font chữ</span>
-                    </Button>
+                    <ReadingCustomization />
                 </div>
 
                 <div className="flex items-center space-x-2">

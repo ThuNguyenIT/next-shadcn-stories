@@ -39,31 +39,44 @@ const genres = [
   { name: "Đam mỹ", href: "/category/dam-my" },
 ]
 
+
+interface IState {
+  isAlertOpen: boolean;
+  open: boolean;
+  color: string
+  bgColor: string
+  activeTab: string
+}
 export default function Navbar() {
   const { user, logout } = useAuthStore();
   const { targetGender } = useHomeStore();
-  const [isAlertOpen, setIsAlertOpen] = React.useState(false)
-  const [open, setOpen] = useState<boolean>(false)
-  const [color, setColor] = useState<string>('male-blue');
-  const [bgColor, setBgColor] = useState<string>('bg-sky-300');
-  const [activeTab, setActiveTab] = useState<string>('login');
+
+  const [state, setState] = useState<IState>({
+    isAlertOpen: false,
+    open: false,
+    color: "male-blue",
+    bgColor: "bg-sky-300",
+    activeTab: "login"
+  });
+  const handleSetStateField = useCallback(
+    (field: keyof IState, value: string | boolean) => {
+      setState((prevState) => ({ ...prevState, [field]: value }));
+    },
+    []
+  );
 
   useEffect(() => {
     // Cập nhật className sau khi component đã mount trên client
-    setColor(
-      `${targetGender === Genders.MALE ? 'text-male-blue' : 'text-female-purple'
-      }`)
-    setBgColor(
-      `${targetGender === Genders.MALE ? 'bg-sky-300' : 'bg-pink-100'
-      }`
-    );
-  }, [targetGender]);
+    handleSetStateField('color', targetGender === Genders.MALE ? 'text-male-blue' : 'text-female-purple')
+    handleSetStateField('bgColor', targetGender === Genders.MALE ? 'bg-sky-300' : 'bg-pink-100')
+
+  }, [targetGender, handleSetStateField]);
 
   const handleOpenAuthModal = useCallback(() => {
-    setOpen(true)
+    handleSetStateField('open', true)
   }, [])
   const handleCloseAuthModal = useCallback(() => {
-    setOpen(false)
+    handleSetStateField('open', false)
   }, [])
   const handleLogout = () => {
     // Implement your logout logic here
@@ -71,17 +84,24 @@ export default function Navbar() {
     logout()
   }
 
-  const openRegisterTab = () => {
-    setActiveTab('register');
+  const openRegisterTab = useCallback(() => {
+    handleSetStateField('activeTab', 'register')
+
     handleOpenAuthModal()
-  };
-  const openSignUpTab = () => {
-    setActiveTab('login');
+  }, []);
+  const openSignUpTab = useCallback(() => {
+    handleSetStateField('activeTab', 'login')
     handleOpenAuthModal()
-  };
+  }, []);
+  const setActiveTab = useCallback((tab: string) => {
+    handleSetStateField('activeTab', tab)
+  }, []);
+  const setIsAlertOpen = useCallback((open: boolean) => {
+    handleSetStateField('isAlertOpen', open)
+  }, []);
   return (
     <div
-      className={`flex hidden w-full justify-around p-2 lg:block ${bgColor}`}
+      className={`flex hidden w-full justify-around p-2 lg:block ${state.bgColor}`}
     >
       <div className="mx-auto flex w-full max-w-1366 justify-between">
         <NavigationMenu>
@@ -89,14 +109,14 @@ export default function Navbar() {
             <NavigationMenuItem>
               <Link href="/home" legacyBehavior passHref>
                 <NavigationMenuLink
-                  className={`nav-link ${navigationMenuTriggerStyle()} text-${color}`}
+                  className={`nav-link ${navigationMenuTriggerStyle()} text-${state.color}`}
                 >
                   Trang chủ
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuTrigger className={`nav-link text-${color}`}>
+              <NavigationMenuTrigger className={`nav-link text-${state.color}`}>
                 Thể loại
               </NavigationMenuTrigger>
               <NavigationMenuContent
@@ -138,7 +158,7 @@ export default function Navbar() {
             <NavigationMenuItem>
               <Link href="/sort" legacyBehavior passHref>
                 <NavigationMenuLink
-                  className={`nav-link ${navigationMenuTriggerStyle()} text-${color}`}
+                  className={`nav-link ${navigationMenuTriggerStyle()} text-${state.color}`}
                 >
                   Sắp xếp
                 </NavigationMenuLink>
@@ -147,7 +167,7 @@ export default function Navbar() {
             <NavigationMenuItem>
               <Link href="/truyen-con-trai" legacyBehavior passHref>
                 <NavigationMenuLink
-                  className={`nav-link ${navigationMenuTriggerStyle()} text-${color}`}
+                  className={`nav-link ${navigationMenuTriggerStyle()} text-${state.color}`}
                 >
                   Truyện con trai
                 </NavigationMenuLink>
@@ -156,7 +176,7 @@ export default function Navbar() {
             <NavigationMenuItem>
               <Link href="/truyen-con-gai" legacyBehavior passHref>
                 <NavigationMenuLink
-                  className={`nav-link ${navigationMenuTriggerStyle()} text-${color}`}
+                  className={`nav-link ${navigationMenuTriggerStyle()} text-${state.color}`}
                 >
                   Truyện con gái
                 </NavigationMenuLink>
@@ -165,7 +185,7 @@ export default function Navbar() {
             <NavigationMenuItem>
               <Link href="/lich-su" legacyBehavior passHref>
                 <NavigationMenuLink
-                  className={`nav-link ${navigationMenuTriggerStyle()} text-${color}`}
+                  className={`nav-link ${navigationMenuTriggerStyle()} text-${state.color}`}
                 >
                   Lịch sử
                 </NavigationMenuLink>
@@ -174,7 +194,7 @@ export default function Navbar() {
             <NavigationMenuItem>
               <Link href="/thao-luan" legacyBehavior passHref>
                 <NavigationMenuLink
-                  className={`nav-link ${navigationMenuTriggerStyle()} text-${color}`}
+                  className={`nav-link ${navigationMenuTriggerStyle()} text-${state.color}`}
                 >
                   Thảo luận
                 </NavigationMenuLink>
@@ -183,7 +203,7 @@ export default function Navbar() {
             <NavigationMenuItem>
               <Link href="/fanpage" legacyBehavior passHref>
                 <NavigationMenuLink
-                  className={`nav-link ${navigationMenuTriggerStyle()} text-${color}`}
+                  className={`nav-link ${navigationMenuTriggerStyle()} text-${state.color}`}
                 >
                   Fanpage
                 </NavigationMenuLink>
@@ -202,7 +222,7 @@ export default function Navbar() {
               <DropdownMenuItem>
                 <Link href="/account">Tài khoản</Link>
               </DropdownMenuItem>
-              <DropdownMenuItem onSelect={() => setIsAlertOpen(true)}>Đăng xuất</DropdownMenuItem>
+              <DropdownMenuItem onSelect={() => handleSetStateField('isAlertOpen', true)}>Đăng xuất</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>) : (
@@ -227,12 +247,12 @@ export default function Navbar() {
 
       </div>
       <AuthModal
-        open={open}
+        open={state.open}
         handleCloseAuthModal={handleCloseAuthModal}
-        activeTab={activeTab}
+        activeTab={state.activeTab}
         setActiveTab={setActiveTab}
       />
-      <LogoutConfirmationDialog isAlertOpen={isAlertOpen} setIsAlertOpen={setIsAlertOpen} handleLogout={handleLogout} />
+      <LogoutConfirmationDialog isAlertOpen={state.isAlertOpen} setIsAlertOpen={setIsAlertOpen} handleLogout={handleLogout} />
     </div>
   );
 }
