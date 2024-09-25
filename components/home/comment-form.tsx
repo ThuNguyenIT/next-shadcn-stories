@@ -12,10 +12,10 @@ export default function CommentForm() {
 
   return (
     <div className="mx-auto w-full text-white">
-      <CardHeader>
+      <CardHeader className="p-4">
         <CardTitle className="text-xl text-blue-500">Bình Luận (200)</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="p-4">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <Input
