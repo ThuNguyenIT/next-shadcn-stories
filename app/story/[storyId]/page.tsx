@@ -114,32 +114,32 @@ export default function StoryDetailPage() {
       <div className="space-y-4">
         <Breadcrumbs items={breadcrumbItems} />
         <div className=" mx-auto text-white">
-          <div className="p-6">
-            <div className="mb-6 flex gap-8">
+          <div className="p-4 sm:p-6">
+            <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:gap-8">
               <div className="flex-shrink-0">
                 <Image
                   src="/images/placeholder3.png"
                   alt={'story.title'}
                   width={170}
                   height={220}
-                  className="object-cover"
+                  className="mx-auto object-cover sm:mx-0"
                 />
               </div>
-              <div className="flex-grow space-y-3">
-                <h1 className="text-2xl font-bold text-black">
+              <div className="flex-grow space-y-3 text-center sm:text-left">
+                <h1 className="text-xl font-bold text-black sm:text-2xl">
                   Ngã Hữu Chư Thiên Vạn
                 </h1>
-                <h1 className="text-15px text-male-blue">
+                <h1 className="text-sm text-male-blue sm:text-15px">
                   Kỳ Huyễn, Đô thị, Ảo tưởng
                 </h1>
-                <p className="text-15px">
+                <p className="text-sm sm:text-15px">
                   <span className="text-gray-400">Tác giả:</span>{' '}
                   <span className="text-male-blue"> Bạch Phật Lăng</span>
                 </p>
-                <p className="text-15px text-gray-400">
+                <p className="text-sm text-gray-400 sm:text-15px">
                   Tình trạng: Đang tiến hành
                 </p>
-                <div className="flex space-x-6 text-sm">
+                <div className="flex justify-center space-x-4 text-xs sm:justify-start sm:space-x-6 sm:text-sm">
                   <span className="flex items-center text-15px text-gray-400">
                     <ThumbsUp className="mr-2 h-4 w-4 text-gray-600" />
                     248.000 lượt thích
@@ -153,7 +153,7 @@ export default function StoryDetailPage() {
                     248.000 lượt xem
                   </span>
                 </div>
-                <div className="flex space-x-3 pt-2">
+                <div className="flex flex-wrap justify-center space-x-2 pt-2 sm:justify-start">
                   {buttonOptions.map((option) => (
                     <div
                       key={option.value}
@@ -161,16 +161,14 @@ export default function StoryDetailPage() {
                     >
                       <Button
                         onClick={() => {
-
-                          handleSetStateField('activeButton', option.value)
+                          handleSetStateField('activeButton', option.value);
                           if (option?.link) {
                             router.push(option.link);
                           }
-                        }
-                        }
+                        }}
                         variant="default"
                         className={classNames(
-                          'rounded-none border-gray-300 bg-transparent',
+                          'rounded-none border-gray-300 bg-transparent px-3 py-1 sm:px-4 sm:py-2',
                           {
                             'border border-custom-red bg-custom-red text-white hover:bg-custom-red hover:text-white':
                               state.activeButton === option.value, // Trạng thái active
@@ -187,7 +185,7 @@ export default function StoryDetailPage() {
               </div>
             </div>
             <div className="w-full">
-              <p className="text-sm leading-relaxed text-custom-gray">
+              <p className="text-xs leading-relaxed text-custom-gray sm:text-sm">
                 Một vị thần trong mắt bạn là như thế nào ? Có một ngôi đền lớn,
                 đền chúng thờ phụng, sùng bái. Vị thần cao to, mặc áo tơ lụa,
                 vương miện lấp lánh?! Không! Hãy cùng Samurai khám phá, Yato,
@@ -202,7 +200,7 @@ export default function StoryDetailPage() {
             <h2 className="mb-2 text-xl font-semibold text-male-blue">
               Chương mới nhất
             </h2>
-            <div >
+            <div>
               {latestChapters.map((chapter, index) => (
                 <ChapterRow
                   key={index}
@@ -216,7 +214,7 @@ export default function StoryDetailPage() {
             <h2 className="mb-2 text-xl font-semibold text-[#3498db]">
               Danh sách chương
             </h2>
-            <div >
+            <div>
               {chapterList.map((chapter, index) => (
                 <ChapterRow
                   key={index}

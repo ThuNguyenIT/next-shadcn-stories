@@ -72,7 +72,7 @@ const stories: Story[] = [
     coverImage: '/images/placeholder3.png'
   }
 ];
-export default function page() {
+export default function Page() {
   const [currentPage, setCurrentPage] = useState<number>(1)
   const totalPages = 5
   return (
