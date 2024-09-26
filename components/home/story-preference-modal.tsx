@@ -1,8 +1,7 @@
 'use client';
 import React, { useCallback, useState } from 'react'
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Shield, Users } from "lucide-react"
 import { Dialog, DialogContent } from '../ui/dialog'
 import Image from 'next/image';
 import { Genders, useHomeStore } from '@/lib';

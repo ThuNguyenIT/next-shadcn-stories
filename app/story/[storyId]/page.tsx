@@ -8,11 +8,11 @@ import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import { useCallback, useState } from 'react';
 import { Chapter, IComment } from '@/types';
-import { ChapterRow } from '@/components/home/chapter-row';
-import { CommentStory } from '@/components/home/comment-story';
+import { ChapterRow } from '@/components/story/chapter-row';
+import { CommentStory } from '@/components/story/comment-story';
 import Pagination from '@/components/home/pagination';
-import CommentForm from '@/components/home/comment-form';
-import { SameGenreStories } from '@/components/home/same-genre-stories';
+import CommentForm from '@/components/story/comment-form';
+import { SameGenreStories } from '@/components/story/same-genre-stories';
 import { sameGenreStories } from '@/constants/data';
 import { useRouter } from 'next/navigation';
 interface IState {

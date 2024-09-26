@@ -1,9 +1,7 @@
 import { Story } from '@/types';
 import Link from 'next/link';
 import Image from 'next/image';
-import { CardContent } from '@/components/ui/card';
 import { ChevronRight } from 'lucide-react';
-import { Separator } from '@/components/ui/separator';
 
 interface IStoryColumn {
   stories: Story[];

@@ -5,22 +5,12 @@ import { CardContent } from '@/components/ui/card';
 import InputField from '@/components/form-control/input-field';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import React, { useState } from 'react';
-import { Calendar } from "@/components/ui/calendar"
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover"
-import { format } from "date-fns"
-import { Calendar as CalendarIcon } from "lucide-react"
-
-import { cn } from "@/lib/utils"
 import DatePicker from '@/components/form-control/date-picker';
 
 export default function AccountForm() {
     const [dob, setDob] = useState<Date | undefined>();
     return (
-        <div className="flex max-w-4xl mx-auto gap-6">
+        <div className="flex max-w-4xl mx-auto gap-6 flex-col lg:flex-row">
             <form className="space-y-4 flex-grow">
                 <InputField id="username" label="Tên tài khoản" value="luanhi" readOnly />
                 <InputField id="email" label="Email" value="lklnn90@gmail.com" type="email" readOnly />
@@ -50,11 +40,10 @@ export default function AccountForm() {
                 </Button>
             </form>
 
-            <div className="w-64">
+            <div className="w-full lg:w-64">
                 <CardContent className="flex flex-col items-center ">
                     <div className="border border-dashed border-male-blue mb-4 ">
                         <Avatar className="w-32 h-32 ">
-                            {/* <span className="mr-1 border border-dashed border-gray-400"> */}
                             <AvatarImage src="/placeholder-avatar.png" alt="Avatar" />
                             <AvatarFallback>CN</AvatarFallback>
                         </Avatar>

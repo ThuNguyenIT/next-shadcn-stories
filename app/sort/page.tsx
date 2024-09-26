@@ -1,5 +1,5 @@
 "use client"
-import BookFilter from '@/components/home/book-filter';
+import BookFilter from '@/components/sort/book-filter';
 import Pagination from '@/components/home/pagination';
 import { UpdatedStoriesList } from '@/components/home/updated-stories-list';
 import PageContainer from '@/components/layout/page-container';

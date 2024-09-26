@@ -1,9 +1,9 @@
 import React from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useLayoutStore } from "@/lib"
 
 export default function StoryChapter() {
-    const { textColor, setTextColor } = useLayoutStore()
+    const { textColor } = useLayoutStore()
     return (
         <div className="mx-auto bg-transparent text-gray-300">
             <CardHeader className="space-y-1">

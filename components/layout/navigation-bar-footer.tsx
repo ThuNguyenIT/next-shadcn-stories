@@ -8,7 +8,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import ReadingCustomization from "../home/reading-customization";
+import ReadingCustomization from "../detail/reading-customization";
 
 export default function NavigationBarFooter() {
 
