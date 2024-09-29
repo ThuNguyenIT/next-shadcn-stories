@@ -7,6 +7,7 @@ import { SearchIcon } from 'lucide-react';
 import { MobileSidebar } from '../layout/mobile-sidebar';
 import { Genders, useHomeStore } from '@/lib';
 import { useCallback, useEffect, useState } from 'react';
+import { SheetMenu } from '../layout/sheet-menu';
 
 
 interface IState {
@@ -50,7 +51,8 @@ export default function Header() {
     <header className="relative h-[300px] w-full overflow-hidden">
       <nav className="flex items-center justify-between px-4 py-2 absolute">
         <div className={`${cn('block lg:!hidden')} z-50`}>
-          <MobileSidebar />
+          {/* <MobileSidebar /> */}
+          <SheetMenu />
         </div>
 
       </nav>
