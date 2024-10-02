@@ -16,7 +16,7 @@ export default function StoryChapter() {
                 <h2 className="text-xl font-bold text-custom-gray text-center mb-6">
                     Chương 5: Vạn nhất nếm đi mạng nhỏ làm thế nào
                 </h2>
-                <div className={`text-${textColor} grid gap-y-4`}>
+                <div className={`text-[${textColor}] grid gap-y-4 text-justify`}>
 
                     <p>
                         Cái kia mộc kiếm vừa rơi xuống nhập trong nồi, không có có cái gì đặc biệt biến hóa, Bạch Tiểu Thuần khẽ di một

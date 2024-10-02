@@ -14,15 +14,16 @@ interface IState {
 interface IColor {
   value: string;
   class: string;
+  colorHex: string;
 }
 
 const colors: IColor[] = [
-  { value: 'red-500', class: 'bg-red-500' },
-  { value: 'yellow-200', class: 'bg-yellow-200' },
-  { value: 'green-200', class: 'bg-green-200' },
-  { value: 'blue-200', class: 'bg-blue-200' },
-  { value: 'pink-200', class: 'bg-pink-200' },
-  { value: 'black', class: 'bg-black' }
+  { value: 'red-500', class: 'bg-red-500', colorHex: '#EF4444' },
+  { value: 'yellow-200', class: 'bg-yellow-200', colorHex: '#FEF08A' },
+  { value: 'green-200', class: 'bg-green-200', colorHex: '#BBF7D0' },
+  { value: 'blue-200', class: 'bg-blue-200', colorHex: '#BFDBFE' },
+  { value: 'pink-200', class: 'bg-pink-200', colorHex: '#FBCFE8' },
+  { value: 'black', class: 'bg-black', colorHex: '#000000' }
 ];
 
 const fonts: string[] = ['Roboto', 'Palatino', 'Times'];
@@ -70,9 +71,9 @@ export default function PopoverContentPanel() {
               <button
                 key={color.value}
                 className={`h-6 w-6 rounded-full ${color.class} flex items-center justify-center border border-custom-red`}
-                onClick={() => handleChooseColor(color.value)}
+                onClick={() => handleChooseColor(color.colorHex)}
               >
-                {state.selectedColor === color.value && (
+                {state.selectedColor === color.colorHex && (
                   <Check className="h-4 w-4 text-white" />
                 )}
               </button>
@@ -86,11 +87,10 @@ export default function PopoverContentPanel() {
             {fonts.map((font) => (
               <button
                 key={font}
-                className={`rounded border bg-transparent px-3 py-1 ${
-                  state.selectedFont === font
-                    ? 'border-custom-red text-custom-red'
-                    : ''
-                }`}
+                className={`rounded border bg-transparent px-3 py-1 ${state.selectedFont === font
+                  ? 'border-custom-red text-custom-red'
+                  : ''
+                  }`}
                 onClick={() => handleChooseFont(font)}
               >
                 {font}

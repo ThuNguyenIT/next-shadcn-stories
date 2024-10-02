@@ -49,7 +49,7 @@ export default function Header() {
 
   return (
     <header className="relative h-[300px] w-full overflow-hidden">
-      <nav className="flex items-center justify-between px-4 py-2 absolute">
+      <nav className="flex items-center justify-between px-8 py-2 absolute">
         <div className={`${cn('block lg:!hidden')} z-50`}>
           {/* <MobileSidebar /> */}
           <SheetMenu />
@@ -62,7 +62,7 @@ export default function Header() {
           backgroundImage: `url("/images/bg-header.png")`
         }}
       />
-      <div className="relative z-10 flex h-full flex-col items-center justify-center px-4">
+      <div className="relative z-10 flex h-full flex-col items-center justify-center px-8">
         <div className="mb-8">
           <div className="flex items-center justify-center ">
             <Image
