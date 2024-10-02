@@ -15,10 +15,10 @@ import {
 } from '@/components/ui/navigation-menu';
 import { Button } from '@/components/ui/button';
 import { useCallback, useEffect, useState } from 'react';
-import AuthModal from './auth/auth-modal';
+import AuthModal from '../auth/auth-modal';
 
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
-import LogoutConfirmationDialog from './home/confirm-logout-dialog';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu';
+import LogoutConfirmationDialog from '../home/confirm-logout-dialog';
 import { Genders, useAuthStore, useHomeStore } from '@/lib';
 
 const genres = [

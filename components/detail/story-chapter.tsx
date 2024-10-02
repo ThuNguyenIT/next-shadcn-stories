@@ -6,13 +6,13 @@ export default function StoryChapter() {
     const { textColor } = useLayoutStore()
     return (
         <div className="mx-auto bg-transparent text-gray-300">
-            <CardHeader className="space-y-1">
+            <CardHeader className="space-y-1 p-4">
                 <CardTitle className="text-2xl font-medium text-male-blue text-center">
                     Ngã Hữu Chư Thiên Vạn
                 </CardTitle>
                 <p className="text-sm text-gray-400 text-center">Tác giả: <span className="text-15px text-male-blue">Bạch Phật Lăng</span> </p>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-4 p-4">
                 <h2 className="text-xl font-bold text-custom-gray text-center mb-6">
                     Chương 5: Vạn nhất nếm đi mạng nhỏ làm thế nào
                 </h2>
