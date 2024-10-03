@@ -4,10 +4,11 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { SearchIcon } from 'lucide-react';
-import { MobileSidebar } from '../layout/mobile-sidebar';
-import { Genders, useHomeStore } from '@/lib';
+import { Genders, useCategoryStore, useHomeStore } from '@/lib';
 import { useCallback, useEffect, useState } from 'react';
 import { SheetMenu } from '../layout/sheet-menu';
+import { createAxiosInstance } from '@/utils/axiosInstance';
+import { Category, GetCategoryResponse } from '@/types';
 
 
 interface IState {
@@ -16,7 +17,24 @@ interface IState {
   isMounted: boolean
 }
 export default function Header() {
+  const axiosInstance = createAxiosInstance()
   const { targetGender, setTargetGender } = useHomeStore();
+  const { setCategory, categories } = useCategoryStore();
+  const getCategory = useCallback(async () => {
+    try {
+      const response = await axiosInstance.get<GetCategoryResponse<Category[]>>('/api/category');
+      const { data } = response
+      if (data?.message === 'Success') {
+        setCategory(data.data)
+      }
+    } catch (err: any) {
+    }
+  }, [])
+  console.log('categories', categories)
+
+  useEffect(() => {
+    getCategory()
+  }, [getCategory])
 
   const [state, setState] = useState<IState>({
     imageMaleSrc: '/svg/icon-shield-active.svg',

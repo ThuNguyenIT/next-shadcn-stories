@@ -1,6 +1,7 @@
 import { Icons } from '@/components/icons';
 export * from './story';
 export * from './user';
+export * from './category';
 
 export interface NavItem {
   title: string;
