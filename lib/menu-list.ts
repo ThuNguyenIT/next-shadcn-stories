@@ -27,9 +27,9 @@ type Menu = {
 export function getMenuList(pathname: string): Menu[] {
   return [
     {
-      href: "/home",
+      href: "/",
       label: "Trang chủ",
-      active: pathname.includes("/home"),
+      active: pathname.includes("/"),
       icon: LayoutGrid,
       submenus: []
 

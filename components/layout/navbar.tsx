@@ -107,7 +107,7 @@ export default function Navbar() {
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
-              <Link href="/home" legacyBehavior passHref>
+              <Link href="/" legacyBehavior passHref>
                 <NavigationMenuLink
                   className={`nav-link ${navigationMenuTriggerStyle()} text-${state.color}`}
                 >
