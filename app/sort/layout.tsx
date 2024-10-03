@@ -1,4 +1,4 @@
-import HomeLayout from '../home/layout';
+import MainLayout from '@/components/layout/main-layout';
 
 export default function SortLayout({
     children
@@ -6,8 +6,8 @@ export default function SortLayout({
     children: React.ReactNode;
 }) {
     return (
-        <HomeLayout>
+        <MainLayout>
             {children}
-        </HomeLayout>
+        </MainLayout>
     );
 }

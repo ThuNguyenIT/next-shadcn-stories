@@ -3,7 +3,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { useCallback, useState } from 'react';
-import classNames from 'classnames';
+import { cn } from '@/lib/utils';
 
 interface IState {
   sortActiveButton: string;
@@ -76,9 +76,8 @@ export default function BookFilter() {
               />
               <Label
                 htmlFor={item.id}
-                className={`${
-                  item.isChecked ? 'text-custom-red' : 'text-gray-600'
-                }`}
+                className={`${item.isChecked ? 'text-custom-red' : 'text-gray-600'
+                  }`}
               >
                 {item.label}
               </Label>
@@ -97,14 +96,9 @@ export default function BookFilter() {
                   handleSetStateField('sortActiveButton', option.value)
                 }
                 variant="default"
-                className={classNames(
+                className={cn(
                   'rounded-none border-gray-300 bg-transparent px-2 py-1 text-sm',
-                  {
-                    'border border-custom-red text-custom-red hover:bg-custom-red hover:text-white':
-                      state.sortActiveButton === option.value,
-                    'text-gray-500 hover:bg-custom-red hover:text-white':
-                      state.sortActiveButton !== option.value
-                  }
+                  state.sortActiveButton === option.value ? 'border border-custom-red text-custom-red hover:bg-custom-red hover:text-white' : 'text-gray-500 hover:bg-custom-red hover:text-white',
                 )}
               >
                 {option.label}
@@ -124,14 +118,9 @@ export default function BookFilter() {
                   handleSetStateField('chapterActiveButton', option.value)
                 }
                 variant="default"
-                className={classNames(
+                className={cn(
                   'rounded-none border-gray-300 bg-transparent px-2 py-1 text-sm',
-                  {
-                    'border border-custom-red text-custom-red hover:bg-custom-red hover:text-white':
-                      state.chapterActiveButton === option.value,
-                    'text-gray-500 hover:bg-custom-red hover:text-white':
-                      state.chapterActiveButton !== option.value
-                  }
+                  state.chapterActiveButton === option.value ? 'border border-custom-red text-custom-red hover:bg-custom-red hover:text-white' : 'text-gray-500 hover:bg-custom-red hover:text-white',
                 )}
               >
                 {option.label}
@@ -151,14 +140,9 @@ export default function BookFilter() {
                   handleSetStateField('statusActiveButton', option.value)
                 }
                 variant="default"
-                className={classNames(
+                className={cn(
                   'rounded-none border-gray-300 bg-transparent px-2 py-1 text-sm',
-                  {
-                    'border border-custom-red text-custom-red hover:bg-custom-red hover:text-white':
-                      state.statusActiveButton === option.value,
-                    'text-gray-500 hover:bg-custom-red hover:text-white':
-                      state.statusActiveButton !== option.value
-                  }
+                  state.statusActiveButton === option.value ? 'border border-custom-red text-custom-red hover:bg-custom-red hover:text-white' : 'text-gray-500 hover:bg-custom-red hover:text-white',
                 )}
               >
                 {option.label}

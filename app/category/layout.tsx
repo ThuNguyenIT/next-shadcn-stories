@@ -1,4 +1,4 @@
-import HomeLayout from '../home/layout';
+import MainLayout from '@/components/layout/main-layout';
 
 export default function CategoryLayout({
     children
@@ -6,8 +6,8 @@ export default function CategoryLayout({
     children: React.ReactNode;
 }) {
     return (
-        <HomeLayout>
+        <MainLayout>
             {children}
-        </HomeLayout>
+        </MainLayout>
     );
 }

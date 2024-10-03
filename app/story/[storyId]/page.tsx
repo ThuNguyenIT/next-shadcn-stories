@@ -2,7 +2,6 @@
 import { Breadcrumbs } from '@/components/breadcrumbs';
 import PageContainer from '@/components/layout/page-container';
 import { Button } from '@/components/ui/button';
-import classNames from 'classnames';
 import { Eye, Heart, ThumbsUp } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
@@ -15,6 +14,7 @@ import CommentForm from '@/components/story/comment-form';
 import { SameGenreStories } from '@/components/story/same-genre-stories';
 import { sameGenreStories } from '@/constants/data';
 import { useRouter } from 'next/navigation';
+import { cn } from '@/lib/utils';
 interface IState {
   activeButton: string;
 }
@@ -167,14 +167,9 @@ export default function StoryDetailPage() {
                           }
                         }}
                         variant="default"
-                        className={classNames(
+                        className={cn(
                           'rounded-none border-gray-300 bg-transparent px-3 py-1 sm:px-4 sm:py-2',
-                          {
-                            'border border-custom-red bg-custom-red text-white hover:bg-custom-red hover:text-white':
-                              state.activeButton === option.value, // Trạng thái active
-                            'text-gray-500 hover:bg-custom-red hover:text-white':
-                              state.activeButton !== option.value // Trạng thái không active
-                          }
+                          state.activeButton === option.value ? 'border border-custom-red bg-custom-red text-white hover:bg-custom-red hover:text-white' : 'text-gray-500 hover:bg-custom-red hover:text-white',
                         )}
                       >
                         {option.label}

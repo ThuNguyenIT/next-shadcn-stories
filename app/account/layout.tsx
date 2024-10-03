@@ -1,13 +1,12 @@
-import HomeLayout from '../home/layout';
-
+import MainLayout from '@/components/layout/main-layout';
 export default function AccountLayout({
     children
 }: {
     children: React.ReactNode;
 }) {
     return (
-        <HomeLayout>
+        <MainLayout>
             {children}
-        </HomeLayout>
+        </MainLayout>
     );
 }
