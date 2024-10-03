@@ -146,3 +146,80 @@ Dự án này được cấp phép dưới giấy phép [MIT License](./LICENSE)
 ---
 
 README này cung cấp một hướng dẫn chi tiết cho người phát triển và người dùng về cách cài đặt, cấu hình, và đóng góp cho dự án. Bạn có thể điều chỉnh tùy theo tính năng và yêu cầu cụ thể của dự án của bạn.
+
+<!-- Đăng nhập -->
+curl -X POST http://localhost:3001/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "username": "jelyqs",
+    "password": "123123"
+  }'
+
+<!-- Tạo role -->
+curl -X POST http://localhost:3001/api/admin/role \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTcyOTQwNTg5NH0.b1ypb2UdREzKXAx6fHeUdENGidUH2P5YfPBPEmttoII"
+
+<!-- Tạo user -->
+curl -X POST http://localhost:3001/api/admin/user \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTcyOTQwNTg5NH0.b1ypb2UdREzKXAx6fHeUdENGidUH2P5YfPBPEmttoII" \
+  -d '{
+    "username": "jelyqs",
+    "email": "jely.big@gmail.com",
+    "password": "123123",
+    "full_name": "Thu Nguyễn",
+    "mobile": "0359399320",
+    "address": "Đà Nẵng",
+    "birthday": "1995-02-03",
+    "role_ids": [1]
+  }'
+
+<!-- Lấy danh sách user -->
+curl -X GET http://localhost:3001/api/admin/user \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTcyOTQwNTg5NH0.b1ypb2UdREzKXAx6fHeUdENGidUH2P5YfPBPEmttoII"
+
+<!-- Lấy thông tin user -->
+curl -X GET http://localhost:3001/api/admin/user/1 \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTcyOTQwNTg5NH0.b1ypb2UdREzKXAx6fHeUdENGidUH2P5YfPBPEmttoII"
+
+<!-- Cập nhật user -->
+curl -X PUT http://localhost:3001/api/admin/user/1 \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTcyOTQwNTg5NH0.b1ypb2UdREzKXAx6fHeUdENGidUH2P5YfPBPEmttoII" \
+  -d '{
+    "username": "jelyqs",
+    "email": "jely.big@gmail.com",
+    "password": "123123",
+    "full_name": "Thu Nguyễn",
+    "mobile": "0359399320",
+    "address": "Đà Nẵng",
+    "birthday": "1995-02-03",
+    "role_ids": [1]
+  }'
+
+<!-- Xóa user -->
+curl -X DELETE http://localhost:3001/api/admin/user/1 \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTcyOTQwNTg5NH0.b1ypb2UdREzKXAx6fHeUdENGidUH2P5YfPBPEmttoII"
+
+<!-- Cập nhật user password -->
+curl -X PUT http://localhost:3001/api/admin/user/1/password \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTcyOTQwNTg5NH0.b1ypb2UdREzKXAx6fHeUdENGidUH2P5YfPBPEmttoII" \
+  -d '{
+    "old_password": "ThuNP123",
+    "new_password": "123123",
+    "confirm_new_password": "123123"
+  }'
+
+<!-- Crawl category - truyenfull  -->
+curl -X GET http://localhost:3001/api/crawl \
+   -H "Content-Type: application/json"
+
+<!--  -->
+
+
+<!--  -->
