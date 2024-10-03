@@ -12,7 +12,7 @@ interface NavItem {
 const navItems: NavItem[] = [
   {
     icon: <Image src="/svg/icon-home.svg" alt={''} width={32} height={32} />,
-    href: '/home'
+    href: '/'
   },
   {
     icon: (
@@ -64,12 +64,12 @@ export default function MobileNavigation() {
     <div className="fixed bottom-0 left-0 right-0 block border-t bg-background lg:hidden">
       <nav className="flex h-16 items-center justify-around">
         <Link
-          href={'/home'}
+          href={'/'}
           className="flex h-full flex-col items-center justify-center hover:bg-transparent"
         >
           <Image src="/svg/icon-home.svg" alt={''} width={32} height={32} />
         </Link>
-        <TextFormattingPanel/>
+        <TextFormattingPanel />
         {/* <Button
           variant="ghost"
           size="icon"

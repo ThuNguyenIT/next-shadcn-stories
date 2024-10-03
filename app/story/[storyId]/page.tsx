@@ -106,7 +106,7 @@ export default function StoryDetailPage() {
     []
   );
   const breadcrumbItems = [
-    { title: 'Trang chủ', link: '/home' },
+    { title: 'Trang chủ', link: '/' },
     { title: `${storyId}`, link: '#' }
   ];
   return (
