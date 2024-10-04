@@ -24,7 +24,7 @@ export const StoryColumn: React.FC<IStoryColumn> = ({ stories }) => {
         <div className="p-4">
           <div className="flex space-x-4">
             <Image
-              src={stories[0].coverImage || ''}
+              src={stories[0].cover_image || ''}
               alt={stories[0].title}
               width={80}
               height={120}

@@ -1,6 +1,6 @@
 import { Story } from '@/types';
 import React from 'react';
-import { StoryCard } from './story-card';
+import { StoryCard } from '../story/story-card';
 import { DynamicTitleSection } from './dynamic-title-section';
 
 interface IUpdatedStoriesList {
