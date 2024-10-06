@@ -29,7 +29,7 @@ export async function GET(
     // Tìm category dựa trên ID được truyền vào từ URL
     const category = await prisma.categories.findUnique({
       where: {
-        id: parseInt(id), // Convert id from string to number
+        slug: (id)
       },
       include: {
         stories: {

@@ -26,24 +26,6 @@ import {
 import LogoutConfirmationDialog from "../home/confirm-logout-dialog";
 import { Genders, useAuthStore, useCategoryStore, useHomeStore } from "@/lib";
 
-const genres = [
-  { name: "Tiên hiệp", href: "/category/tien-hiep" },
-  { name: "Huyền huyễn", href: "/category/huyen-huyen" },
-  { name: "Đô thị", href: "/category/do-thi" },
-  { name: "Khoa huyễn", href: "/category/khoa-huyen" },
-  { name: "Kỳ huyễn", href: "/category/ky-huyen" },
-  { name: "Võ hiệp", href: "/category/vo-hiep" },
-  { name: "Lịch sử", href: "/category/lich-su" },
-  { name: "Đồng nhân", href: "/category/dong-nhan" },
-  { name: "Quân sự", href: "/category/quan-su" },
-  { name: "Du hí", href: "/category/du-hi" },
-  { name: "Canh kỳ", href: "/category/canh-ky" },
-  { name: "Linh dị", href: "/category/linh-di" },
-  { name: "Ngôn tình", href: "/category/ngon-tinh" },
-  { name: "Nữ cường", href: "/category/nu-cuong" },
-  { name: "Đam mỹ", href: "/category/dam-my" },
-];
-
 interface IState {
   isAlertOpen: boolean;
   open: boolean;
@@ -125,9 +107,8 @@ export default function Navbar() {
             <NavigationMenuItem>
               <Link href='/' legacyBehavior passHref>
                 <NavigationMenuLink
-                  className={`nav-link ${navigationMenuTriggerStyle()} text-${
-                    state.color
-                  }`}
+                  className={`nav-link ${navigationMenuTriggerStyle()} text-${state.color
+                    }`}
                 >
                   Trang chủ
                 </NavigationMenuLink>
@@ -146,7 +127,7 @@ export default function Navbar() {
                   {categories.map((genre) => (
                     <NavigationMenuLink
                       key={genre.name}
-                      href={`/category/${genre.id}`}
+                      href={`/category/${genre.slug}`}
                       className='block select-none space-y-1 border-b border-dashed border-gray-200 p-2 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground'
                     >
                       {genre.name}
@@ -176,9 +157,8 @@ export default function Navbar() {
             <NavigationMenuItem>
               <Link href='/sort' legacyBehavior passHref>
                 <NavigationMenuLink
-                  className={`nav-link ${navigationMenuTriggerStyle()} text-${
-                    state.color
-                  }`}
+                  className={`nav-link ${navigationMenuTriggerStyle()} text-${state.color
+                    }`}
                 >
                   Sắp xếp
                 </NavigationMenuLink>
@@ -187,9 +167,8 @@ export default function Navbar() {
             <NavigationMenuItem>
               <Link href='/truyen-con-trai' legacyBehavior passHref>
                 <NavigationMenuLink
-                  className={`nav-link ${navigationMenuTriggerStyle()} text-${
-                    state.color
-                  }`}
+                  className={`nav-link ${navigationMenuTriggerStyle()} text-${state.color
+                    }`}
                 >
                   Truyện con trai
                 </NavigationMenuLink>
@@ -198,9 +177,8 @@ export default function Navbar() {
             <NavigationMenuItem>
               <Link href='/truyen-con-gai' legacyBehavior passHref>
                 <NavigationMenuLink
-                  className={`nav-link ${navigationMenuTriggerStyle()} text-${
-                    state.color
-                  }`}
+                  className={`nav-link ${navigationMenuTriggerStyle()} text-${state.color
+                    }`}
                 >
                   Truyện con gái
                 </NavigationMenuLink>
@@ -209,9 +187,8 @@ export default function Navbar() {
             <NavigationMenuItem>
               <Link href='/lich-su' legacyBehavior passHref>
                 <NavigationMenuLink
-                  className={`nav-link ${navigationMenuTriggerStyle()} text-${
-                    state.color
-                  }`}
+                  className={`nav-link ${navigationMenuTriggerStyle()} text-${state.color
+                    }`}
                 >
                   Lịch sử
                 </NavigationMenuLink>
@@ -220,9 +197,8 @@ export default function Navbar() {
             <NavigationMenuItem>
               <Link href='/thao-luan' legacyBehavior passHref>
                 <NavigationMenuLink
-                  className={`nav-link ${navigationMenuTriggerStyle()} text-${
-                    state.color
-                  }`}
+                  className={`nav-link ${navigationMenuTriggerStyle()} text-${state.color
+                    }`}
                 >
                   Thảo luận
                 </NavigationMenuLink>
@@ -231,9 +207,8 @@ export default function Navbar() {
             <NavigationMenuItem>
               <Link href='/fanpage' legacyBehavior passHref>
                 <NavigationMenuLink
-                  className={`nav-link ${navigationMenuTriggerStyle()} text-${
-                    state.color
-                  }`}
+                  className={`nav-link ${navigationMenuTriggerStyle()} text-${state.color
+                    }`}
                 >
                   Fanpage
                 </NavigationMenuLink>

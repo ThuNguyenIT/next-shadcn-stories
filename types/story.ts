@@ -11,14 +11,21 @@ export interface Story {
   view_count: number;
   status?: string;
   chapter?: number;
+  chapters?: Chapter[];
   total_chapter?: number;
   updated_at?: string | Date;
   author?: Author;
+  category_name?: string[];
 }
 
 export interface Chapter {
+  id: number;
+  story_id: number;
   title: string;
-  date: string;
+  content: string;
+  chapter_number: string;
+  created_at: string;
+  updated_at: string
 }
 
 export interface IComment {
@@ -31,6 +38,14 @@ export interface IComment {
   parentAuthor?: string;
 }
 
+export interface StoryData {
+  story: Story;
+  chapters: Chapter[];
+  hasMoreChapters: boolean;
+  totalChapters: number
+  currentPage: number
+  totalPages: number
+}
 
 export interface GetStoryBySlugResponse<T> {
   message: string;
