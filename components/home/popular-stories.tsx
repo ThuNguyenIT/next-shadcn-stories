@@ -1,6 +1,6 @@
 import { Story } from '@/types';
 import React from 'react';
-import { StoryCard } from './story-card';
+import { StoryCard } from '../story/story-card';
 import { DynamicTitleSection } from './dynamic-title-section';
 
 interface IPopularStories {
@@ -10,7 +10,7 @@ export const PopularStories: React.FC<IPopularStories> = ({ stories }) => {
   return (
     <div className="container mx-auto pl-0 pr-0">
       <DynamicTitleSection
-        title={'Truyện được xem nhiều'}
+        title={'Truyện full'}
         href={'/more'}
         linkText="Xem thêm"
       />

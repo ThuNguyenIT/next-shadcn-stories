@@ -2,7 +2,7 @@
 import React from 'react';
 import { CardTitle } from '@/components/ui/card';
 import { Story } from '@/types';
-import { StoryCard } from '../home/story-card';
+import { StoryCard } from './story-card';
 
 
 interface ISameGenreStories {

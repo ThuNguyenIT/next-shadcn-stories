@@ -1,7 +1,7 @@
 import { Story } from '@/types';
 import Link from 'next/link';
 import React from 'react';
-import { StoryCard } from './story-card';
+import { StoryCard } from '../story/story-card';
 import { DynamicTitleSection } from './dynamic-title-section';
 
 interface IFavoriteStories {
@@ -11,7 +11,7 @@ export const FavoriteStories: React.FC<IFavoriteStories> = ({ stories }) => {
   return (
     <div className="container mx-auto pl-0 pr-0">
       <DynamicTitleSection
-        title={'Truyện yêu thích'}
+        title={'Truyện hot'}
         href={'/more'}
         linkText="Xem thêm"
       />

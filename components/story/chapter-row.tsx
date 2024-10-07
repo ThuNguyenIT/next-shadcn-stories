@@ -9,6 +9,6 @@ export const ChapterRow: React.FC<{ chapter: Chapter; isEven: boolean }> = ({
     <a href="#" className="text-black text-sm">
       {chapter.title}
     </a>
-    <span className="italic text-gray-600 text-sm">{chapter.date}</span>
+    <span className="italic text-gray-600 text-sm">{chapter.updated_at}</span>
   </div>
 );

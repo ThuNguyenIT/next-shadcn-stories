@@ -3,9 +3,9 @@ import {
   Users,
   Settings,
   Bookmark,
-  SquarePen,
+  Square,
   LayoutGrid,
-  LucideIcon
+  LucideIcon,
 } from "lucide-react";
 
 type Submenu = {
@@ -18,11 +18,9 @@ type Menu = {
   href: string;
   label: string;
   active: boolean;
-  icon: LucideIcon
+  icon: LucideIcon;
   submenus: Submenu[];
 };
-
-
 
 export function getMenuList(pathname: string): Menu[] {
   return [
@@ -31,11 +29,9 @@ export function getMenuList(pathname: string): Menu[] {
       label: "Trang chủ",
       active: pathname.includes("/"),
       icon: LayoutGrid,
-      submenus: []
-
+      submenus: [],
     },
     {
-
       href: "/category",
       label: "Thể loại",
       active: pathname.includes("/category"),
@@ -44,136 +40,128 @@ export function getMenuList(pathname: string): Menu[] {
         {
           href: "/category/tien-hiep",
           label: "Tiên hiệp",
-          active: pathname === "/category/tien-hiep"
+          active: pathname === "/category/tien-hiep",
         },
         {
           href: "/category/huyen-huyen",
           label: "Huyền huyễn",
-          active: pathname === "/category/huyen-huyen"
+          active: pathname === "/category/huyen-huyen",
         },
         {
           href: "/category/do-thi",
           label: "Đô thị",
-          active: pathname === "/category/do-thi"
+          active: pathname === "/category/do-thi",
         },
         {
           href: "/category/khoa-huyen",
           label: "Khoa huyễn",
-          active: pathname === "/category/khoa-huyen"
+          active: pathname === "/category/khoa-huyen",
         },
         {
           href: "/category/ky-huyen",
           label: "Kỳ huyễn",
-          active: pathname === "/category/ky-huyen"
+          active: pathname === "/category/ky-huyen",
         },
         {
           href: "/category/vo-hiep",
           label: "Võ hiệp",
-          active: pathname === "/category/vo-hiep"
+          active: pathname === "/category/vo-hiep",
         },
         {
           href: "/category/lich-su",
           label: "Lịch sử",
-          active: pathname === "/category/lich-su"
+          active: pathname === "/category/lich-su",
         },
         {
           href: "/category/dong-nhan",
           label: "Đồng nhân",
-          active: pathname === "/category/dong-nhan"
+          active: pathname === "/category/dong-nhan",
         },
         {
           href: "/category/quan-su",
           label: "Quân sự",
-          active: pathname === "/category/quan-su"
+          active: pathname === "/category/quan-su",
         },
         {
           href: "/category/du-hi",
           label: "Du hí",
-          active: pathname === "/category/du-hi"
+          active: pathname === "/category/du-hi",
         },
         {
           href: "/category/canh-ky",
           label: "Canh kỳ",
-          active: pathname === "/category/canh-ky"
+          active: pathname === "/category/canh-ky",
         },
         {
           href: "/category/linh-di",
           label: "Linh dị",
-          active: pathname === "/category/linh-di"
+          active: pathname === "/category/linh-di",
         },
         {
           href: "/category/ngon-tinh",
           label: "Ngôn tình",
-          active: pathname === "/category/ngon-tinh"
+          active: pathname === "/category/ngon-tinh",
         },
         {
           href: "/category/nu-cuong",
           label: "Nữ cường",
-          active: pathname === "/category/nu-cuong"
+          active: pathname === "/category/nu-cuong",
         },
         {
           href: "/category/dam-my",
           label: "Đam mỹ",
-          active: pathname === "/category/dam-my"
-        }
-      ]
+          active: pathname === "/category/dam-my",
+        },
+      ],
     },
     {
-
       href: "/sort",
       label: "Sắp xếp",
       active: pathname.includes("/sort"),
-      icon: SquarePen,
-      submenus: []
-
+      icon: Square,
+      submenus: [],
     },
     {
-
       href: "#",
       label: "Truyện con trai",
       active: pathname.includes("#"),
       icon: Tag,
-      submenus: []
+      submenus: [],
     },
     {
-
       href: "#",
       label: "Truyện con gái",
       active: pathname.includes("#"),
       icon: Users,
-      submenus: []
+      submenus: [],
     },
     {
-
       href: "#",
       label: "Lịch sử",
       active: pathname.includes("#"),
       icon: Users,
-      submenus: []
+      submenus: [],
     },
     {
-
       href: "#",
       label: "Thảo luận",
       active: pathname.includes("#"),
       icon: Users,
-      submenus: []
+      submenus: [],
     },
     {
-
       href: "#",
       label: "Fanpage",
       active: pathname.includes("#"),
       icon: Settings,
-      submenus: []
+      submenus: [],
     },
     {
-
       href: "#",
       label: "Tài khoản",
       active: pathname.includes("#"),
       icon: Users,
-      submenus: []
+      submenus: [],
     },
   ];
 }
