@@ -1,3 +1,4 @@
+"use client"
 import { DynamicTitleSection } from "@/components/home/dynamic-title-section";
 import { FavoriteStories } from "@/components/home/favorite-stories";
 import { PopularStories } from "@/components/home/popular-stories";
@@ -5,8 +6,10 @@ import { StoryColumn } from "@/components/home/story-column";
 import { UpdatedStoriesList } from "@/components/home/updated-stories-list";
 import MainLayout from "@/components/layout/main-layout";
 import PageContainer from "@/components/layout/page-container";
-import { Author, Story } from "@/types";
+import { Author, CategoryData, GetStoryByCategoryIdResponse, GetStoryByListResponse, IList, ListData, Story } from "@/types";
+import { createAxiosInstance } from "@/utils/axiosInstance";
 import { Separator } from "@radix-ui/react-separator";
+import { useCallback, useEffect, useState } from "react";
 
 const author: Author = {
   id: 1,
@@ -191,14 +194,47 @@ const completedStories: Story[] = [
   },
 ];
 export default function page() {
+  const axiosInstance = createAxiosInstance();
+
+  const [storiesNewUpdate, setStoriesNewUpdate] = useState<IList>();
+  const [storiesHot, setStoriesHot] = useState<IList>();
+  const [storiesFull, setStoriesFull] = useState<IList>();
+  const getStoryByCategoryId = useCallback(async (slug: string) => {
+    const response = await axiosInstance.get<
+      GetStoryByListResponse<ListData>
+    >(`/api/home/${slug}`);
+    const { data } = response;
+    if (data?.message === "Success") {
+      if (slug === "truyen-moi") {
+
+        setStoriesNewUpdate(data.data.list[0]);
+      }
+      else if (slug === "truyen-hot") {
+        setStoriesHot(data.data.list[0]);
+
+      }
+      else if (slug === "truyen-full") {
+        setStoriesFull(data.data.list[0]);
+
+      }
+
+    }
+  }, []);
+
+  useEffect(() => {
+    getStoryByCategoryId('truyen-moi');
+    getStoryByCategoryId('truyen-hot');
+    getStoryByCategoryId('truyen-full');
+  }, []);
   return (
     <MainLayout>
       <PageContainer>
-        <UpdatedStoriesList stories={stories} />
+        {storiesNewUpdate && (<UpdatedStoriesList stories={storiesNewUpdate?.stories} />)}
+
         <Separator className='border-1 bg-secondary mb-10 mt-6 border-dashed border-indigo-600' />
         <div className='container mx-auto flex flex-col gap-x-10 space-y-8 px-4 sm:flex-row sm:space-x-4 sm:space-y-0'>
-          <FavoriteStories stories={stories} />
-          <PopularStories stories={stories} />
+          {storiesHot && <FavoriteStories stories={storiesHot?.stories} />}
+          {storiesFull && <PopularStories stories={storiesFull?.stories} />}
         </div>
         <Separator className='border-1 bg-secondary mb-10 mt-6 border-dashed border-indigo-600' />
         <div className='container mx-auto px-4'>

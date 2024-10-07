@@ -66,7 +66,7 @@ export async function GET(
     });
 
     return createResponse("Success", {
-      data: structuredStories,
+      list: structuredStories,
       pageCurrent: page,
       totalPages,
     });

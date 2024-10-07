@@ -10,7 +10,7 @@ export const PopularStories: React.FC<IPopularStories> = ({ stories }) => {
   return (
     <div className="container mx-auto pl-0 pr-0">
       <DynamicTitleSection
-        title={'Truyện được xem nhiều'}
+        title={'Truyện full'}
         href={'/more'}
         linkText="Xem thêm"
       />

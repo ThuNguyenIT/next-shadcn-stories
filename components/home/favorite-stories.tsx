@@ -11,7 +11,7 @@ export const FavoriteStories: React.FC<IFavoriteStories> = ({ stories }) => {
   return (
     <div className="container mx-auto pl-0 pr-0">
       <DynamicTitleSection
-        title={'Truyện yêu thích'}
+        title={'Truyện hot'}
         href={'/more'}
         linkText="Xem thêm"
       />
