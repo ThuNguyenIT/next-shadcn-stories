@@ -12,20 +12,6 @@ export async function GET(
     const { id } = params;
     if (!prisma) throw new Error("Prisma is not initialized.");
 
-    // Tìm danh sách với slug "truyen-moi"
-    // const list = await prisma.lists.findUnique({
-    //   where: {
-    //     id: parseInt(id),
-    //   },
-    //   include: {
-    //     stories: {
-    //       include: {
-    //         story: true, // Lấy thông tin truyện trong danh sách
-    //       },
-    //     },
-    //   },
-    // });
-
     // Tìm category dựa trên ID được truyền vào từ URL
     const category = await prisma.categories.findUnique({
       where: {
