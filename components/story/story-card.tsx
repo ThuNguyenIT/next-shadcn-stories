@@ -6,6 +6,8 @@ interface IStoryCard {
   story: Story;
 }
 export const StoryCard: React.FC<IStoryCard> = ({ story }) => {
+  console.log("story", story);
+  
   return (
     <div key={story.id} className='overflow-hidden'>
       <div>
@@ -20,7 +22,7 @@ export const StoryCard: React.FC<IStoryCard> = ({ story }) => {
           <div className='space-y-1 detail-story'>
             <Link
               href={`/story/${story.slug}`}
-              className='line-clamp-1 font-normal text-black truncate'
+              className='line-clamp-1 font-normal text-black'
             >
               {story.title}
             </Link>

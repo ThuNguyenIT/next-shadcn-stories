@@ -3,18 +3,18 @@ import React from 'react';
 import { StoryCard } from '../story/story-card';
 import { DynamicTitleSection } from './dynamic-title-section';
 
-interface IUpdatedStoriesList {
+interface IHotStories {
   stories: Story[];
 }
-export const UpdatedStoriesList: React.FC<IUpdatedStoriesList> = ({ stories }) => {
+export const HotStories: React.FC<IHotStories> = ({ stories }) => {
   return (
-    <div className="container mx-auto mt-6 px-4">
+    <div className="container mx-auto pl-0 pr-0">
       <DynamicTitleSection
-        title={'Truyện mới cập nhật'}
-        href={'/list/truyen-moi'}
+        title={'Truyện hot'}
+        href={'/list/truyen-hot'}
         linkText="Xem thêm"
       />
-      <div className="grid grid-cols-1 gap-y-5 gap-x-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-x-4 gap-y-5 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
         {stories.map((story) => (
           <React.Fragment key={story.id}>
             <StoryCard story={story} />

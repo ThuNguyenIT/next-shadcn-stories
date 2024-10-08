@@ -11,8 +11,7 @@ export async function GET(
   try {
     const searchParams = req.nextUrl.searchParams;
     const page = parseInt(searchParams.get("page") || "1");
-
-    const pageSize = 8; // Số lượng chương mỗi trang
+    const pageSize = parseInt(searchParams.get("limit") || "25");
     const skip = (page - 1) * pageSize;
     const listStory = await prisma.lists.findMany({
       where: {
@@ -52,22 +51,14 @@ export async function GET(
       return {
         ...list,
         stories: list.stories.map((s) => {
-          return {
-            id: s.story.id,
-            title: s.story.title,
-            description: s.story.description,
-            slug: s.story.slug,
-            created_at: s.story.created_at,
-            updated_at: s.story.updated_at,
-            author: s.story.author,
-          };
+          return s.story;
         }),
       };
     });
 
     return createResponse("Success", {
       list: structuredStories,
-      pageCurrent: page,
+      currentPage: page,
       totalPages,
     });
   } catch (error) {
