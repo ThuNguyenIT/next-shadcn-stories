@@ -1,47 +1,48 @@
 import { PrismaClient } from "@prisma/client";
 import { createResponse, getErrorMessage } from "@/lib/utils";
-import { NextRequest } from "next/server";
-
 const prisma = new PrismaClient();
 
-export async function GET(req: NextRequest) {
+export async function POST(request: Request) {
   try {
-    // Lấy query parameters
-    const searchParams = req.nextUrl.searchParams;
-    const slugParams = searchParams.getAll("slug");
-    const page = parseInt(searchParams.get("page") || "1");
-
-    const pageSize = 10; // Số lượng chương mỗi trang
+    const { categoryId, page } = await request.json();
+    const pageSize = 8;
     const skip = (page - 1) * pageSize;
-
-    // const storyData = await prisma.stories.findMany({
-    //   where: { slug: { in: slugParams } },
-    // });
-    const storyData = await prisma.categories.findMany({
-      where: { slug: { in: slugParams } },
+    const storyData = await prisma.stories.findMany({
+      where: {
+        categories: {
+          some: {
+            category_id: {
+              in: categoryId,
+            },
+          },
+        },
+      },
+      include: {
+        author: true,
+      },
+      skip,
+      take: pageSize,
     });
-
-
     if (!storyData) {
-      return createResponse("Error", "Truyện không tồn tại", 404);
+      return createResponse("Error", "Không có dữ liệu", 404);
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    // const { categories, ...rest } = storyData;
-    // const story = {
-    //   ...rest,
-    //   category_name: storyData.categories.map((cat) => cat.category.name) || [],
-    // };
-
-    // const totalChapters = await prisma.chapters.count({
-    //   where: { story_id: story.id },
-    // });
+    const totalChapters = await prisma.stories.count({
+      where: {
+        categories: {
+          some: {
+            category_id: {
+              in: categoryId,
+            },
+          },
+        },
+      },
+    });
 
     return createResponse("Success", {
-      story: storyData,
-      // totalChapters,
+      stories: storyData,
       currentPage: page,
-      // totalPages: Math.ceil(totalChapters / pageSize),
+      totalPages: Math.ceil(totalChapters / pageSize),
     });
   } catch (error) {
     return createResponse(getErrorMessage(error), null, 500);

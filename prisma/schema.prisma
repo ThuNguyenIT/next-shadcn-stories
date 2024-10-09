@@ -153,7 +153,7 @@ model stories {
   tag               Json?
   total_chapter     Int?                @default(0)
   author            authors             @relation(fields: [author_id], references: [id])
-  lists             story_lists[]
+  --lists             story_lists[]
   categories        story_categories[]
   chapters          chapters[]
   bookmarks         bookmarks[]
@@ -176,13 +176,14 @@ model stories {
 
 model story_lists {
   story_id    Int
-  category_id Int
-  list        lists   @relation(fields: [category_id], references: [id])
+  list_id     Int
+  list        lists   @relation(fields: [list_id], references: [id])
   story       stories @relation(fields: [story_id], references: [id])
 
-  @@id([story_id, category_id])
-  @@index([category_id], map: "story_lists_category_id_fkey")
+  @@id([story_id, list_id])
+  @@index([list_id], map: "story_lists_list_id_fkey")
 }
+
 
 model story_categories {
   story_id    Int
