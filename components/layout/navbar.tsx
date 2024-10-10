@@ -32,6 +32,7 @@ interface IState {
   color: string;
   bgColor: string;
   activeTab: string;
+  isClient: boolean
 }
 export default function Navbar() {
   const { user, logout } = useAuthStore();
@@ -44,6 +45,7 @@ export default function Navbar() {
     color: "male-blue",
     bgColor: "bg-sky-300",
     activeTab: "login",
+    isClient: false
   });
   const handleSetStateField = useCallback(
     (field: keyof IState, value: string | boolean) => {
@@ -51,6 +53,9 @@ export default function Navbar() {
     },
     []
   );
+  useEffect(() => {
+    handleSetStateField('isClient', true)
+  }, []);
 
   useEffect(() => {
     // Cập nhật className sau khi component đã mount trên client
@@ -216,11 +221,12 @@ export default function Navbar() {
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-        {user ? (
+
+        {state.isClient && user ? (
           <div className='right-4 top-2 flex items-center space-x-2'>
             <DropdownMenu>
               <DropdownMenuTrigger className='flex items-center text-custom-red'>
-                {user.full_name}
+                {user.email}
 
                 <ChevronDown className='ml-1 h-4 w-4' />
               </DropdownMenuTrigger>
@@ -298,25 +304,3 @@ const ListItem = React.forwardRef<
 });
 ListItem.displayName = "ListItem";
 
-const sortItems = [
-  {
-    title: "Mới cập nhật",
-    href: "/sort/latest",
-    description: "Truyện mới được cập nhật gần đây",
-  },
-  {
-    title: "Xem nhiều nhất",
-    href: "/sort/most-viewed",
-    description: "Truyện có lượt xem cao nhất",
-  },
-  {
-    title: "Đánh giá cao",
-    href: "/sort/top-rated",
-    description: "Truyện được đánh giá tốt nhất",
-  },
-  {
-    title: "Theo thể loại",
-    href: "/sort/by-genre",
-    description: "Sắp xếp truyện theo thể loại",
-  },
-];

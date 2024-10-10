@@ -6,21 +6,23 @@ import InputField from '@/components/form-control/input-field';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import React, { useState } from 'react';
 import DatePicker from '@/components/form-control/date-picker';
+import { useAuthStore } from '@/lib';
 
 export default function AccountForm() {
+    const { user } = useAuthStore();
     const [dob, setDob] = useState<Date | undefined>();
     return (
         <div className="flex max-w-4xl mx-auto gap-6 flex-col lg:flex-row">
             <form className="space-y-4 flex-grow">
-                <InputField id="username" label="Tên tài khoản" value="luanhi" readOnly />
-                <InputField id="email" label="Email" value="lklnn90@gmail.com" type="email" readOnly />
+                <InputField id="username" label="Tên tài khoản" value={user?.username || ''} readOnly />
+                <InputField id="email" label="Email" value={user?.email || ''} type="email" readOnly />
 
 
                 <h3 className="text-lg font-semibold mt-6 mb-4">Thông tin cá nhân</h3>
-                <InputField id="fullname" label="Họ tên" value="luanhi" />
+                <InputField id="fullname" label="Họ tên" value={user?.full_name || ''} />
 
                 <DatePicker id="dob" label="Ngày sinh" selectedDate={dob} onDateChange={setDob} />
-                <InputField id="phone" label="Điện thoại" value="0937980186" type="tel" />
+                <InputField id="mobile" label="Điện thoại" value={user?.mobile || ""} type="tel" />
                 <div className="space-y-2">
                     <Label className="font-medium text-13px text-gray-600">Giới tính</Label>
                     <RadioGroup defaultValue="male" className="flex space-x-4">

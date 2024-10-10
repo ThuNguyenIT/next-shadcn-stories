@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { User } from '@/types';
+import { deleteCookie } from 'cookies-next';
 
 
 export type AuthState = {
@@ -19,6 +20,7 @@ export const useAuthStore = create<AuthState & AuthActions>()(
                 set({ user });
             },
             logout: () => {
+                deleteCookie('jwtToken')
                 set({ user: null });
             }
         }),

@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/lib/store/auth";
 import { createAxiosInstance } from "@/utils/axiosInstance";
+import { setCookie } from "cookies-next";
 
 // Schema validation for login
 const LoginSchema = z.object({
@@ -34,22 +35,13 @@ export const LoginForm: React.FC<ILoginForm> = ({ handleCloseAuthModal }) => {
   });
 
   async function onSubmit(data_: z.infer<typeof LoginSchema>) {
-    console.log("onSubmit", data_);
-    // const response = await axios.post("/api/login", formData);
-    // const response = await axiosInstance.post(`/api/users/login`, data_);
-    // console.log("response", response);
-
-    // const { data } = response;
-    // if (data?.message === "Success") {
-    //   console.log("data1231231231", data);
-    // }
-
-    // setUser({
-    //     id: 10, username: 'vuha',
-    //     email: data_.email,
-    //     full_name: "Vu ha"
-    // })
-    // handleCloseAuthModal();
+    const response = await axiosInstance.post(`/api/users/login`, data_);
+    const { data } = response;
+    if (data?.message === "Success") {
+      setCookie('jwtToken', data.data.access_token)
+      setUser(data.data.user)
+      handleCloseAuthModal();
+    }
   }
 
   return (
