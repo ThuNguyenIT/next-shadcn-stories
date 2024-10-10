@@ -6,8 +6,6 @@ interface IStoryCard {
   story: Story;
 }
 export const StoryCard: React.FC<IStoryCard> = ({ story }) => {
-  console.log("story", story);
-  
   return (
     <div key={story.id} className='overflow-hidden'>
       <div>

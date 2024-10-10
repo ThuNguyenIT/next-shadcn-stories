@@ -18,7 +18,7 @@ interface IState {
 export default function Header() {
   const axiosInstance = createAxiosInstance();
   const { targetGender, setTargetGender } = useHomeStore();
-  const { setCategory } = useCategoryStore();
+  const { setCategory, categories } = useCategoryStore();
   const getCategory = useCallback(async () => {
     try {
       const response =
@@ -27,13 +27,17 @@ export default function Header() {
         );
       const { data } = response;
       if (data?.message === "Success") {
+        console.log('hihi');
+        
         setCategory(data.data);
       }
     } catch (err: any) {}
   }, []);
 
   useEffect(() => {
-    getCategory();
+    if (!categories || categories.length === 0) {
+      getCategory();
+    }
   }, [getCategory]);
 
   const [state, setState] = useState<IState>({
