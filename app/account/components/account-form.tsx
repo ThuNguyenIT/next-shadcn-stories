@@ -91,7 +91,7 @@ export default function AccountForm() {
                     />
 
 
-                    <FormField
+                    {/* <FormField
                         control={form.control}
                         name="birthday"
                         render={({ field }) => (
@@ -113,7 +113,7 @@ export default function AccountForm() {
                                 <FormMessage />
                             </FormItem>
                         )}
-                    />
+                    /> */}
                     <FormField
                         control={form.control}
                         name='mobile'

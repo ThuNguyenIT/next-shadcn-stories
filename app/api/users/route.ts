@@ -30,9 +30,8 @@ export async function PUT(req: NextRequest) {
             { status: 201 }
         );
     } catch (error) {
-        console.error("Error registering user:", error);
         return NextResponse.json(
-            { message: "Error registering user" },
+            { message: "Error update user" },
             { status: 500 }
         );
     }
