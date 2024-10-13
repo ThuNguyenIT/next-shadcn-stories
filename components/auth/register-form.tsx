@@ -29,10 +29,10 @@ const RegisterSchema = z
       .regex(/[a-z]/, { message: "Mật khẩu phải có ít nhất một ký tự thường." })
       // .regex(/[A-Z]/, { message: "Mật khẩu phải có ít nhất một ký tự hoa." })
       .regex(/\d/, { message: "Mật khẩu phải có ít nhất một chữ số." })
-      // .regex(/[@$!%*?&#]/, {
-      //   message: "Mật khẩu phải có ít nhất một ký tự đặc biệt.",
-      // })
-      ,
+    // .regex(/[@$!%*?&#]/, {
+    //   message: "Mật khẩu phải có ít nhất một ký tự đặc biệt.",
+    // })
+    ,
     confirmPassword: z
       .string()
       .min(8, { message: "Xác nhận mật khẩu phải có ít nhất 8 ký tự." }),
@@ -60,8 +60,6 @@ export const RegisterForm: React.FC<IRegisterForm> = ({ setActiveTab }) => {
     const response = await axiosInstance.post(`/api/users/register`, data_);
     const { data } = response;
     if (data?.message === "Success") {
-      console.log("data", data);
-
       setActiveTab("login");
     }
   }

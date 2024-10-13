@@ -25,6 +25,8 @@ import {
 } from "../ui/dropdown-menu";
 import LogoutConfirmationDialog from "../home/confirm-logout-dialog";
 import { Genders, useAuthStore, useCategoryStore, useHomeStore } from "@/lib";
+import { useRouter } from 'next/navigation';
+
 
 interface IState {
   isAlertOpen: boolean;
@@ -38,6 +40,7 @@ export default function Navbar() {
   const { user, logout } = useAuthStore();
   const { targetGender } = useHomeStore();
   const { categories } = useCategoryStore();
+  const router = useRouter();
 
   const [state, setState] = useState<IState>({
     isAlertOpen: false,
@@ -53,9 +56,12 @@ export default function Navbar() {
     },
     []
   );
+
   useEffect(() => {
-    handleSetStateField('isClient', true)
-  }, []);
+    // Cập nhật trạng thái khi user thay đổi
+    handleSetStateField("isClient", !!user);
+  }, [user, handleSetStateField]);
+
 
   useEffect(() => {
     // Cập nhật className sau khi component đã mount trên client
@@ -75,11 +81,10 @@ export default function Navbar() {
   const handleCloseAuthModal = useCallback(() => {
     handleSetStateField("open", false);
   }, [handleSetStateField]);
-  const handleLogout = () => {
-    // Implement your logout logic here
-    console.log("User logged out", typeof user, user);
-    logout();
-  };
+  const handleLogout = useCallback(() => {
+    // logout();
+    router.push('/');
+  }, []);
 
   const openRegisterTab = useCallback(() => {
     handleSetStateField("activeTab", "register");

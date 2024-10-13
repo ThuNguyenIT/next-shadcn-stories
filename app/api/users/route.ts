@@ -1,12 +1,11 @@
 import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
-import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
 
 export async function PUT(req: NextRequest) {
     try {
-        const { id, full_name, mobile, address } =
+        const { id, full_name, mobile, address, birthday } =
             await req.json();
 
         if (!id) {
@@ -22,6 +21,7 @@ export async function PUT(req: NextRequest) {
                 full_name,
                 mobile,
                 address,
+                birthday
             },
         });
 

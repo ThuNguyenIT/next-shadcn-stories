@@ -26,7 +26,6 @@ const DatePicker: React.FC<DatePickerProps> = ({ label, id, selectedDate, onDate
 
     return (
         <div className="space-y-2">
-            <Label htmlFor={id}>{label}</Label>
             <Popover>
                 <PopoverTrigger asChild>
                     <Button
