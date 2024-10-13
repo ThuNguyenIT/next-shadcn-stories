@@ -25,6 +25,8 @@ import {
 } from "../ui/dropdown-menu";
 import LogoutConfirmationDialog from "../home/confirm-logout-dialog";
 import { Genders, useAuthStore, useCategoryStore, useHomeStore } from "@/lib";
+import { useRouter } from 'next/navigation';
+
 
 interface IState {
   isAlertOpen: boolean;
@@ -32,11 +34,13 @@ interface IState {
   color: string;
   bgColor: string;
   activeTab: string;
+  isClient: boolean
 }
 export default function Navbar() {
   const { user, logout } = useAuthStore();
   const { targetGender } = useHomeStore();
   const { categories } = useCategoryStore();
+  const router = useRouter();
 
   const [state, setState] = useState<IState>({
     isAlertOpen: false,
@@ -44,6 +48,7 @@ export default function Navbar() {
     color: "male-blue",
     bgColor: "bg-sky-300",
     activeTab: "login",
+    isClient: false
   });
   const handleSetStateField = useCallback(
     (field: keyof IState, value: string | boolean) => {
@@ -51,6 +56,12 @@ export default function Navbar() {
     },
     []
   );
+
+  useEffect(() => {
+    // Cập nhật trạng thái khi user thay đổi
+    handleSetStateField("isClient", !!user);
+  }, [user, handleSetStateField]);
+
 
   useEffect(() => {
     // Cập nhật className sau khi component đã mount trên client
@@ -70,11 +81,10 @@ export default function Navbar() {
   const handleCloseAuthModal = useCallback(() => {
     handleSetStateField("open", false);
   }, [handleSetStateField]);
-  const handleLogout = () => {
-    // Implement your logout logic here
-    console.log("User logged out", typeof user, user);
-    logout();
-  };
+  const handleLogout = useCallback(() => {
+    // logout();
+    router.push('/');
+  }, []);
 
   const openRegisterTab = useCallback(() => {
     handleSetStateField("activeTab", "register");
@@ -216,11 +226,12 @@ export default function Navbar() {
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-        {user ? (
+
+        {state.isClient && user ? (
           <div className='right-4 top-2 flex items-center space-x-2'>
             <DropdownMenu>
               <DropdownMenuTrigger className='flex items-center text-custom-red'>
-                {user.full_name}
+                {user.email}
 
                 <ChevronDown className='ml-1 h-4 w-4' />
               </DropdownMenuTrigger>
@@ -298,25 +309,3 @@ const ListItem = React.forwardRef<
 });
 ListItem.displayName = "ListItem";
 
-const sortItems = [
-  {
-    title: "Mới cập nhật",
-    href: "/sort/latest",
-    description: "Truyện mới được cập nhật gần đây",
-  },
-  {
-    title: "Xem nhiều nhất",
-    href: "/sort/most-viewed",
-    description: "Truyện có lượt xem cao nhất",
-  },
-  {
-    title: "Đánh giá cao",
-    href: "/sort/top-rated",
-    description: "Truyện được đánh giá tốt nhất",
-  },
-  {
-    title: "Theo thể loại",
-    href: "/sort/by-genre",
-    description: "Sắp xếp truyện theo thể loại",
-  },
-];
