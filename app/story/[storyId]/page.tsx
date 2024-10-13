@@ -30,11 +30,7 @@ interface ButtonOption {
   link?: string;
 }
 
-const buttonOptions: ButtonOption[] = [
-  { label: "Đọc truyện", value: "doc-truyen", link: "/detail/abc" },
-  { label: "Yêu thích", value: "yeu-thich" },
-  { label: "Theo dõi", value: "theo-doi" },
-];
+
 
 
 
@@ -86,7 +82,12 @@ export default function StoryDetailPage() {
   const params = useParams();
   const router = useRouter();
   const { storyId } = params;
-  const totalPages = 50;
+
+  const buttonOptions: ButtonOption[] = [
+    { label: "Đọc truyện", value: "doc-truyen", link: `/detail/${storyId}` },
+    { label: "Yêu thích", value: "yeu-thich" },
+    { label: "Theo dõi", value: "theo-doi" },
+  ];
 
   const [state, setState] = useState<IState>({
     activeButton: "doc-truyen",

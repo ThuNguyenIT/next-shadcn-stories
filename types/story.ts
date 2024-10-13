@@ -51,3 +51,7 @@ export interface GetStoryBySlugResponse<T> {
   message: string;
   data: T;
 }
+export interface GetLatestChapterResponse<T> {
+  message: string;
+  data: T;
+}
