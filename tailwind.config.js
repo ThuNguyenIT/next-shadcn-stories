@@ -68,7 +68,12 @@ module.exports = {
         'male-blue': '#0277BD',
         'custom-red': '#EF5350',
         'light-blue': '#F3FCFF',
-        'custom-gray': '#424242'
+        'custom-gray': '#424242',
+        'custom-black': '#000000',
+        // 'custom-green': '#BBF7D0',
+        // 'custom-blue': '#BFDBFE',
+        // 'custom-pink': '#FBCFE8',
+        // 'custom-yellow': '#FEF08A'
       },
       borderRadius: {
         lg: 'var(--radius)',

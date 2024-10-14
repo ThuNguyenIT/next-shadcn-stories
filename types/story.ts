@@ -45,6 +45,7 @@ export interface StoryData {
   totalChapters: number
   currentPage: number
   totalPages: number
+  latestChapter: Chapter
 }
 
 export interface GetStoryBySlugResponse<T> {

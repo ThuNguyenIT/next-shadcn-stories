@@ -16,7 +16,7 @@ export type LayoutActions = {
 export const useLayoutStore = create<LayoutState & LayoutActions>()(
     (set, get) => ({
         fontSize: 20,
-        textColor: get()?.textColor || '#000000',
+        textColor: get()?.textColor || 'black',
         fontFamily: 'Roboto',
         setFontSize: (font: number) => {
             set({ fontSize: font });

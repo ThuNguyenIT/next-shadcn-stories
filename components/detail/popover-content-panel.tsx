@@ -18,11 +18,11 @@ interface IColor {
 }
 
 const colors: IColor[] = [
-  { value: 'red-500', class: 'bg-red-500', colorHex: '#EF4444' },
-  { value: 'yellow-200', class: 'bg-yellow-200', colorHex: '#FEF08A' },
-  { value: 'green-200', class: 'bg-green-200', colorHex: '#BBF7D0' },
-  { value: 'blue-200', class: 'bg-blue-200', colorHex: '#BFDBFE' },
-  { value: 'pink-200', class: 'bg-pink-200', colorHex: '#FBCFE8' },
+  { value: 'custom-red', class: 'bg-red-500', colorHex: '#EF4444' },
+  { value: 'custom-yellow', class: 'bg-yellow-200', colorHex: '#FEF08A' },
+  { value: 'custom-green', class: 'bg-green-200', colorHex: '#BBF7D0' },
+  { value: 'blue', class: 'bg-blue-200', colorHex: '#BFDBFE' },
+  { value: 'custom-pink', class: 'bg-pink-200', colorHex: '#FBCFE8' },
   { value: 'black', class: 'bg-black', colorHex: '#000000' }
 ];
 
@@ -71,9 +71,9 @@ export default function PopoverContentPanel() {
               <button
                 key={color.value}
                 className={`h-6 w-6 rounded-full ${color.class} flex items-center justify-center border border-custom-red`}
-                onClick={() => handleChooseColor(color.colorHex)}
+                onClick={() => handleChooseColor(color.value)}
               >
-                {state.selectedColor === color.colorHex && (
+                {state.selectedColor === color.value && (
                   <Check className="h-4 w-4 text-white" />
                 )}
               </button>

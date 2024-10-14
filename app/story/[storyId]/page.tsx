@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Eye, Heart, ThumbsUp } from "lucide-react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { use, useCallback, useEffect, useState } from "react";
 import { Chapter, GetStoryBySlugResponse, IComment, Story, StoryData } from "@/types";
 import { ChapterRow } from "@/components/story/chapter-row";
 import { CommentStory } from "@/components/story/comment-story";
@@ -21,6 +21,7 @@ interface IState {
   activeButton: string;
   currentPage: number
   totalPages: number
+  latestChapter: Chapter | null
   loading: boolean
 }
 
@@ -83,18 +84,19 @@ export default function StoryDetailPage() {
   const router = useRouter();
   const { storyId } = params;
 
-  const buttonOptions: ButtonOption[] = [
-    { label: "Đọc truyện", value: "doc-truyen", link: `/detail/${storyId}` },
-    { label: "Yêu thích", value: "yeu-thich" },
-    { label: "Theo dõi", value: "theo-doi" },
-  ];
 
   const [state, setState] = useState<IState>({
     activeButton: "doc-truyen",
     currentPage: 1,
     totalPages: 0,
+    latestChapter: null,
     loading: true
   });
+  const buttonOptions: ButtonOption[] = [
+    // { label: "Đọc truyện", value: "doc-truyen", link: `/${storyDetail?.slug}/${state.latestChapterId}` },
+    { label: "Yêu thích", value: "yeu-thich" },
+    { label: "Theo dõi", value: "theo-doi" },
+  ];
 
   const getStoryBySlug = useCallback(async (page = 1) => {
     setState((prev) => ({ ...prev, loading: true }));
@@ -113,6 +115,7 @@ export default function StoryDetailPage() {
         currentPage: data.data.currentPage,
         totalPages: data.data.totalPages,
         loading: false,
+        latestChapter: data.data.latestChapter
       }));
     }
 
@@ -130,6 +133,10 @@ export default function StoryDetailPage() {
   const onPageChange = useCallback((page: number) => {
     handleSetStateField('currentPage', page)
   }, [])
+
+  const handleReadingStory = useCallback(() => {
+    router.push(`/${storyDetail?.slug}/${state.latestChapter?.id}`);
+  }, [storyDetail, state])
   return (
     <PageContainer>
       <div className='space-y-4'>
@@ -177,6 +184,21 @@ export default function StoryDetailPage() {
                     </span>
                   </div>
                   <div className='flex flex-wrap justify-center space-x-2 pt-2 sm:justify-start'>
+                    <div
+                      className='flex items-center space-x-2'
+                    >
+                      <Button
+                        onClick={handleReadingStory}
+                        variant='default'
+                        className={cn(
+                          "rounded-none border-gray-300 bg-transparent px-3 py-1 sm:px-4 sm:py-2",
+                          "border border-custom-red bg-custom-red text-white hover:bg-custom-red hover:text-white"
+
+                        )}
+                      >
+                        {`Đọc truyện`}
+                      </Button>
+                    </div>
                     {buttonOptions.map((option) => (
                       <div
                         key={option.value}

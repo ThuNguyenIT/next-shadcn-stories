@@ -15,7 +15,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 
     // Tìm truyện theo slug
     const storyData = await prisma.stories.findUnique({
-      where: { slug: params.id }, 
+      where: { slug: params.id },
       include: {
         categories: {
           include: {
@@ -28,9 +28,6 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
         },
         author: true,
         chapters: {
-          // orderBy: {
-          //   created_at: 'desc', // Sắp xếp chương mới nhất
-          // },
           skip,
           take: pageSize,
         },
@@ -40,7 +37,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
     if (!storyData) {
       return createResponse('Error', 'Truyện không tồn tại', 404);
     }
- 
+
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { categories, ...rest } = storyData;
     const story = {
@@ -51,6 +48,12 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
     const totalChapters = await prisma.chapters.count({
       where: { story_id: story.id },
     });
+    const latestChapter = await prisma.chapters.findFirst({
+      where: { story_id: story.id },
+      orderBy: {
+        created_at: "desc",
+      },
+    });
 
 
     return createResponse('Success', {
@@ -58,6 +61,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
       totalChapters,
       currentPage: page,
       totalPages: Math.ceil(totalChapters / pageSize),
+      latestChapter
     });
   } catch (error) {
     return createResponse(getErrorMessage(error), null, 500);
