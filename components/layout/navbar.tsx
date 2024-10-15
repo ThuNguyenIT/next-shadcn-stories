@@ -26,6 +26,8 @@ import {
 import LogoutConfirmationDialog from "../home/confirm-logout-dialog";
 import { Genders, useAuthStore, useCategoryStore, useHomeStore } from "@/lib";
 import { useRouter } from 'next/navigation';
+import { Category, GetCategoryResponse } from "@/types";
+import { createAxiosInstance } from "@/utils/axiosInstance";
 
 
 interface IState {
@@ -39,8 +41,8 @@ interface IState {
 export default function Navbar() {
   const { user, logout } = useAuthStore();
   const { targetGender } = useHomeStore();
-  const { categories } = useCategoryStore();
   const router = useRouter();
+  const axiosInstance = createAxiosInstance();
 
   const [state, setState] = useState<IState>({
     isAlertOpen: false,
@@ -56,6 +58,28 @@ export default function Navbar() {
     },
     []
   );
+
+  const { setCategory, categories } = useCategoryStore();
+  const getCategory = useCallback(async () => {
+    try {
+      const response =
+        await axiosInstance.get<GetCategoryResponse<Category[]>>(
+          "/api/category"
+        );
+      const { data } = response;
+      if (data?.message === "Success") {
+        console.log('hihi');
+
+        setCategory(data.data);
+      }
+    } catch (err: any) { }
+  }, []);
+
+  useEffect(() => {
+    if (!categories || categories.length === 0) {
+      getCategory();
+    }
+  }, [getCategory]);
 
   useEffect(() => {
     // Cập nhật trạng thái khi user thay đổi

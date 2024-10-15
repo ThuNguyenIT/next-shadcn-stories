@@ -5,8 +5,6 @@ import NavigationBarFooter from './navigation-bar-footer';
 import MobileNavigation from './mobile-navigation';
 import { cn } from '@/lib/utils';
 import { SheetMenu } from './sheet-menu';
-// import { MobileSidebar } from './mobile-sidebar';
-// import { cn } from '@/lib/utils';
 
 export default function SimpleLayout({
   children

@@ -56,3 +56,11 @@ export interface GetLatestChapterResponse<T> {
   message: string;
   data: T;
 }
+export interface IIdChapter {
+  id: number
+}
+export interface DataLatestChapterResponse {
+  story: Story;
+  latestChapter: Chapter;
+  chapterIds: IIdChapter[];
+}

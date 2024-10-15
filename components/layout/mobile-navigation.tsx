@@ -70,13 +70,6 @@ export default function MobileNavigation() {
           <Image src="/svg/icon-home.svg" alt={''} width={32} height={32} />
         </Link>
         <TextFormattingPanel />
-        {/* <Button
-          variant="ghost"
-          size="icon"
-          className="flex h-full flex-col items-center justify-center hover:bg-transparent"
-        >
-          <Image src="/svg/icon-settings.svg" alt={''} width={32} height={32} />
-        </Button> */}
         <Button
           variant="ghost"
           size="icon"

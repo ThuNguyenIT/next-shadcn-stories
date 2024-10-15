@@ -4,11 +4,9 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { SearchIcon } from "lucide-react";
-import { Genders, useCategoryStore, useHomeStore } from "@/lib";
+import { Genders, useHomeStore } from "@/lib";
 import { useCallback, useEffect, useState } from "react";
 import { SheetMenu } from "../layout/sheet-menu";
-import { createAxiosInstance } from "@/utils/axiosInstance";
-import { Category, GetCategoryResponse } from "@/types";
 
 interface IState {
   imageMaleSrc: string;
@@ -16,29 +14,9 @@ interface IState {
   isMounted: boolean;
 }
 export default function Header() {
-  const axiosInstance = createAxiosInstance();
-  const { targetGender, setTargetGender } = useHomeStore();
-  const { setCategory, categories } = useCategoryStore();
-  const getCategory = useCallback(async () => {
-    try {
-      const response =
-        await axiosInstance.get<GetCategoryResponse<Category[]>>(
-          "/api/category"
-        );
-      const { data } = response;
-      if (data?.message === "Success") {
-        console.log('hihi');
-        
-        setCategory(data.data);
-      }
-    } catch (err: any) {}
-  }, []);
 
-  useEffect(() => {
-    if (!categories || categories.length === 0) {
-      getCategory();
-    }
-  }, [getCategory]);
+  const { targetGender, setTargetGender } = useHomeStore();
+
 
   const [state, setState] = useState<IState>({
     imageMaleSrc: "/svg/icon-shield-active.svg",
@@ -98,24 +76,22 @@ export default function Header() {
             <Input
               type='text'
               placeholder='Nhập tên truyện hoặc tác giả'
-              className={`pr-10 ${
-                state.isMounted
-                  ? targetGender === Genders.MALE
-                    ? "border-male-blue"
-                    : "border-female-purple"
-                  : ""
-              }`}
+              className={`pr-10 ${state.isMounted
+                ? targetGender === Genders.MALE
+                  ? "border-male-blue"
+                  : "border-female-purple"
+                : ""
+                }`}
             />
             <Button
               size='icon'
               variant='ghost'
-              className={`absolute right-0 top-0 h-full ${
-                state.isMounted
-                  ? targetGender === Genders.MALE
-                    ? "hover:bg-male-blue bg-male-blue"
-                    : "hover:bg-female-purple bg-female-purple"
-                  : ""
-              }`}
+              className={`absolute right-0 top-0 h-full ${state.isMounted
+                ? targetGender === Genders.MALE
+                  ? "hover:bg-male-blue bg-male-blue"
+                  : "hover:bg-female-purple bg-female-purple"
+                : ""
+                }`}
             >
               <SearchIcon className='h-4 w-4 text-white ' />
             </Button>
