@@ -18,11 +18,11 @@ interface IColor {
 }
 
 const colors: IColor[] = [
-  { value: 'custom-red', class: 'bg-red-500', colorHex: '#EF4444' },
-  { value: 'custom-yellow', class: 'bg-yellow-200', colorHex: '#FEF08A' },
-  { value: 'custom-green', class: 'bg-green-200', colorHex: '#BBF7D0' },
-  { value: 'blue', class: 'bg-blue-200', colorHex: '#BFDBFE' },
-  { value: 'custom-pink', class: 'bg-pink-200', colorHex: '#FBCFE8' },
+  { value: '#EF4444', class: 'bg-red-500', colorHex: '#EF4444' },
+  { value: '#FEF08A', class: 'bg-yellow-200', colorHex: '#FEF08A' },
+  { value: '#BBF7D0', class: 'bg-green-200', colorHex: '#BBF7D0' },
+  { value: '#BFDBFE', class: 'bg-blue-200', colorHex: '#BFDBFE' },
+  { value: '#FBCFE8', class: 'bg-pink-200', colorHex: '#FBCFE8' },
   { value: 'black', class: 'bg-black', colorHex: '#000000' }
 ];
 

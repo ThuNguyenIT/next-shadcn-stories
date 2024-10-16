@@ -3,7 +3,7 @@ import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLayoutStore, useStoryStore } from "@/lib";
 
 export default function StoryChapter() {
-  const { textColor } = useLayoutStore();
+  const { textColor, fontSize } = useLayoutStore();
   const { storyDetail, chapter } = useStoryStore();
   return (
     <div className='mx-auto bg-transparent text-gray-300'>
@@ -23,7 +23,9 @@ export default function StoryChapter() {
           Chương {chapter?.chapter_number}: {chapter?.title}
         </h2>
         <div
-          className={`text-${textColor} grid gap-y-4 text-justify leading-10`}
+
+          className={`text-${textColor} grid gap-y-4 text-justify leading-10 text-[${fontSize}px]`}
+          style={{ fontSize: `${fontSize}px`, color: textColor }}
         >
           {chapter?.content}
         </div>

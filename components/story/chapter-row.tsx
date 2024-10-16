@@ -13,7 +13,11 @@ export const ChapterRow: React.FC<{
       <a href={`/${story?.slug}/${chapter.id}`} className='text-black text-sm'>
         {chapter.title}
       </a>
-      <span className='italic text-gray-600 text-sm'>{chapter.updated_at}</span>
+      <span className='italic text-gray-600 text-sm'>
+        {new Date(chapter.updated_at ?? new Date()).toLocaleDateString(
+          "vi-VN"
+        )}
+      </span>
     </div>
   );
 };
