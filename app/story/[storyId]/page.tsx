@@ -4,8 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Eye, Heart, ThumbsUp } from "lucide-react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
-import { use, useCallback, useEffect, useState } from "react";
-import { Chapter, GetStoryBySlugResponse, IComment, Story, StoryData } from "@/types";
+import { useCallback, useEffect, useState } from "react";
+import {
+  Chapter,
+  GetStoryBySlugResponse,
+  IComment,
+  Story,
+  StoryData,
+} from "@/types";
 import { ChapterRow } from "@/components/story/chapter-row";
 import { CommentStory } from "@/components/story/comment-story";
 import Pagination from "@/components/home/pagination";
@@ -19,10 +25,10 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useStoryStore } from "@/lib";
 interface IState {
   activeButton: string;
-  currentPage: number
-  totalPages: number
-  latestChapter: Chapter | null
-  loading: boolean
+  currentPage: number;
+  totalPages: number;
+  latestChapter: Chapter | null;
+  loading: boolean;
 }
 
 interface ButtonOption {
@@ -30,10 +36,6 @@ interface ButtonOption {
   value: string;
   link?: string;
 }
-
-
-
-
 
 const comments: IComment[] = [
   {
@@ -79,18 +81,17 @@ const comments: IComment[] = [
 ];
 export default function StoryDetailPage() {
   const axiosInstance = createAxiosInstance();
-  const { setStoryDetail, storyDetail } = useStoryStore()
+  const { setStoryDetail, storyDetail } = useStoryStore();
   const params = useParams();
   const router = useRouter();
   const { storyId } = params;
-
 
   const [state, setState] = useState<IState>({
     activeButton: "doc-truyen",
     currentPage: 1,
     totalPages: 0,
     latestChapter: null,
-    loading: true
+    loading: true,
   });
   const buttonOptions: ButtonOption[] = [
     // { label: "Đọc truyện", value: "doc-truyen", link: `/${storyDetail?.slug}/${state.latestChapterId}` },
@@ -98,28 +99,30 @@ export default function StoryDetailPage() {
     { label: "Theo dõi", value: "theo-doi" },
   ];
 
-  const getStoryBySlug = useCallback(async (page = 1) => {
-    setState((prev) => ({ ...prev, loading: true }));
-    const response = await axiosInstance.get<GetStoryBySlugResponse<StoryData>>(
-      `/api/story/${storyId}`, {
-      params: {
-        page,
-      },
-    }
-    );
-    const { data } = response;
-    if (data?.message === "Success") {
-      setStoryDetail(data.data.story)
-      setState((prev) => ({
-        ...prev,
-        currentPage: data.data.currentPage,
-        totalPages: data.data.totalPages,
-        loading: false,
-        latestChapter: data.data.latestChapter
-      }));
-    }
-
-  }, [storyId]);
+  const getStoryBySlug = useCallback(
+    async (page = 1) => {
+      setState((prev) => ({ ...prev, loading: true }));
+      const response = await axiosInstance.get<
+        GetStoryBySlugResponse<StoryData>
+      >(`/api/story/${storyId}`, {
+        params: {
+          page,
+        },
+      });
+      const { data } = response;
+      if (data?.message === "Success") {
+        setStoryDetail(data.data.story);
+        setState((prev) => ({
+          ...prev,
+          currentPage: data.data.currentPage,
+          totalPages: data.data.totalPages,
+          loading: false,
+          latestChapter: data.data.latestChapter,
+        }));
+      }
+    },
+    [setStoryDetail, storyId]
+  );
 
   useEffect(() => {
     getStoryBySlug(state.currentPage);
@@ -130,13 +133,18 @@ export default function StoryDetailPage() {
     },
     []
   );
-  const onPageChange = useCallback((page: number) => {
-    handleSetStateField('currentPage', page)
-  }, [])
+  const onPageChange = useCallback(
+    (page: number) => {
+      handleSetStateField("currentPage", page);
+    },
+    [handleSetStateField]
+  );
 
   const handleReadingStory = useCallback(() => {
+    console.log("state.latestChapter", state.latestChapter);
+
     router.push(`/${storyDetail?.slug}/${state.latestChapter?.id}`);
-  }, [storyDetail, state])
+  }, [router, storyDetail?.slug, state.latestChapter?.id]);
   return (
     <PageContainer>
       <div className='space-y-4'>
@@ -164,7 +172,10 @@ export default function StoryDetailPage() {
                   </h1>
                   <p className='text-sm sm:text-15px'>
                     <span className='text-gray-400'>Tác giả:</span>{" "}
-                    <span className='text-male-blue'> {storyDetail?.author?.name}</span>
+                    <span className='text-male-blue'>
+                      {" "}
+                      {storyDetail?.author?.name}
+                    </span>
                   </p>
                   <p className='text-sm text-gray-400 sm:text-15px'>
                     Tình trạng: Đang tiến hành
@@ -184,16 +195,13 @@ export default function StoryDetailPage() {
                     </span>
                   </div>
                   <div className='flex flex-wrap justify-center space-x-2 pt-2 sm:justify-start'>
-                    <div
-                      className='flex items-center space-x-2'
-                    >
+                    <div className='flex items-center space-x-2'>
                       <Button
                         onClick={handleReadingStory}
                         variant='default'
                         className={cn(
                           "rounded-none border-gray-300 bg-transparent px-3 py-1 sm:px-4 sm:py-2",
                           "border border-custom-red bg-custom-red text-white hover:bg-custom-red hover:text-white"
-
                         )}
                       >
                         {`Đọc truyện`}
@@ -242,6 +250,7 @@ export default function StoryDetailPage() {
             <div>
               {storyDetail?.chapters?.map((chapter, index) => (
                 <ChapterRow
+                  story={storyDetail}
                   key={index}
                   chapter={chapter}
                   isEven={index % 2 === 0}
@@ -251,12 +260,13 @@ export default function StoryDetailPage() {
           </div>
         </div>
         <div className='p-4'>
-          {state.totalPages > 0 ? (<Pagination
-            currentPage={state.currentPage}
-            totalPages={state.totalPages}
-            onPageChange={onPageChange}
-          />) : null}
-
+          {state.totalPages > 0 ? (
+            <Pagination
+              currentPage={state.currentPage}
+              totalPages={state.totalPages}
+              onPageChange={onPageChange}
+            />
+          ) : null}
         </div>
         <div className='p-4'>
           <SameGenreStories stories={sameGenreStories} />

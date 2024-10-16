@@ -58,6 +58,7 @@ export interface GetLatestChapterResponse<T> {
 }
 export interface IIdChapter {
   id: number
+  chapter_number: number
 }
 export interface DataLatestChapterResponse {
   story: Story;

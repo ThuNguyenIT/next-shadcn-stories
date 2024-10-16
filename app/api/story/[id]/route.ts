@@ -4,11 +4,14 @@ import { NextRequest } from "next/server";
 
 const prisma = new PrismaClient();
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
     // Lấy query parameters
     const searchParams = req.nextUrl.searchParams;
-    const page = parseInt(searchParams.get('page') || '1');
+    const page = parseInt(searchParams.get("page") || "1");
 
     const pageSize = 10; // Số lượng chương mỗi trang
     const skip = (page - 1) * pageSize;
@@ -23,7 +26,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
               select: {
                 name: true,
               },
-            }
+            },
           },
         },
         author: true,
@@ -35,36 +38,44 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
     });
 
     if (!storyData) {
-      return createResponse('Error', 'Truyện không tồn tại', 404);
+      return createResponse("Error", "Truyện không tồn tại", 404);
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { categories, ...rest } = storyData;
     const story = {
       ...rest,
-      category_name: storyData.categories.map((cat) => cat.category.name) || [],
+      category_name:
+        storyData.categories.map(
+          (cat: { category: { name: any } }) => cat.category.name
+        ) || [],
     };
 
     const totalChapters = await prisma.chapters.count({
       where: { story_id: story.id },
     });
-    const latestChapter = await prisma.chapters.findFirst({
-      where: { story_id: story.id },
-      orderBy: {
-        created_at: "desc",
-      },
-    });
+    // const latestChapter = await prisma.chapters.findFirst({
+    //   where: { story_id: story.id },
+    //   orderBy: {
+    //     chapter_number: "desc",
+    //   },
+    // });
+    const [latestChapter] = await prisma.$queryRaw`
+  SELECT *
+  FROM chapters
+  WHERE story_id = ${story.id}
+  ORDER BY CAST(chapter_number AS UNSIGNED) DESC
+  LIMIT 1
+`;
 
-
-    return createResponse('Success', {
+    return createResponse("Success", {
       story,
       totalChapters,
       currentPage: page,
       totalPages: Math.ceil(totalChapters / pageSize),
-      latestChapter
+      latestChapter,
     });
   } catch (error) {
     return createResponse(getErrorMessage(error), null, 500);
   }
 }
-
