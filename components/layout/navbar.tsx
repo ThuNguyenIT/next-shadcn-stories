@@ -106,7 +106,7 @@ export default function Navbar() {
     handleSetStateField("open", false);
   }, [handleSetStateField]);
   const handleLogout = useCallback(() => {
-    // logout();
+    logout();
     router.push('/');
   }, []);
 
@@ -162,7 +162,7 @@ export default function Navbar() {
                     <NavigationMenuLink
                       key={genre.name}
                       href={`/category/${genre.slug}`}
-                      className='block select-none space-y-1 border-b border-dashed border-gray-200 p-2 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground'
+                      className='block select-none space-y-1 border-b border-dashed border-gray-200 p-2 leading-none no-underline outline-none transition-colors hover:bg-accent-light dark:hover:bg-accent-dark hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground dark:hover:text-black  dark:text-black'
                     >
                       {genre.name}
                     </NavigationMenuLink>

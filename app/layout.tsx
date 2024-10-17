@@ -29,7 +29,7 @@ export default async function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`${inter.className} overflow-hidden `}
+        className={`${inter.className} overflow-hidden bg-white`}
         suppressHydrationWarning={true}
       >
         <NextTopLoader showSpinner={false} />

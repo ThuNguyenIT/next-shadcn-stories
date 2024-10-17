@@ -1,14 +1,21 @@
 import { PrismaClient } from "@prisma/client";
 import { createResponse, getErrorMessage } from "@/lib/utils";
 import { NextRequest } from "next/server";
+import { authenticateToken } from "../../users/login/route";
 
 const prisma = new PrismaClient();
-
+interface Chapter {
+  id: number;
+  story_id: number;
+  chapter_number: string;
+  // Add other fields as necessary
+}
 export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
+    const user_id = await authenticateToken(req);
     // Lấy query parameters
     const searchParams = req.nextUrl.searchParams;
     const page = parseInt(searchParams.get("page") || "1");
@@ -34,6 +41,12 @@ export async function GET(
           skip,
           take: pageSize,
         },
+        favorites: {
+          where: { user_id: user_id ? user_id : 0 },
+          select: {
+            id: true, // Lấy ID hoặc bất kỳ trường nào khác cần thiết
+          },
+        },
       },
     });
 
@@ -54,13 +67,7 @@ export async function GET(
     const totalChapters = await prisma.chapters.count({
       where: { story_id: story.id },
     });
-    // const latestChapter = await prisma.chapters.findFirst({
-    //   where: { story_id: story.id },
-    //   orderBy: {
-    //     chapter_number: "desc",
-    //   },
-    // });
-    const [latestChapter] = await prisma.$queryRaw`
+    const [latestChapter] = await prisma.$queryRaw<Chapter[]>`
   SELECT *
   FROM chapters
   WHERE story_id = ${story.id}

@@ -65,7 +65,7 @@ export default function PopoverContentPanel() {
     <PopoverContent className="w-100 bg-light-blue">
       <div className="space-y-4">
         <div className="flex items-center space-x-4">
-          <h3 className="text-sm font-medium">Màu sắc:</h3>
+          <h3 className="text-sm font-medium text-black">Màu sắc:</h3>
           <div className="flex space-x-2">
             {colors.map((color) => (
               <button
@@ -82,12 +82,12 @@ export default function PopoverContentPanel() {
         </div>
 
         <div className="flex items-center space-x-4">
-          <h3 className="text-sm font-medium">Font chữ:</h3>
+          <h3 className="text-sm font-medium text-black">Font chữ:</h3>
           <div className="flex space-x-2">
             {fonts.map((font) => (
               <button
                 key={font}
-                className={`rounded border bg-transparent px-3 py-1 ${state.selectedFont === font
+                className={`rounded border bg-transparent text-black px-3 py-1 ${state.selectedFont === font
                   ? 'border-custom-red text-custom-red'
                   : ''
                   }`}
@@ -100,23 +100,23 @@ export default function PopoverContentPanel() {
         </div>
 
         <div className="flex items-center space-x-4">
-          <h3 className="text-sm font-medium">Cỡ chữ:</h3>
+          <h3 className="text-sm font-medium text-black">Cỡ chữ:</h3>
           <div className="flex items-center space-x-2">
             <Button
               variant="outline"
               size="icon"
-              className="h-6 w-6 rounded-full border-black"
+              className="h-6 w-6 rounded-full border-black text-black"
               onClick={() =>
                 handleSetFontSize(Math.max(state.fontSize - 1, 12))
               }
             >
               <Minus className="h-4 w-4" />
             </Button>
-            <span className="w-8 text-center">{state.fontSize}</span>
+            <span className="w-8 text-center text-black">{state.fontSize}</span>
             <Button
               variant="outline"
               size="icon"
-              className="h-6 w-6 rounded-full border-black"
+              className="h-6 w-6 rounded-full border-black text-black"
               onClick={() =>
                 handleSetFontSize(Math.min(state.fontSize + 1, 32))
               }

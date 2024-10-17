@@ -4,11 +4,10 @@ import { NextRequest } from "next/server";
 import { authenticateToken } from "../users/login/route";
 
 const prisma = new PrismaClient();
-
 export async function GET(req: NextRequest) {
   try {
     const user_id = await authenticateToken(req);
-    // if (!user_id) return createResponse('Error', 'Unauthorized', 401)
+
     const slugs = req.nextUrl.searchParams.getAll("slug[]");
     if (!Array.isArray(slugs) || slugs.length < 2) {
       return createResponse(
@@ -59,6 +58,27 @@ export async function GET(req: NextRequest) {
       (a: { chapter_number: any }, b: { chapter_number: any }) =>
         Number(a.chapter_number) - Number(b.chapter_number)
     );
+
+
+    if (user_id) {
+      const updatedProgress = await prisma.reading_progress.upsert({
+        where: {
+          user_id_story_id: {
+            user_id: user_id,
+            story_id: story.id,
+          },
+        },
+        update: {
+          chapter_id: Number(chapterId),
+          last_read_at: new Date(),
+        },
+        create: {
+          user_id: user_id,
+          story_id: story.id,
+          chapter_id: Number(chapterId),
+        },
+      });
+    }
 
     return createResponse("Success", {
       story,

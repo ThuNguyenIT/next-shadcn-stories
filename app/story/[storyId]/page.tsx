@@ -79,6 +79,10 @@ const comments: IComment[] = [
     avatarSrc: "/placeholder.svg?height=40&width=40",
   },
 ];
+
+const buttonOptions: ButtonOption[] = [
+  { label: "Theo dõi", value: "theo-doi" },
+];
 export default function StoryDetailPage() {
   const axiosInstance = createAxiosInstance();
   const { setStoryDetail, storyDetail } = useStoryStore();
@@ -93,11 +97,7 @@ export default function StoryDetailPage() {
     latestChapter: null,
     loading: true,
   });
-  const buttonOptions: ButtonOption[] = [
-    // { label: "Đọc truyện", value: "doc-truyen", link: `/${storyDetail?.slug}/${state.latestChapterId}` },
-    { label: "Yêu thích", value: "yeu-thich" },
-    { label: "Theo dõi", value: "theo-doi" },
-  ];
+
 
   const getStoryBySlug = useCallback(
     async (page = 1) => {
@@ -141,10 +141,17 @@ export default function StoryDetailPage() {
   );
 
   const handleReadingStory = useCallback(() => {
-    console.log("state.latestChapter", state.latestChapter);
 
     router.push(`/${storyDetail?.slug}/${state.latestChapter?.id}`);
   }, [router, storyDetail?.slug, state.latestChapter?.id]);
+
+  const handleFavoriteStory = useCallback(async () => {
+    const response = await axiosInstance.post<
+      GetStoryBySlugResponse<StoryData>
+    >(`/api/story/favorites`, {
+      story_id: storyDetail?.id,
+    });
+  }, [storyDetail?.id])
   return (
     <PageContainer>
       <div className='space-y-4'>
@@ -205,6 +212,18 @@ export default function StoryDetailPage() {
                         )}
                       >
                         {`Đọc truyện`}
+                      </Button>
+                    </div>
+                    <div className='flex items-center space-x-2'>
+                      <Button
+                        onClick={handleFavoriteStory}
+                        variant='default'
+                        className={cn(
+                          "rounded-none border-gray-300 bg-transparent px-3 py-1 sm:px-4 sm:py-2",
+                          "border border-custom-red bg-custom-red text-white hover:bg-custom-red hover:text-white"
+                        )}
+                      >
+                        {`Yêu thích`}
                       </Button>
                     </div>
                     {buttonOptions.map((option) => (

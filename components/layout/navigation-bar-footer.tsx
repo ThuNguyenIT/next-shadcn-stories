@@ -103,7 +103,7 @@ export default function NavigationBarFooter() {
             </span>
           </Button>
           <Select defaultValue={initialValue} onValueChange={handleChange}>
-            <SelectTrigger className='w-[250px] rounded-[50px] border-gray-600'>
+            <SelectTrigger className='w-[250px] rounded-[50px] border-gray-600 text-black'>
               <SelectValue placeholder={`Chương ${initialValue}`} />
             </SelectTrigger>
             <SelectContent>
