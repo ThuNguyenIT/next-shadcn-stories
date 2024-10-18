@@ -56,12 +56,14 @@ export async function GET(
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { categories, ...rest } = storyData;
+    const isFavorite = storyData.favorites.length > 0;
     const story = {
       ...rest,
       category_name:
         storyData.categories.map(
           (cat: { category: { name: any } }) => cat.category.name
         ) || [],
+      isFavorite: isFavorite,
     };
 
     const totalChapters = await prisma.chapters.count({

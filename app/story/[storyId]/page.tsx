@@ -9,6 +9,7 @@ import {
   Chapter,
   GetStoryBySlugResponse,
   IComment,
+  PostFavoritesResponse,
   Story,
   StoryData,
 } from "@/types";
@@ -22,13 +23,14 @@ import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { createAxiosInstance } from "@/utils/axiosInstance";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useStoryStore } from "@/lib";
+import { useAuthStore, useStoryStore } from "@/lib";
 interface IState {
   activeButton: string;
   currentPage: number;
   totalPages: number;
   latestChapter: Chapter | null;
   loading: boolean;
+  isSubmitComment: boolean;
 }
 
 interface ButtonOption {
@@ -37,48 +39,7 @@ interface ButtonOption {
   link?: string;
 }
 
-const comments: IComment[] = [
-  {
-    author: "Nguyễn Văn A",
-    content: "Truyện đang ngay lúc gây cấn, dù sao cũng thank nhóm dịch",
-    timestamp: "26 phút trước",
-    likes: 24,
-    avatarSrc: "/placeholder.svg?height=40&width=40",
-    replies: [
-      {
-        author: "Diệp Chân Khang",
-        content: "Truyện đang ngay lúc gây cấn, dù sao cũng thank nhóm dịch",
-        timestamp: "26 phút trước",
-        likes: 24,
-        avatarSrc: "/placeholder.svg?height=40&width=40",
-        replies: [
-          {
-            author: "Tuấn Akira",
-            content:
-              "Truyện đang ngay lúc gây cấn, dù sao cũng thank nhóm dịch",
-            timestamp: "26 phút trước",
-            likes: 24,
-            avatarSrc: "/placeholder.svg?height=40&width=40",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    author: "Nguyễn Văn A",
-    content: "Truyện đang ngay lúc gây cấn, dù sao cũng thank nhóm dịch",
-    timestamp: "26 phút trước",
-    likes: 24,
-    avatarSrc: "/placeholder.svg?height=40&width=40",
-  },
-  {
-    author: "Nguyễn Văn A",
-    content: "Truyện đang ngay lúc gây cấn, dù sao cũng thank nhóm dịch",
-    timestamp: "26 phút trước",
-    likes: 24,
-    avatarSrc: "/placeholder.svg?height=40&width=40",
-  },
-];
+const comments: IComment[] = [];
 
 const buttonOptions: ButtonOption[] = [
   { label: "Theo dõi", value: "theo-doi" },
@@ -86,6 +47,7 @@ const buttonOptions: ButtonOption[] = [
 export default function StoryDetailPage() {
   const axiosInstance = createAxiosInstance();
   const { setStoryDetail, storyDetail } = useStoryStore();
+  const { user } = useAuthStore();
   const params = useParams();
   const router = useRouter();
   const { storyId } = params;
@@ -96,8 +58,8 @@ export default function StoryDetailPage() {
     totalPages: 0,
     latestChapter: null,
     loading: true,
+    isSubmitComment: false,
   });
-
 
   const getStoryBySlug = useCallback(
     async (page = 1) => {
@@ -128,7 +90,7 @@ export default function StoryDetailPage() {
     getStoryBySlug(state.currentPage);
   }, [getStoryBySlug, state.currentPage]);
   const handleSetStateField = useCallback(
-    (field: keyof IState, value: string | null | Story | number) => {
+    (field: keyof IState, value: string | null | Story | number | boolean) => {
       setState((prevState) => ({ ...prevState, [field]: value }));
     },
     []
@@ -141,17 +103,74 @@ export default function StoryDetailPage() {
   );
 
   const handleReadingStory = useCallback(() => {
-
     router.push(`/${storyDetail?.slug}/${state.latestChapter?.id}`);
   }, [router, storyDetail?.slug, state.latestChapter?.id]);
 
-  const handleFavoriteStory = useCallback(async () => {
-    const response = await axiosInstance.post<
-      GetStoryBySlugResponse<StoryData>
-    >(`/api/story/favorites`, {
-      story_id: storyDetail?.id,
-    });
-  }, [storyDetail?.id])
+  const postFavorites = useCallback(
+    async (story: Story) => {
+      const response = await axiosInstance.post<PostFavoritesResponse>(
+        `/api/story/favorites`,
+        {
+          story_id: story.id,
+        }
+      );
+      const { data } = response;
+      if (data?.message === "Success") {
+        const updatedStory = {
+          ...story,
+          isFavorite: !story?.isFavorite,
+        };
+        setStoryDetail(updatedStory);
+      }
+    },
+    [setStoryDetail]
+  );
+
+  const handleFavoriteStory = useCallback(() => {
+    if (user && storyDetail) {
+      return postFavorites(storyDetail);
+    }
+  }, [postFavorites, storyDetail, user]);
+
+  const postComment = useCallback(
+    async (story: Story, content: string, parent_comment_id: number | null) => {
+      handleSetStateField("isSubmitComment", true);
+
+      try {
+        const response = await axiosInstance.post<PostFavoritesResponse>(
+          `/api/comments`,
+          {
+            story_id: story.id,
+            content,
+            parent_comment_id,
+          }
+        );
+
+        const { data } = response;
+
+        if (data?.message === "Success") {
+          console.log("Comment added successfully");
+        }
+      } catch (error) {
+      } finally {
+        handleSetStateField("isSubmitComment", false);
+      }
+    },
+    [setStoryDetail]
+  );
+  const handleCommentSubmit = useCallback(
+    (content: string) => {
+      console.log("content", content);
+
+      if (user && storyDetail) {
+        return postComment(storyDetail, content, null);
+      }
+    },
+    [postComment, storyDetail, user]
+  );
+
+
+  
   return (
     <PageContainer>
       <div className='space-y-4'>
@@ -220,10 +239,14 @@ export default function StoryDetailPage() {
                         variant='default'
                         className={cn(
                           "rounded-none border-gray-300 bg-transparent px-3 py-1 sm:px-4 sm:py-2",
-                          "border border-custom-red bg-custom-red text-white hover:bg-custom-red hover:text-white"
+                          storyDetail?.isFavorite
+                            ? "border border-custom-red bg-custom-red text-white hover:bg-custom-red hover:text-white"
+                            : "text-gray-500 hover:bg-custom-red hover:text-white"
                         )}
                       >
-                        {`Yêu thích`}
+                        {`${
+                          storyDetail?.isFavorite ? "Bỏ yêu thích" : "Yêu thích"
+                        }`}
                       </Button>
                     </div>
                     {buttonOptions.map((option) => (
@@ -291,12 +314,16 @@ export default function StoryDetailPage() {
           <SameGenreStories stories={sameGenreStories} />
         </div>
 
-        <CommentForm />
+        <CommentForm
+          onSubmit={handleCommentSubmit}
+          isSubmitComment={state.isSubmitComment}
+        />
 
         <div className='space-y-4 p-4'>
-          {comments.map((comment, index) => (
+          {/* {comments.map((comment, index) => (
             <CommentStory key={index} {...comment} />
-          ))}
+          ))} */}
+          <CommentStory/>
           <Button className='w-full bg-blue-600 text-white hover:bg-blue-700'>
             Xem thêm nhiều bình luận
           </Button>

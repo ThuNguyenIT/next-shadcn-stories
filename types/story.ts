@@ -1,4 +1,5 @@
 import { Author } from "./author";
+import { User } from "./user";
 
 export interface Story {
   id: number;
@@ -16,6 +17,7 @@ export interface Story {
   updated_at?: string | Date;
   author?: Author;
   category_name?: string[];
+  isFavorite?: boolean;
 }
 
 export interface Chapter {
@@ -25,27 +27,30 @@ export interface Chapter {
   content: string;
   chapter_number: string;
   created_at: string;
-  updated_at: string
+  updated_at: string;
 }
 
 export interface IComment {
-  author: string;
+  id: number;
+  story_id: number | null;
+  chapter_id: number | null;
+  user_id: number | null;
   content: string;
-  timestamp: string;
-  likes: number;
-  avatarSrc: string;
-  replies?: IComment[];
-  parentAuthor?: string;
+  parent_comment_id: number | null;
+  created_at: string;
+  updated_at: string;
+  user: User;
+  replies: IComment[];
 }
 
 export interface StoryData {
   story: Story;
   chapters: Chapter[];
   hasMoreChapters: boolean;
-  totalChapters: number
-  currentPage: number
-  totalPages: number
-  latestChapter: Chapter
+  totalChapters: number;
+  currentPage: number;
+  totalPages: number;
+  latestChapter: Chapter;
 }
 
 export interface GetStoryBySlugResponse<T> {
@@ -57,11 +62,26 @@ export interface GetLatestChapterResponse<T> {
   data: T;
 }
 export interface IIdChapter {
-  id: number
-  chapter_number: number
+  id: number;
+  chapter_number: number;
 }
 export interface DataLatestChapterResponse {
   story: Story;
   latestChapter: Chapter;
   chapterIds: IIdChapter[];
+}
+
+export interface PostFavoritesResponse {
+  message: string;
+  data: null;
+}
+
+
+export interface CommentResponse {
+  message: string;
+  data: {
+    comments: IComment[];
+    currentPage: number;
+    totalPages: number;
+  };
 }
