@@ -41,6 +41,7 @@ export interface IComment {
   updated_at: string;
   user: User;
   replies: IComment[];
+  parentAuthor?: string
 }
 
 export interface StoryData {

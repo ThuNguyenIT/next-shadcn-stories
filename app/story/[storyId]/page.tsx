@@ -14,7 +14,6 @@ import {
   StoryData,
 } from "@/types";
 import { ChapterRow } from "@/components/story/chapter-row";
-import { CommentStory } from "@/components/story/comment-story";
 import Pagination from "@/components/home/pagination";
 import CommentForm from "@/components/story/comment-form";
 import { SameGenreStories } from "@/components/story/same-genre-stories";
@@ -24,6 +23,7 @@ import { cn } from "@/lib/utils";
 import { createAxiosInstance } from "@/utils/axiosInstance";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAuthStore, useStoryStore } from "@/lib";
+import { ContainerComment } from "@/components/story/container-comment";
 interface IState {
   activeButton: string;
   currentPage: number;
@@ -160,17 +160,24 @@ export default function StoryDetailPage() {
   );
   const handleCommentSubmit = useCallback(
     (content: string) => {
-      console.log("content", content);
-
       if (user && storyDetail) {
         return postComment(storyDetail, content, null);
       }
     },
-    [postComment, storyDetail, user]
+    [storyDetail, user]
+  );
+  const handleReplyCommentSubmit = useCallback(
+    (content: string, parent_comment_id: number) => {
+
+      if (user && storyDetail) {
+        return postComment(storyDetail, content, parent_comment_id);
+      }
+    },
+    [storyDetail, user]
   );
 
 
-  
+
   return (
     <PageContainer>
       <div className='space-y-4'>
@@ -244,9 +251,8 @@ export default function StoryDetailPage() {
                             : "text-gray-500 hover:bg-custom-red hover:text-white"
                         )}
                       >
-                        {`${
-                          storyDetail?.isFavorite ? "Bỏ yêu thích" : "Yêu thích"
-                        }`}
+                        {`${storyDetail?.isFavorite ? "Bỏ yêu thích" : "Yêu thích"
+                          }`}
                       </Button>
                     </div>
                     {buttonOptions.map((option) => (
@@ -320,10 +326,8 @@ export default function StoryDetailPage() {
         />
 
         <div className='space-y-4 p-4'>
-          {/* {comments.map((comment, index) => (
-            <CommentStory key={index} {...comment} />
-          ))} */}
-          <CommentStory/>
+
+          <ContainerComment onSubmit={handleReplyCommentSubmit} />
           <Button className='w-full bg-blue-600 text-white hover:bg-blue-700'>
             Xem thêm nhiều bình luận
           </Button>

@@ -1,7 +1,3 @@
-import { Heart, MessageCircle } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { Button } from "../ui/button";
-import { CardContent } from "../ui/card";
 import { CommentResponse, IComment } from "@/types";
 import { useCallback, useEffect, useState } from "react";
 import { createAxiosInstance } from "@/utils/axiosInstance";
@@ -12,7 +8,10 @@ interface IState {
   currentPage: number;
   totalPages: number;
 }
-export const Comment = () => {
+interface ContainerCommentProps {
+  onSubmit: (content: string, parent_comment_id: number) => Promise<void> | void;
+}
+export const ContainerComment: React.FC<ContainerCommentProps> = ({ onSubmit }) => {
   const axiosInstance = createAxiosInstance();
   const { listComment, storyDetail, setListComment } = useStoryStore();
   const { user } = useAuthStore();
@@ -44,12 +43,15 @@ export const Comment = () => {
   useEffect(() => {
     if (storyDetail) {
       getListComment(state.currentPage, storyDetail.id);
-    } else {
-      console.log("no call");
     }
+    console.log('no call')
   }, [getListComment, state.currentPage, storyDetail]);
 
-  return listComment.map((comment, index) => {
-     <CommentStory key={index} {...comment} />;
-  });
+  return (
+    <>
+      {listComment.map((comment: IComment, index: number) => (
+        <CommentStory key={index} {...comment} onSubmit={onSubmit} />
+      ))}
+    </>
+  );
 };
