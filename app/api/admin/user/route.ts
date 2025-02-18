@@ -6,7 +6,7 @@ import { createResponse, getErrorMessage, getRequestInfo } from '@/lib/utils'
 
 export async function GET() {
   try {
-    const users = await prisma.user.findMany({
+    const users = await prisma.users.findMany({
       select: {
         id: true,
         username: true,
@@ -23,7 +23,7 @@ export async function GET() {
             bonus: true
           }
         },
-        user_role: {
+        user_roles: {
           select: {
             role: {
               select: {
@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
       role_ids
     } = await request.json()
 
-    const user = await prisma.user.findFirst({
+    const user = await prisma.users.findFirst({
       where: {
         OR: [{ username: username }, { email: email }]
       }
@@ -80,7 +80,7 @@ export async function POST(request: NextRequest) {
     const parsedBirthday = birthday ? new Date(birthday) : null
     const { userAgent, ipAddress } = getRequestInfo(request)
 
-    const newUser = await prisma.user.create({
+    const newUser = await prisma.users.create({
       data: {
         username,
         email,
@@ -96,7 +96,7 @@ export async function POST(request: NextRequest) {
             point: 0
           }
         },
-        user_activity: {
+        user_activities: {
           create: {
             action: 'USER_CREATE',
             description: 'Tạo mới tài khoản',
@@ -109,7 +109,7 @@ export async function POST(request: NextRequest) {
     })
 
     if (Array.isArray(role_ids) && role_ids.length > 0) {
-      await prisma.user_role.createMany({
+      await prisma.user_roles.createMany({
         data: role_ids.map((roleId) => ({
           user_id: newUser.id,
           role_id: roleId

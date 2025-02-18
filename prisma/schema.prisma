@@ -122,6 +122,7 @@ model lists {
   name        String        @unique
   slug        String        @unique
   description String?       @db.Text
+  status      Boolean       @default(true)
   stories     story_lists[]
 
   created_at DateTime @default(now())
@@ -133,6 +134,7 @@ model categories {
   name        String             @unique
   slug        String             @unique
   description String?            @db.Text
+  status      Boolean       @default(true)
   stories     story_categories[]
 
   created_at DateTime @default(now())
@@ -148,12 +150,13 @@ model stories {
   cover_image       Json?
   author_id         Int
   view_count        Int                 @default(0)
+  isActive          Boolean             @default(true)
   status            String
   labels            Json?
   tag               Json?
   total_chapter     Int?                @default(0)
   author            authors             @relation(fields: [author_id], references: [id])
-  --lists             story_lists[]
+  lists             story_lists[]
   categories        story_categories[]
   chapters          chapters[]
   bookmarks         bookmarks[]
@@ -162,7 +165,7 @@ model stories {
   reading_progress  reading_progress[]
   ratings           ratings[]
   reports           reports[]
-  story_views      story_views[]
+  story_views       story_views[]
   user_view_stories user_view_stories[]
 
   created_at DateTime @default(now())
@@ -175,20 +178,19 @@ model stories {
 }
 
 model story_lists {
-  story_id    Int
-  list_id     Int
-  list        lists   @relation(fields: [list_id], references: [id])
-  story       stories @relation(fields: [story_id], references: [id])
+  story_id Int
+  list_id  Int
+  list     lists   @relation(fields: [list_id], references: [id], onDelete: Cascade)
+  story    stories @relation(fields: [story_id], references: [id])
 
   @@id([story_id, list_id])
   @@index([list_id], map: "story_lists_list_id_fkey")
 }
 
-
 model story_categories {
   story_id    Int
   category_id Int
-  category    categories @relation(fields: [category_id], references: [id])
+  category    categories @relation(fields: [category_id], references: [id], onDelete: Cascade)
   story       stories    @relation(fields: [story_id], references: [id])
 
   @@id([story_id, category_id])

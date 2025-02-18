@@ -3,7 +3,7 @@ import { createResponse, getErrorMessage } from '@/lib/utils'
 import { RoleName } from '@/constants/enum'
 
 export async function GET() {
-  const roles = await prisma.role.findMany()
+  const roles = await prisma.roles.findMany()
   return createResponse('Thành công', roles)
 }
 
@@ -16,7 +16,7 @@ export async function POST() {
         description: RoleName[key as keyof typeof RoleName]
       }))
 
-    const createdRoles = await prisma.role.createMany({
+    const createdRoles = await prisma.roles.createMany({
       data: rolesToCreate,
       skipDuplicates: true
     })

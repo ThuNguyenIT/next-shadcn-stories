@@ -1,6 +1,5 @@
 import { NextRequest } from 'next/server'
 import { getCookie } from 'cookies-next'
-import bcrypt from 'bcryptjs'
 
 import { prisma } from '@/lib/prisma'
 import { createResponse, getErrorMessage, getRequestInfo } from '@/lib/utils'
@@ -15,21 +14,21 @@ export async function PUT(
     const userId = parseInt(params.id)
     const sessionId = req.cookies.get('sessionId')?.value
 
-    const existingUser = await prisma.user.findUnique({
+    const existingUser = await prisma.users.findUnique({
       where: { id: userId }
     })
 
     if (!existingUser) {
-      return createResponse('Tài khoản không tồn tại', null, 404)
+      return createResponse('Không tìm thấy', null, 404)
     }
 
     const { userAgent, ipAddress } = getRequestInfo(req)
 
-    await prisma.user.update({
+    await prisma.users.update({
       where: { id: userId },
       data: {
         status: status,
-        user_activity: {
+        user_activities: {
           create: {
             action: 'USER_UPDATE_STATUS',
             description: 'Cập nhật trạng thái',

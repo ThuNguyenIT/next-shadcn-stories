@@ -16,12 +16,12 @@ export async function PUT(
     const userId = parseInt(params.id)
     const sessionId = req.cookies.get('sessionId')?.value
 
-    const existingUser = await prisma.user.findUnique({
+    const existingUser = await prisma.users.findUnique({
       where: { id: userId }
     })
 
     if (!existingUser) {
-      return createResponse('Tài khoản không tồn tại', null, 404)
+      return createResponse('Không tìm thấy', null, 404)
     }
 
     if (old_password) {
@@ -41,11 +41,11 @@ export async function PUT(
     const hashedNewPassword = await bcrypt.hash(new_password, 10)
     const { userAgent, ipAddress } = getRequestInfo(req)
 
-    await prisma.user.update({
+    await prisma.users.update({
       where: { id: userId },
       data: {
         password: hashedNewPassword,
-        user_activity: {
+        user_activities: {
           create: {
             action: 'USER_UPDATE_PASSWORD',
             description: 'Cập nhật mật khẩu',

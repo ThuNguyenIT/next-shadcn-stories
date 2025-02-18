@@ -1,53 +1,58 @@
-import { NextRequest } from 'next/server'
-import { PrismaClient } from '@prisma/client'
-import { createResponse, getErrorMessage } from '@/lib/utils'
+import { PrismaClient } from "@prisma/client";
+import { createResponse, getErrorMessage } from "@/lib/utils";
+import { pagination } from "@/types/common";
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
-    const categoriesWithNovels = await prisma.category.findMany({
-      select: {
-        id: true,
-        name: true,
-        slug: true,
-        description: true,
-        novels: {
-            include: {
-                novel: true,
-            },
+    const { searchParams } = new URL(req.url);
+    const page = parseInt(searchParams.get("page") || "1", 10);
+    const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
+    const skip = (page - 1) * pageSize;
+
+    const [result, totalCount] = await Promise.all([
+      prisma.categories.findMany({
+        where: {
+          status: true,
         },
-      }
-    })
+        skip,
+        take: pageSize,
+      }),
+      prisma.categories.count({
+        where: {
+          status: true,
+        },
+      }),
+    ]);
 
-    const result = categoriesWithNovels.map(category => ({
-        categoryName: category.name,
-        totalNovels: category.novels.length,
-        novels: category.novels.map(novelCategory => novelCategory.novel),
-      }));
-      
+    const pagination: pagination = {
+      total: totalCount,
+      page,
+      pageSize,
+      totalPages: Math.ceil(totalCount / pageSize),
+    };
 
-    return createResponse('Thành công', result)
+    return createResponse("Thành công", { result, pagination });
   } catch (error) {
-    return createResponse(getErrorMessage(error), null, 500)
+    return createResponse(getErrorMessage(error), null, 500);
   }
 }
 
-export async function POST(req: NextRequest) {
+export async function POST(req: Request) {
   try {
-    const body = await req.json()
-    const { name, slug, description } = body
-
-    const newCategory = await prisma.category.create({
+    const { name, slug, description, status } = await req.json();
+    const result = await prisma.categories.create({
       data: {
         name,
         slug,
-        description
-      }
-    })
+        description,
+        status,
+      },
+    });
 
-    return createResponse('Thành công', newCategory)
+    return createResponse("Thành công", result);
   } catch (error) {
-    return createResponse(getErrorMessage(error), null, 500)
+    return createResponse(getErrorMessage(error), null, 500);
   }
 }

@@ -147,6 +147,10 @@ Dự án này được cấp phép dưới giấy phép [MIT License](./LICENSE)
 
 README này cung cấp một hướng dẫn chi tiết cho người phát triển và người dùng về cách cài đặt, cấu hình, và đóng góp cho dự án. Bạn có thể điều chỉnh tùy theo tính năng và yêu cầu cụ thể của dự án của bạn.
 
+<!-- Crawl category - truyenfull  -->
+curl -X GET http://localhost:3001/api/crawl \
+  -H "Content-Type: application/json"
+
 <!-- Đăng nhập -->
 curl -X POST http://localhost:3001/api/auth/login \
   -H "Content-Type: application/json" \
@@ -158,12 +162,12 @@ curl -X POST http://localhost:3001/api/auth/login \
 <!-- Tạo role -->
 curl -X POST http://localhost:3001/api/admin/role \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTcyOTQwNTg5NH0.b1ypb2UdREzKXAx6fHeUdENGidUH2P5YfPBPEmttoII"
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTczMTgzNjI3NH0.FC4hjxBOTrZHgh9Nhbv5rd4-TV3uPtHk2KBf68qDt-I"
 
 <!-- Tạo user -->
 curl -X POST http://localhost:3001/api/admin/user \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTcyOTQwNTg5NH0.b1ypb2UdREzKXAx6fHeUdENGidUH2P5YfPBPEmttoII" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTczMTgzNjI3NH0.FC4hjxBOTrZHgh9Nhbv5rd4-TV3uPtHk2KBf68qDt-I" \
   -d '{
     "username": "jelyqs",
     "email": "jely.big@gmail.com",
@@ -178,17 +182,17 @@ curl -X POST http://localhost:3001/api/admin/user \
 <!-- Lấy danh sách user -->
 curl -X GET http://localhost:3001/api/admin/user \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTcyOTQwNTg5NH0.b1ypb2UdREzKXAx6fHeUdENGidUH2P5YfPBPEmttoII"
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTczMTgzNjI3NH0.FC4hjxBOTrZHgh9Nhbv5rd4-TV3uPtHk2KBf68qDt-I"
 
 <!-- Lấy thông tin user -->
 curl -X GET http://localhost:3001/api/admin/user/1 \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTcyOTQwNTg5NH0.b1ypb2UdREzKXAx6fHeUdENGidUH2P5YfPBPEmttoII"
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTczMTgzNjI3NH0.FC4hjxBOTrZHgh9Nhbv5rd4-TV3uPtHk2KBf68qDt-I"
 
 <!-- Cập nhật user -->
 curl -X PUT http://localhost:3001/api/admin/user/1 \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTcyOTQwNTg5NH0.b1ypb2UdREzKXAx6fHeUdENGidUH2P5YfPBPEmttoII" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTczMTgzNjI3NH0.FC4hjxBOTrZHgh9Nhbv5rd4-TV3uPtHk2KBf68qDt-I" \
   -d '{
     "username": "jelyqs",
     "email": "jely.big@gmail.com",
@@ -203,23 +207,168 @@ curl -X PUT http://localhost:3001/api/admin/user/1 \
 <!-- Xóa user -->
 curl -X DELETE http://localhost:3001/api/admin/user/1 \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTcyOTQwNTg5NH0.b1ypb2UdREzKXAx6fHeUdENGidUH2P5YfPBPEmttoII"
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTczMTgzNjI3NH0.FC4hjxBOTrZHgh9Nhbv5rd4-TV3uPtHk2KBf68qDt-I"
 
 <!-- Cập nhật user password -->
 curl -X PUT http://localhost:3001/api/admin/user/1/password \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTcyOTQwNTg5NH0.b1ypb2UdREzKXAx6fHeUdENGidUH2P5YfPBPEmttoII" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTczMTgzNjI3NH0.FC4hjxBOTrZHgh9Nhbv5rd4-TV3uPtHk2KBf68qDt-I" \
   -d '{
     "old_password": "ThuNP123",
     "new_password": "123123",
     "confirm_new_password": "123123"
   }'
 
-<!-- Crawl category - truyenfull  -->
-curl -X GET http://localhost:3001/api/crawl \
-   -H "Content-Type: application/json"
+<!-- Danh mục truyện -->
+  <!-- Lấy danh mục truyện -->
+  curl -X GET "http://localhost:3001/api/admin/category?page=1&pageSize=10" \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTczMTgzNjI3NH0.FC4hjxBOTrZHgh9Nhbv5rd4-TV3uPtHk2KBf68qDt-I"
+  <!-- Lấy chi tiết danh mục truyện -->
+  curl -X GET "http://localhost:3001/api/admin/category/{id}" \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTczMTgzNjI3NH0.FC4hjxBOTrZHgh9Nhbv5rd4-TV3uPtHk2KBf68qDt-I"
+  <!-- Thêm mới danh mục truyện -->
+  curl -X POST "http://localhost:3001/api/admin/category" \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTczMTgzNjI3NH0.FC4hjxBOTrZHgh9Nhbv5rd4-TV3uPtHk2KBf68qDt-I" \
+    -d '{
+      "name": "Tên danh mục",
+      "slug": "slug-danh-muc",
+      "description": "Mô tả của danh mục",
+      "status": true
+    }'
+  <!-- Cập nhật danh mục truyện -->
+  curl -X PUT "http://localhost:3001/api/admin/category/{id}" \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTczMTgzNjI3NH0.FC4hjxBOTrZHgh9Nhbv5rd4-TV3uPtHk2KBf68qDt-I" \
+    -d '{
+      "name": "Tên mới của danh mục",
+      "slug": "slug-moi-cua-danh-muc",
+      "description": "Mô tả mới của danh mục",
+      "status": true
+    }'
+  <!-- Xóa danh mục truyện -->
+  curl -X DELETE "http://localhost:3001/api/admin/category/{id}" \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTczMTgzNjI3NH0.FC4hjxBOTrZHgh9Nhbv5rd4-TV3uPtHk2KBf68qDt-I"
+
+<!-- Danh sách truyện -->
+  <!-- Lấy danh sách truyện -->
+  curl -X GET "http://localhost:3001/api/admin/list?page=1&pageSize=10" \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTczMTgzNjI3NH0.FC4hjxBOTrZHgh9Nhbv5rd4-TV3uPtHk2KBf68qDt-I"
+  <!-- Lấy chi tiết -->
+  curl -X GET "http://localhost:3001/api/admin/lists/{id}" \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTczMTgzNjI3NH0.FC4hjxBOTrZHgh9Nhbv5rd4-TV3uPtHk2KBf68qDt-I"
+  <!-- Thêm mới -->
+  curl -X POST "http://localhost:3001/api/admin/lists" \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTczMTgzNjI3NH0.FC4hjxBOTrZHgh9Nhbv5rd4-TV3uPtHk2KBf68qDt-I" \
+    -d '{
+      "name": "Tên item",
+      "slug": "slug-item",
+      "description": "Mô tả của item",
+      "status": true
+    }'
+  <!-- Cập nhật -->
+  curl -X PUT "http://localhost:3001/api/admin/lists/{id}" \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTczMTgzNjI3NH0.FC4hjxBOTrZHgh9Nhbv5rd4-TV3uPtHk2KBf68qDt-I" \
+    -d '{
+      "name": "Tên mới của item",
+      "slug": "slug-moi-cua-item",
+      "description": "Mô tả mới của item",
+      "status": true
+    }'
+  <!-- Xóa -->
+  curl -X DELETE "http://localhost:3001/api/admin/lists/{id}" \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTczMTgzNjI3NH0.FC4hjxBOTrZHgh9Nhbv5rd4-TV3uPtHk2KBf68qDt-I"
+
+<!-- Truyện -->
+  <!-- Danh sách -->
+  curl -X GET "http://localhost:3001/api/admin/story?page=1&pageSize=1" \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTczMTgzNjI3NH0.FC4hjxBOTrZHgh9Nhbv5rd4-TV3uPtHk2KBf68qDt-I"
+  <!-- Thêm mới -->
+  curl -X POST http://localhost:3001/api/admin/story \
+  -H "Content-Type: application/json" \
+    -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTczMTgzNjI3NH0.FC4hjxBOTrZHgh9Nhbv5rd4-TV3uPtHk2KBf68qDt-I" \
+  -d '{
+    "title": "Tên câu chuyện",
+    "slug": "ten-cau-chuyen",
+    "description": "Mô tả về câu chuyện",
+    "avatar_image": "https://example.com/avatar.jpg",
+    "cover_image": "https://example.com/cover.jpg",
+    "author_id": 1,
+    "isActive": true,
+    "status": "published",
+    "labels": ["action", "adventure"],
+    "tag": ["fantasy", "magic"],
+    "total_chapter": 10,
+    "listIds": [1, 2],
+    "categoryIds": [1, 3]
+  }'
+  <!-- Chi tiết -->
+  curl -X GET http://localhost:3001/api/admin/story/1 \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTczMTgzNjI3NH0.FC4hjxBOTrZHgh9Nhbv5rd4-TV3uPtHk2KBf68qDt-I"
+  <!-- Cập nhật -->
+  curl -X PUT http://localhost:3001/api/admin/story/1 \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTczMTgzNjI3NH0.FC4hjxBOTrZHgh9Nhbv5rd4-TV3uPtHk2KBf68qDt-I" \
+  -d '{
+    "title": "Tên câu chuyện mới",
+    "slug": "ten-cau-chuyen-moi",
+    "description": "Mô tả cập nhật về câu chuyện",
+    "avatar_image": { "url": "https://example.com/avatar-moi.jpg" },
+    "cover_image": { "url": "https://example.com/cover-moi.jpg" },
+    "isActive": true,
+    "status": "published",
+    "labels": ["action", "adventure"],
+    "tag": ["fantasy", "magic"],
+    "total_chapter": 12,
+    "listIds": [1, 3],
+    "categoryIds": [2, 4]
+  }'
+  <!-- Xóa -->
+  curl -X DELETE http://localhost:3001/api/admin/story/1 \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTczMTgzNjI3NH0.FC4hjxBOTrZHgh9Nhbv5rd4-TV3uPtHk2KBf68qDt-I"
+
+<!-- Chapter -->
+  <!-- Danh sách -->
+  curl -X GET "http://localhost:3001/api/admin/story/1/chapter?page=1&pageSize=10" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTczMTgzNjI3NH0.FC4hjxBOTrZHgh9Nhbv5rd4-TV3uPtHk2KBf68qDt-I"
+  <!-- Thêm mới -->
+  curl -X POST http://localhost:3001/api/admin/story/1/chapter \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTczMTgzNjI3NH0.FC4hjxBOTrZHgh9Nhbv5rd4-TV3uPtHk2KBf68qDt-I" \
+  -d '{
+    "title": "Chapter 1",
+    "content": "Nội dung của chapter 1",
+    "chapter_number": "1"
+  }'
+  <!-- Chi tiết -->
+  curl -X GET http://localhost:3001/api/admin/story/1/chapter/2 \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTczMTgzNjI3NH0.FC4hjxBOTrZHgh9Nhbv5rd4-TV3uPtHk2KBf68qDt-I"
+  <!-- Cập nhật -->
+  curl -X PUT http://localhost:3001/api/admin/story/1/chapter/2 \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTczMTgzNjI3NH0.FC4hjxBOTrZHgh9Nhbv5rd4-TV3uPtHk2KBf68qDt-I" \
+  -d '{
+    "title": "Chapter 1 Updated",
+    "content": "Nội dung đã được cập nhật cho chapter 1",
+    "chapter_number": "1"
+  }'
+  <!-- Xóa -->
+  curl -X DELETE http://localhost:3001/api/admin/story/1/chapter/2 \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImplbHlxcyIsImV4cCI6MTczMTgzNjI3NH0.FC4hjxBOTrZHgh9Nhbv5rd4-TV3uPtHk2KBf68qDt-I"
 
 <!--  -->
-
-
 <!--  -->

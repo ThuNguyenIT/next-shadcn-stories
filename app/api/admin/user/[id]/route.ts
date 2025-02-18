@@ -32,7 +32,7 @@ export async function PUT(
     const userId = parseInt(params.id)
     const sessionId = req.cookies.get('sessionId')?.value
 
-    const existingUser = await prisma.user.findFirst({
+    const existingUser = await prisma.users.findFirst({
       where: {
         id: userId,
         OR: [
@@ -53,7 +53,7 @@ export async function PUT(
     const parsedBirthday = birthday ? new Date(birthday) : null
     const { userAgent, ipAddress } = getRequestInfo(req)
 
-    const updatedUser = await prisma.user.update({
+    const updatedUser = await prisma.users.update({
       where: { id: userId },
       data: {
         username,
@@ -62,7 +62,7 @@ export async function PUT(
         mobile,
         address,
         birthday: parsedBirthday,
-        user_activity: {
+        user_activities: {
           create: {
             action: 'USER_UPDATE',
             description: 'Cập nhật tài khoản',
@@ -75,7 +75,7 @@ export async function PUT(
     })
 
     if (Array.isArray(role_ids) && role_ids.length > 0) {
-      const currentRoles = await prisma.user_role.findMany({
+      const currentRoles = await prisma.user_roles.findMany({
         where: { user_id: userId }
       })
 
@@ -85,7 +85,7 @@ export async function PUT(
         (roleId) => !role_ids.includes(roleId)
       )
       if (rolesToRemove.length > 0) {
-        await prisma.user_role.deleteMany({
+        await prisma.user_roles.deleteMany({
           where: {
             user_id: userId,
             role_id: { in: rolesToRemove }
@@ -97,7 +97,7 @@ export async function PUT(
         (roleId) => !currentRoleIds.includes(roleId)
       )
       if (rolesToAdd.length > 0) {
-        await prisma.user_role.createMany({
+        await prisma.user_roles.createMany({
           data: rolesToAdd.map((roleId) => ({
             user_id: userId,
             role_id: roleId
